@@ -1,0 +1,14 @@
+name: continuous integration
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker run --rm --mount type=bind,src=$GITHUB_WORKSPACE,dst=/workspaces/ris -w /workspaces/ris customcommander/tagtical sh -c 'yarn && make test burrito-test'

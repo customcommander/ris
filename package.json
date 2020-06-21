@@ -1,0 +1,20 @@
+{
+  "name": "@customcommander/ris",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "grammar.js"
+  ],
+  "dependencies": {
+    "nearley": "^2.19.4"
+  },
+  "devDependencies": {
+    "cucumber": "^6.0.5",
+    "semantic-release": "^17.0.8"
+  },
+  "scripts": {
+    "test": "make"
+  }
+}

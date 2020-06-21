@@ -1,0 +1,19 @@
+name: release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: docker run -e NPM_TOKEN -e GH_TOKEN --rm --mount type=bind,src=$GITHUB_WORKSPACE,dst=/workspaces/ris -w /workspaces/ris customcommander/tagtical sh -c 'yarn && yarn semantic-release --no-ci'
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
