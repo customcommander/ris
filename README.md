@@ -40,3 +40,16 @@ parse
 | Tag | Key  | Description    |
 |:----|:-----|:---------------|
 | TY  | type | Reference type |
+
+## Development
+
+The following command will:
+
+1.  Compile the grammar.
+2.  Test the grammar against the `sample.ris` file.
+3.  Output the result to the standard output.
+4.  Write the output to `out.txt`. (This file is ignored by Git.)
+
+```
+make sample
+```
