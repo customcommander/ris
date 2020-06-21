@@ -1,0 +1,8 @@
+{
+  "name": "ris-dev",
+  "image": "customcommander/tagtical",
+  "postCreateCommand": "yarn",
+  "extensions": [
+    "karyfoundation.nearley"
+  ]
+}
