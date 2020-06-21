@@ -16,5 +16,8 @@
   },
   "scripts": {
     "test": "make"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
