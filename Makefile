@@ -1,5 +1,7 @@
 test: /tmp/ris.test
 burrito-test: /tmp/ris.burrito-test
+sample: grammar.js sample.ris
+	cat sample.ris | yarn -s nearley-test -q grammar.js | tee out.txt
 
 grammar.js: grammar.ne
 	yarn -s nearleyc $^ > $@
