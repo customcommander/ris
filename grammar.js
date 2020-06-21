@@ -133,7 +133,7 @@ var grammar = {
     {"name": "TY$string$56", "symbols": [{"literal":"V"}, {"literal":"I"}, {"literal":"D"}, {"literal":"E"}, {"literal":"O"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "TY", "symbols": ["TY$string$56"]},
     {"name": "SEP$string$1", "symbols": [{"literal":" "}, {"literal":" "}, {"literal":"-"}, {"literal":" "}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "SEP", "symbols": ["SEP$string$1"]}
+    {"name": "SEP", "symbols": ["SEP$string$1"], "postprocess": () => null}
 ]
   , ParserStart: "RIS"
 }

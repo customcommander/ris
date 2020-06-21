@@ -68,4 +68,4 @@ TY -> "ABST"    # abstract
     | "UNPD"    # unpublished work
     | "VIDEO"   # video recording
 
-SEP -> "  - "
+SEP -> "  - " {% () => null %}
