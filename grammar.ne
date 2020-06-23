@@ -31,6 +31,6 @@ LINE
 
 # end of reference
 EOR
-    ->  "ER" %SEP _
+    ->  %ER %SEP _
         {% () => null %}
 

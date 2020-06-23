@@ -24,7 +24,7 @@ function id(x) { return x[0]; }
     {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "KEYWORD", "symbols": [(lexer.has("KW") ? {type: "KW"} : KW), (lexer.has("SEP") ? {type: "SEP"} : SEP), "KEYWORD$ebnf$1"], "postprocess": ([,,lines]) => ({key: 'keyword', value: lines.join(' ')})},
     {"name": "LINE", "symbols": [(lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([{value}]) => value},
-    {"name": "EOR", "symbols": [{"literal":"ER"}, (lexer.has("SEP") ? {type: "SEP"} : SEP), "_"], "postprocess": () => null}
+    {"name": "EOR", "symbols": [(lexer.has("ER") ? {type: "ER"} : ER), (lexer.has("SEP") ? {type: "SEP"} : SEP), "_"], "postprocess": () => null}
 ]
   , ParserStart: "RIS"
 }
