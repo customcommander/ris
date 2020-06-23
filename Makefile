@@ -3,7 +3,7 @@ burrito-test: /tmp/ris.burrito-test
 sample: grammar.js sample.ris
 	cat sample.ris | yarn -s nearley-test -q grammar.js | tee out.txt
 
-grammar.js: grammar.ne
+grammar.js: grammar.ne lexer.js
 	yarn -s nearleyc $^ > $@
 
 /tmp/ris.test: grammar.js index.js ris-parser.feature steps.js
