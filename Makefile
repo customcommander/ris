@@ -14,8 +14,10 @@ grammar.js: grammar.ne lexer.js
 	rm -rf /tmp/burrito
 	mkdir /tmp/burrito
 	cp burrito.test.js /tmp/burrito
-	cd /tmp/burrito && yarn init -y && yarn add /tmp/ris.tgz && yarn && node burrito.test.js
+	cp sample.ris /tmp/burrito
+	cd /tmp/burrito && yarn init -y && yarn add file:/tmp/ris.tgz && yarn install && node burrito.test.js
 	touch $@
 
 /tmp/ris.tgz: index.js grammar.js package.json
+	yarn cache clean
 	yarn pack --force --filename $@

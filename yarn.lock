@@ -31,6 +31,11 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
+"@customcommander/multifun@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@customcommander/multifun/-/multifun-1.0.1.tgz#cfb42e7e33208ccd193d692805c87b52c021db8d"
+  integrity sha512-WHGQieVc+eUL2nK9lSMnZz3c4tpQmFZMhufeqzWdlt9vjISK7U1eMV6ERtunrquXe6dTmZirHPvcHFPzXxkm4g==
+
 "@iarna/cli@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@iarna/cli/-/cli-1.2.0.tgz#0f7af5e851afe895104583c4ca07377a8094d641"

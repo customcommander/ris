@@ -9,6 +9,7 @@ const lexer =
     ( { NL: { match: /\n/, lineBreaks: true }
       , SEP: "  - "
       , TY: "TY"
+      , KW: "KW"
       , ER: "ER"
       , TY_VAL: [ "ABST"   , "ADVS"  , "AGGR"
                 , "ANCIENT", "ART"   , "BILL"
@@ -30,6 +31,7 @@ const lexer =
                 , "STAT"   , "THES"  , "UNBILL"
                 , "UNPD"   , "VIDEO"
                 ]
+      , CONTENT: /[a-zA-Z0-9 \-\.']+/
       }
     );
 

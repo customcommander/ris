@@ -22,20 +22,8 @@
 
 const parse = require('@customcommander/ris');
 const assert = require('assert').strict;
+const fs = require('fs');
 
-const records =
-  parse
-    (`TY  - JOUR
-      ER  - 
-      TY  - BOOK
-      ER  - 
-      TY  - CHAP
-      ER  - `);
+const records = parse(fs.readFileSync('sample.ris', 'utf-8'));
 
-assert.deepStrictEqual
-  ( records
-  , [ { "type": "JOUR" }
-    , { "type": "BOOK" }
-    , { "type": "CHAP" }
-    ]
-  );
+assert(records.length > 0);

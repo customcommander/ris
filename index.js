@@ -3,27 +3,35 @@
  */
 
 const nearley = require('nearley');
-const grammar = require('./grammar');
+const grammar = require('./grammar.js');
+const multifun = require('@customcommander/multifun');
 
-const parser =
-  new nearley.Parser
-    ( nearley.Grammar.fromCompiled(grammar)
-    , { keepHistory: true }
+const to_record =
+  multifun
+    ( (acc, {key}) => key
+    , 'keyword', (acc, {value}) =>
+                    ( acc.keyword = acc.keyword || []
+                    , acc.keyword.push(value)
+                    , acc
+                    )
+    , acc => acc
     );
 
 const process_ast =
   ast =>
     ast.map
-      ( xs => xs.reduce
-          ( (acc, o) => (acc[o.key] = o.value, acc)
-          , {}
-          )
+      ( ([head, tail]) =>
+          tail.reduce
+            ( to_record
+            , {type: head.value}
+            )
       );
 
 const parse = text => {
+  const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
   try {
     parser.feed(text);
-    return process_ast(parser.results[0][0]);
+    return process_ast(parser.results[0]);
   } catch (e) {
     // ...
   }
