@@ -4,33 +4,23 @@
 @lexer lexer
 @builtin "whitespace.ne"
 
-RIS
-    ->  RECORD:+
-        {% ([d]) => d %}
+RIS         ->  RECORD:+
+                {% ([d]) => d %}
 
-RECORD
-    ->  RTYPE OTHER_TAG:* EOR
-        {% ast => ast.filter(x => x !== null) %}
+RECORD      ->  RTYPE OTHER_TAG:* EOR
+                {% ast => ast.filter(x => x !== null) %}
 
-# reference type
-RTYPE
-    ->  %TY %SEP %TY_VAL __
-        {% ([,,{value}]) => ({key: 'type', value}) %}
+RTYPE       ->  %TY %SEP %TY_VAL __
+                {% ([,,{value}]) => ({key: 'type', value}) %}
 
-OTHER_TAG
-    ->  KEYWORD
-        {% ([d]) => d %}
+OTHER_TAG   ->  KEYWORD
+                {% ([d]) => d %}
 
-KEYWORD
-    ->  %KW %SEP LINE:+
-        {% ([,,lines]) => ({key: 'keyword', value: lines.join(' ')}) %}
+KEYWORD     ->  %KW %SEP LINE:+
+                {% ([,,lines]) => ({key: 'keyword', value: lines.join(' ')}) %}
 
-LINE
-    ->  %CONTENT __
-        {% ([{value}]) => value %}
+LINE        ->  %CONTENT __
+                {% ([{value}]) => value %}
 
-# end of reference
-EOR
-    ->  %ER %SEP _
-        {% () => null %}
-
+EOR         ->  %ER %SEP _
+                {% () => null %}
