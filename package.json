@@ -11,9 +11,11 @@
   ],
   "files": [
     "index.js",
-    "grammar.js"
+    "grammar.js",
+    "lexer.js"
   ],
   "dependencies": {
+    "@customcommander/multifun": "^1.0.1",
     "moo": "^0.5.1",
     "nearley": "^2.19.4"
   },
