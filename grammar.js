@@ -14,7 +14,7 @@ function id(x) { return x[0]; }
     {"name": "wschar", "symbols": [/[ \t\n\v\f]/], "postprocess": id},
     {"name": "RIS$ebnf$1", "symbols": ["RECORD"]},
     {"name": "RIS$ebnf$1", "symbols": ["RIS$ebnf$1", "RECORD"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "RIS", "symbols": ["RIS$ebnf$1"], "postprocess": ([d]) => d},
+    {"name": "RIS", "symbols": ["_", "RIS$ebnf$1"], "postprocess": ([, d]) => d},
     {"name": "RECORD$ebnf$1", "symbols": []},
     {"name": "RECORD$ebnf$1", "symbols": ["RECORD$ebnf$1", "OTHER_TAG"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "RECORD", "symbols": ["RTYPE", "RECORD$ebnf$1", "EOR"], "postprocess": ast => ast.filter(x => x !== null)},

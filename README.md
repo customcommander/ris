@@ -21,13 +21,14 @@ npm -i @customcommander/ris
 ```javascript
 const parse = require('@customcommander/ris');
 
-parse
-  (`TY  - JOUR
-    ER  - 
-    TY  - BOOK
-    ER  - 
-    TY  - CHAP
-    ER  - `);
+parse(`
+TY  - JOUR
+ER  - 
+TY  - BOOK
+ER  - 
+TY  - CHAP
+ER  - 
+`);
 
 //=> [ { "type": "JOUR" }
 //=> , { "type": "BOOK" }
