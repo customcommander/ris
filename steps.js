@@ -23,3 +23,13 @@ defineStep('I will find a reference where {string} is set to {string}', function
   }
   assert.deepStrictEqual(this.list[0][field], expected_value);
 });
+
+defineStep('I will find a reference where {string} is set to', function (field, value) {
+  let expected_value;
+  try {
+    expected_value = JSON.parse(value);
+  } catch (e) {
+    expected_value = value; // it's a string
+  }
+  assert.deepStrictEqual(this.list[0][field], expected_value);
+});
