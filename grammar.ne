@@ -4,8 +4,8 @@
 @lexer lexer
 @builtin "whitespace.ne"
 
-RIS         ->  RECORD:+
-                {% ([d]) => d %}
+RIS         ->  _ RECORD:+
+                {% ([, d]) => d %}
 
 RECORD      ->  RTYPE OTHER_TAG:* EOR
                 {% ast => ast.filter(x => x !== null) %}
