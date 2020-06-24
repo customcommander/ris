@@ -37,9 +37,11 @@ parse
 
 ## Conversion Table
 
-| Tag | Key  | Description    |
-|:----|:-----|:---------------|
-| TY  | type | Reference type |
+| Tag | Key     | Description    |
+|:----|:--------|:---------------|
+| TY  | type    | Reference type |
+| KW  | keyword | Keywords       |
+| UR  | url     | Web/URL        |
 
 ## Development
 

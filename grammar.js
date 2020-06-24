@@ -19,10 +19,25 @@ function id(x) { return x[0]; }
     {"name": "RECORD$ebnf$1", "symbols": ["RECORD$ebnf$1", "OTHER_TAG"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "RECORD", "symbols": ["RTYPE", "RECORD$ebnf$1", "EOR"], "postprocess": ast => ast.filter(x => x !== null)},
     {"name": "RTYPE", "symbols": [(lexer.has("TY") ? {type: "TY"} : TY), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("TY_VAL") ? {type: "TY_VAL"} : TY_VAL), "__"], "postprocess": ([,,{value}]) => ({key: 'type', value})},
-    {"name": "OTHER_TAG", "symbols": ["KEYWORD"], "postprocess": ([d]) => d},
+    {"name": "OTHER_TAG$subexpression$1", "symbols": ["KEYWORD"]},
+    {"name": "OTHER_TAG$subexpression$1", "symbols": ["URL"]},
+    {"name": "OTHER_TAG", "symbols": ["OTHER_TAG$subexpression$1"], "postprocess": ([[d]]) => d},
     {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},
     {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "KEYWORD", "symbols": [(lexer.has("KW") ? {type: "KW"} : KW), (lexer.has("SEP") ? {type: "SEP"} : SEP), "KEYWORD$ebnf$1"], "postprocess": ([,,lines]) => ({key: 'keyword', value: lines.join(' ')})},
+    {"name": "KEYWORD", "symbols": [(lexer.has("KW") ? {type: "KW"} : KW), (lexer.has("SEP") ? {type: "SEP"} : SEP), "KEYWORD$ebnf$1"], "postprocess":  ([,,lines]) =>
+        ( { key: 'keyword'
+          , value: lines.join(' ')
+          }
+        )
+                        },
+    {"name": "URL$ebnf$1", "symbols": ["LINE"]},
+    {"name": "URL$ebnf$1", "symbols": ["URL$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "URL", "symbols": [(lexer.has("UR") ? {type: "UR"} : UR), (lexer.has("SEP") ? {type: "SEP"} : SEP), "URL$ebnf$1"], "postprocess":  ([,,lines]) =>
+        ( { key: 'url'
+          , value: lines.flatMap(line => line.split(';').map(url => url.trim()).filter(Boolean))
+          }
+        )
+                        },
     {"name": "LINE", "symbols": [(lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([{value}]) => value},
     {"name": "EOR", "symbols": [(lexer.has("ER") ? {type: "ER"} : ER), (lexer.has("SEP") ? {type: "SEP"} : SEP), "_"], "postprocess": () => null}
 ]

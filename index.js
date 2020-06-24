@@ -14,6 +14,10 @@ const to_record =
                     , acc.keyword.push(value)
                     , acc
                     )
+    , 'url'    , (acc, {value}) =>
+                    ( acc.url = (acc.url || []).concat(value)
+                    , acc
+                    )
     , acc => acc
     );
 

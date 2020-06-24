@@ -10,6 +10,7 @@ const lexer =
       , SEP: "  - "
       , TY: "TY"
       , KW: "KW"
+      , UR: "UR"
       , ER: "ER"
       , TY_VAL: [ "ABST"   , "ADVS"  , "AGGR"
                 , "ANCIENT", "ART"   , "BILL"
@@ -31,7 +32,7 @@ const lexer =
                 , "STAT"   , "THES"  , "UNBILL"
                 , "UNPD"   , "VIDEO"
                 ]
-      , CONTENT: /[a-zA-Z0-9 \-\.']+/
+      , CONTENT: /[a-zA-Z0-9 \-\.':/;]+/
       }
     );
 

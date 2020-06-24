@@ -1,17 +1,20 @@
 TY  - JOUR
-KW  - cortical contusion
-KW  - blood-brain barrier
-KW  - horseradish peroxidase
-KW  - hippocampus
-KW  - rat
+UR  - http://example.com
+UR  - http://example.net
+KW  - foo
+KW  - bar
+KW  - baz
 ER  - 
 
 TY  - BOOK
-KW  - Epidemiology
-KW  - U.S. Gov't
+KW  - foo
+KW  - bar
+UR  - http://example.com; http://example.org;
+http://example.net
 ER  - 
 
 TY  - CHAP
-KW  - HIV
-KW  - AIDS
+UR  - http://example.net
+KW  - foo
+UR  - http://example.com; http://example.org
 ER  - 
