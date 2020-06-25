@@ -24,6 +24,7 @@ const to_record =
     , 'abstract'      , add
     , 'acc_number'    , add
     , 'author_address', add
+    , 'arch_loc'      , add
     , 'pub_year'      , add
     , 'date'          , (acc, {value: [year, month, day, info]}) =>
                           ( acc.date = {year, month, day, info}

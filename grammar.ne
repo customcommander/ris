@@ -20,12 +20,14 @@ OTHER_TAG   ->  ( KEYWORD
                 | ABSTRACT
                 | AUTHOR_ADDR
                 | ACC_NUMBER
+                | ARCH_LOC
                 )
                 {% ([[d]]) => d %}
 
 ABSTRACT    ->  %AB %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'abstract'      , value}) %}
 AUTHOR_ADDR ->  %AD %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'author_address', value}) %}
 ACC_NUMBER  ->  %AN %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'acc_number'    , value}) %}
+ARCH_LOC    ->  %AV %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'arch_loc'      , value}) %}
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>
