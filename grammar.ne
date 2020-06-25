@@ -13,11 +13,19 @@ RECORD      ->  RTYPE OTHER_TAG:* EOR
 RTYPE       ->  %TY %SEP %TY_VAL __
                 {% ([,,{value}]) => ({key: 'type', value}) %}
 
-OTHER_TAG   ->  (KEYWORD | URL | DATE | PUBYEAR | ABSTRACT | AUTHOR_ADDR)
+OTHER_TAG   ->  ( KEYWORD
+                | URL
+                | DATE
+                | PUBYEAR
+                | ABSTRACT
+                | AUTHOR_ADDR
+                | ACC_NUMBER
+                )
                 {% ([[d]]) => d %}
 
 ABSTRACT    ->  %AB %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'abstract'      , value}) %}
 AUTHOR_ADDR ->  %AD %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'author_address', value}) %}
+ACC_NUMBER  ->  %AN %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'acc_number'    , value}) %}
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>

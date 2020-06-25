@@ -11,6 +11,7 @@ const lexer =
       , TY: "TY"
       , AB: "AB"
       , AD: "AD"
+      , AN: "AN"
       , DA: "DA"
       , KW: "KW"
       , PY: "PY"
