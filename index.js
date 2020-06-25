@@ -21,6 +21,7 @@ const to_record =
     ( (acc, {key}) => key
     , 'keyword' , append
     , 'url'     , append
+    , 'abstract', add
     , 'pub_year', add
     , 'date'    , (acc, {value: [year, month, day, info]}) =>
                     ( acc.date = {year, month, day, info}

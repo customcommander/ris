@@ -9,6 +9,7 @@ const lexer =
     ( { NL: { match: /\n/, lineBreaks: true }
       , SEP: "  - "
       , TY: "TY"
+      , AB: "AB"
       , DA: "DA"
       , KW: "KW"
       , PY: "PY"

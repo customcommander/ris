@@ -75,12 +75,17 @@ Scenario Outline: DA - Date
     | /06//         | date  | {"year": ""    , "month": "06", "day": ""  , "info": ""}     |
     | 2020//25/Conf | date  | {"year": "2020", "month": ""  , "day": "25", "info": "Conf"} |
 
-Scenario: PY - Publication Year
+Scenario Outline: Other tags
   Given I have this RIS file
     """
     TY  - JOUR
-    PY  - 2014
+    <tag>  - <content>
     ER  - 
     """
   When I parse the file
-  Then I will find a reference where 'pub_year' is set to '"2014"'
+  Then I will find a reference where '<field>' is set to '<value>'
+
+  Examples:
+    | tag | content | field    | value  |
+    | AB  | foobar  | abstract | foobar |
+    | PY  | 2014    | pub_year | "2014" |
