@@ -43,6 +43,7 @@ ER  -
 | TY  | type           | Reference type       |
 | AB  | abstract       | Abstract             |
 | AD  | author_address | Author address       |
+| AN  | acc_number     | Accession number     |
 | AV  | arch_loc       | Location in archives |
 | DA  | date           | Date                 |
 | KW  | keyword        | Keywords             |
