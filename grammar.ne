@@ -13,13 +13,21 @@ RECORD      ->  RTYPE OTHER_TAG:* EOR
 RTYPE       ->  %TY %SEP %TY_VAL __
                 {% ([,,{value}]) => ({key: 'type', value}) %}
 
-OTHER_TAG   ->  (KEYWORD | URL)
+OTHER_TAG   ->  (KEYWORD | URL | DATE)
                 {% ([[d]]) => d %}
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>
                         ( { key: 'keyword'
                           , value: lines.join(' ')
+                          }
+                        )
+                %}
+
+DATE        ->  %DA %SEP %DATE_CONTENT __
+                {% ([,,{value}]) =>
+                        ( { key: 'date'
+                          , value: value.split('/')
                           }
                         )
                 %}

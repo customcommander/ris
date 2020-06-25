@@ -57,3 +57,20 @@ Scenario: URLs
     , "url6"
     ]
     """
+
+Scenario Outline: DA - Date
+  Given I have this RIS file
+  """
+  TY  - JOUR
+  DA  - <date>
+  ER  - 
+  """
+  When I parse the file
+  Then I will find a reference where '<field>' is set to '<value>'
+
+  Examples:
+    | date          | field | value                                                        |
+    | 2020/06/25/   | date  | {"year": "2020", "month": "06", "day": "25", "info": ""}     |
+    | ///           | date  | {"year": ""    , "month": ""  , "day": ""  , "info": ""}     |
+    | /06//         | date  | {"year": ""    , "month": "06", "day": ""  , "info": ""}     |
+    | 2020//25/Conf | date  | {"year": "2020", "month": ""  , "day": "25", "info": "Conf"} |

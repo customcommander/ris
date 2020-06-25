@@ -4,9 +4,11 @@ UR  - http://example.net
 KW  - foo
 KW  - bar
 KW  - baz
+DA  - 2020/06/25/SuperConf
 ER  - 
 
 TY  - BOOK
+DA  - ///
 KW  - foo
 KW  - bar
 UR  - http://example.com; http://example.org;
@@ -14,6 +16,7 @@ http://example.net
 ER  - 
 
 TY  - CHAP
+DA  - 2020///SuperConf
 UR  - http://example.net
 KW  - foo
 UR  - http://example.com; http://example.org

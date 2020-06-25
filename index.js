@@ -18,6 +18,10 @@ const to_record =
                     ( acc.url = (acc.url || []).concat(value)
                     , acc
                     )
+    , 'date'   , (acc, {value: [year, month, day, info]}) =>
+                    ( acc.date = {year, month, day, info}
+                    , acc
+                    )
     , acc => acc
     );
 

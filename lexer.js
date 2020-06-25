@@ -9,6 +9,7 @@ const lexer =
     ( { NL: { match: /\n/, lineBreaks: true }
       , SEP: "  - "
       , TY: "TY"
+      , DA: "DA"
       , KW: "KW"
       , UR: "UR"
       , ER: "ER"
@@ -32,6 +33,7 @@ const lexer =
                 , "STAT"   , "THES"  , "UNBILL"
                 , "UNPD"   , "VIDEO"
                 ]
+      , DATE_CONTENT: /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/
       , CONTENT: /[a-zA-Z0-9 \-\.':/;]+/
       }
     );
