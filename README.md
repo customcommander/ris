@@ -41,6 +41,7 @@ ER  -
 | Tag | Key     | Description    |
 |:----|:--------|:---------------|
 | TY  | type    | Reference type |
+| DA  | date    | Date           |
 | KW  | keyword | Keywords       |
 | UR  | url     | Web/URL        |
 

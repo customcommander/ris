@@ -21,12 +21,19 @@ function id(x) { return x[0]; }
     {"name": "RTYPE", "symbols": [(lexer.has("TY") ? {type: "TY"} : TY), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("TY_VAL") ? {type: "TY_VAL"} : TY_VAL), "__"], "postprocess": ([,,{value}]) => ({key: 'type', value})},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["KEYWORD"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["URL"]},
+    {"name": "OTHER_TAG$subexpression$1", "symbols": ["DATE"]},
     {"name": "OTHER_TAG", "symbols": ["OTHER_TAG$subexpression$1"], "postprocess": ([[d]]) => d},
     {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},
     {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "KEYWORD", "symbols": [(lexer.has("KW") ? {type: "KW"} : KW), (lexer.has("SEP") ? {type: "SEP"} : SEP), "KEYWORD$ebnf$1"], "postprocess":  ([,,lines]) =>
         ( { key: 'keyword'
           , value: lines.join(' ')
+          }
+        )
+                        },
+    {"name": "DATE", "symbols": [(lexer.has("DA") ? {type: "DA"} : DA), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("DATE_CONTENT") ? {type: "DATE_CONTENT"} : DATE_CONTENT), "__"], "postprocess":  ([,,{value}]) =>
+        ( { key: 'date'
+          , value: value.split('/')
           }
         )
                         },
