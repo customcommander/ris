@@ -15,24 +15,6 @@ Scenario: Returns a list of references
   When I parse the file
   Then I will get a list of references
 
-Scenario Outline: Field mapping
-  Given I have this RIS file
-    """
-    TY  - JOUR
-    KW  - foo
-    KW  - bar
-    UR  - http://example.com
-    ER  - 
-    """
-  When I parse the file
-  Then I will find a reference where '<field>' is set to '<value>'
-
-  Examples:
-    | field    | value                  |
-    | type     | JOUR                   |
-    | keyword  | ["foo", "bar"]         |
-    | url      | ["http://example.com"] |
-
 Scenario: URLs
   Given I have this RIS file
     """
