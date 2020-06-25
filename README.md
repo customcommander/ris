@@ -38,12 +38,13 @@ ER  -
 
 ## Conversion Table
 
-| Tag | Key     | Description    |
-|:----|:--------|:---------------|
-| TY  | type    | Reference type |
-| DA  | date    | Date           |
-| KW  | keyword | Keywords       |
-| UR  | url     | Web/URL        |
+| Tag | Key      | Description      |
+|:----|:---------|:-----------------|
+| TY  | type     | Reference type   |
+| DA  | date     | Date             |
+| KW  | keyword  | Keywords         |
+| PY  | pub_year | Publication year |
+| UR  | url      | Web/URL          |
 
 ## Development
 

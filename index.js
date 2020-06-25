@@ -9,17 +9,21 @@ const multifun = require('@customcommander/multifun');
 const to_record =
   multifun
     ( (acc, {key}) => key
-    , 'keyword', (acc, {value}) =>
+    , 'keyword' , (acc, {value}) =>
                     ( acc.keyword = acc.keyword || []
                     , acc.keyword.push(value)
                     , acc
                     )
-    , 'url'    , (acc, {value}) =>
+    , 'url'     , (acc, {value}) =>
                     ( acc.url = (acc.url || []).concat(value)
                     , acc
                     )
-    , 'date'   , (acc, {value: [year, month, day, info]}) =>
+    , 'date'    , (acc, {value: [year, month, day, info]}) =>
                     ( acc.date = {year, month, day, info}
+                    , acc
+                    )
+    , 'pub_year', (acc, {value}) =>
+                    ( acc.pub_year = value
                     , acc
                     )
     , acc => acc

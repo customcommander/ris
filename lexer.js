@@ -11,6 +11,7 @@ const lexer =
       , TY: "TY"
       , DA: "DA"
       , KW: "KW"
+      , PY: "PY"
       , UR: "UR"
       , ER: "ER"
       , TY_VAL: [ "ABST"   , "ADVS"  , "AGGR"
@@ -34,6 +35,7 @@ const lexer =
                 , "UNPD"   , "VIDEO"
                 ]
       , DATE_CONTENT: /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/
+      , PUBYEAR_CONTENT : /\d{4}/
       , CONTENT: /[a-zA-Z0-9 \-\.':/;]+/
       }
     );

@@ -22,6 +22,7 @@ function id(x) { return x[0]; }
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["KEYWORD"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["URL"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["DATE"]},
+    {"name": "OTHER_TAG$subexpression$1", "symbols": ["PUBYEAR"]},
     {"name": "OTHER_TAG", "symbols": ["OTHER_TAG$subexpression$1"], "postprocess": ([[d]]) => d},
     {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},
     {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
@@ -34,6 +35,12 @@ function id(x) { return x[0]; }
     {"name": "DATE", "symbols": [(lexer.has("DA") ? {type: "DA"} : DA), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("DATE_CONTENT") ? {type: "DATE_CONTENT"} : DATE_CONTENT), "__"], "postprocess":  ([,,{value}]) =>
         ( { key: 'date'
           , value: value.split('/')
+          }
+        )
+                        },
+    {"name": "PUBYEAR", "symbols": [(lexer.has("PY") ? {type: "PY"} : PY), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("PUBYEAR_CONTENT") ? {type: "PUBYEAR_CONTENT"} : PUBYEAR_CONTENT), "__"], "postprocess":  ([,,{value}]) =>
+        ( { key: 'pub_year'
+          , value
           }
         )
                         },
