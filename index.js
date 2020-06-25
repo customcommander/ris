@@ -22,6 +22,7 @@ const to_record =
     , 'keyword'       , append
     , 'url'           , append
     , 'abstract'      , add
+    , 'acc_number'    , add
     , 'author_address', add
     , 'pub_year'      , add
     , 'date'          , (acc, {value: [year, month, day, info]}) =>

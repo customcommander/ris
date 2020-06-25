@@ -89,4 +89,5 @@ Scenario Outline: Other tags
     | tag | content      | field          | value       |
     | AB  | foobar       | abstract       | foobar      |
     | AD  | fulham road  | author_address | fulham road |
+    | AN  | 12ABC        | acc_number     | 12ABC       |
     | PY  | 2014         | pub_year       | "2014"      |
