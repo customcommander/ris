@@ -24,7 +24,8 @@
     "semantic-release": "^17.0.8"
   },
   "scripts": {
-    "test": "make"
+    "test": "make",
+    "sample": "make sample"
   },
   "publishConfig": {
     "access": "public"
