@@ -86,6 +86,7 @@ Scenario Outline: Other tags
   Then I will find a reference where '<field>' is set to '<value>'
 
   Examples:
-    | tag | content | field    | value  |
-    | AB  | foobar  | abstract | foobar |
-    | PY  | 2014    | pub_year | "2014" |
+    | tag | content      | field          | value       |
+    | AB  | foobar       | abstract       | foobar      |
+    | AD  | fulham road  | author_address | fulham road |
+    | PY  | 2014         | pub_year       | "2014"      |

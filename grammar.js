@@ -24,8 +24,10 @@ function id(x) { return x[0]; }
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["DATE"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["PUBYEAR"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["ABSTRACT"]},
+    {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR_ADDR"]},
     {"name": "OTHER_TAG", "symbols": ["OTHER_TAG$subexpression$1"], "postprocess": ([[d]]) => d},
-    {"name": "ABSTRACT", "symbols": [(lexer.has("AB") ? {type: "AB"} : AB), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'abstract', value})},
+    {"name": "ABSTRACT", "symbols": [(lexer.has("AB") ? {type: "AB"} : AB), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'abstract'      , value})},
+    {"name": "AUTHOR_ADDR", "symbols": [(lexer.has("AD") ? {type: "AD"} : AD), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_address', value})},
     {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},
     {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "KEYWORD", "symbols": [(lexer.has("KW") ? {type: "KW"} : KW), (lexer.has("SEP") ? {type: "SEP"} : SEP), "KEYWORD$ebnf$1"], "postprocess":  ([,,lines]) =>
