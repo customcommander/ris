@@ -74,3 +74,13 @@ Scenario Outline: DA - Date
     | ///           | date  | {"year": ""    , "month": ""  , "day": ""  , "info": ""}     |
     | /06//         | date  | {"year": ""    , "month": "06", "day": ""  , "info": ""}     |
     | 2020//25/Conf | date  | {"year": "2020", "month": ""  , "day": "25", "info": "Conf"} |
+
+Scenario: PY - Publication Year
+  Given I have this RIS file
+    """
+    TY  - JOUR
+    PY  - 2014
+    ER  - 
+    """
+  When I parse the file
+  Then I will find a reference where 'pub_year' is set to '"2014"'
