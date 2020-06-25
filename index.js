@@ -19,13 +19,14 @@ const add =
 const to_record =
   multifun
     ( (acc, {key}) => key
-    , 'keyword' , append
-    , 'url'     , append
-    , 'abstract', add
-    , 'pub_year', add
-    , 'date'    , (acc, {value: [year, month, day, info]}) =>
-                    ( acc.date = {year, month, day, info}
-                    , acc )
+    , 'keyword'       , append
+    , 'url'           , append
+    , 'abstract'      , add
+    , 'author_address', add
+    , 'pub_year'      , add
+    , 'date'          , (acc, {value: [year, month, day, info]}) =>
+                          ( acc.date = {year, month, day, info}
+                          , acc )
     , acc => acc
     );
 

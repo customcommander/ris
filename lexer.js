@@ -10,6 +10,7 @@ const lexer =
       , SEP: "  - "
       , TY: "TY"
       , AB: "AB"
+      , AD: "AD"
       , DA: "DA"
       , KW: "KW"
       , PY: "PY"
