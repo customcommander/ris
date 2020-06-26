@@ -61,6 +61,7 @@ ER  -
 | DB  | db_provider    | Database provider                             |
 | DO  | doi            | DOI (Digital Object Identifier)               |
 | ET  | edition        | Edition                                       |
+| J2  | title_alt      | Alternate title                               |
 | KW  | keyword        | Keywords                                      |
 | PY  | pub_year       | Publication year                              |
 | RP  | reprint        | Reprint status                                |

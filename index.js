@@ -56,6 +56,7 @@ const to_record =
     , 'edition'       , add
     , 'pub_year'      , add
     , 'pub_loc'       , add
+    , 'title_alt'     , add
     , 'date'          , (acc, {value}) =>
                           ( acc.date = zip(['year', 'month', 'day', 'info'])(value)
                           , acc )

@@ -30,6 +30,7 @@ OTHER_TAG   ->  ( KEYWORD
                 | CUSTOM
                 | DOI
                 | EDITION
+                | TITLE_ALT
                 )
                 {% ([[d]]) => d %}
 
@@ -45,6 +46,7 @@ DB_NAME     ->  %DB %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'db_name'    
 DB_PROV     ->  %DP %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'db_provider'   , value}) %}
 DOI         ->  %DO %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'doi'           , value}) %}
 EDITION     ->  %ET %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'edition'       , value}) %}
+TITLE_ALT   ->  %J2 %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'title_alt'     , value}) %}
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>
