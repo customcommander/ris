@@ -32,6 +32,7 @@ function id(x) { return x[0]; }
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["CALL_NUMBER"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["PUB_LOC"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["DATABASE"]},
+    {"name": "OTHER_TAG$subexpression$1", "symbols": ["CUSTOM"]},
     {"name": "OTHER_TAG", "symbols": ["OTHER_TAG$subexpression$1"], "postprocess": ([[d]]) => d},
     {"name": "ABSTRACT", "symbols": [(lexer.has("AB") ? {type: "AB"} : AB), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'abstract'      , value})},
     {"name": "AUTHOR_ADDR", "symbols": [(lexer.has("AD") ? {type: "AD"} : AD), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_address', value})},
@@ -70,6 +71,15 @@ function id(x) { return x[0]; }
           }
         )
                         },
+    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C1") ? {type: "C1"} : C1)]},
+    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C2") ? {type: "C2"} : C2)]},
+    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C3") ? {type: "C3"} : C3)]},
+    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C4") ? {type: "C4"} : C4)]},
+    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C5") ? {type: "C5"} : C5)]},
+    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C6") ? {type: "C6"} : C6)]},
+    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C7") ? {type: "C7"} : C7)]},
+    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C8") ? {type: "C8"} : C8)]},
+    {"name": "CUSTOM", "symbols": ["CUSTOM$subexpression$1", (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([[{value: key}],,{value}]) => ({key: 'custom', value: [key, value]})},
     {"name": "LINE", "symbols": [(lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([{value}]) => value},
     {"name": "EOR", "symbols": [(lexer.has("ER") ? {type: "ER"} : ER), (lexer.has("SEP") ? {type: "SEP"} : SEP), "_"], "postprocess": () => null}
 ]

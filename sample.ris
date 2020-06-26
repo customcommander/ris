@@ -17,6 +17,10 @@ UR  - http://example.com; http://example.org;
 http://example.net
 PY  - 2014
 RP  - ON REQUEST (06/26/2020)
+C1  - custom1
+C2  - custom2
+C3  - custom3
+C4  - custom4
 ER  - 
 
 TY  - CHAP

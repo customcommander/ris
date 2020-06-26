@@ -73,6 +73,14 @@ Scenario Outline: Other tags
     | AD  | fulham road             | author_address | fulham road                                  |
     | AN  | 12ABC                   | acc_number     | 12ABC                                        |
     | AV  | 99ABC                   | arch_loc       | 99ABC                                        |
+    | C1  | aa                      | custom         | ["aa",""  ,""  ,""  ,""  ,""  ,""  ,""  ]    |
+    | C2  | bb                      | custom         | [""  ,"bb",""  ,""  ,""  ,""  ,""  ,""  ]    |
+    | C3  | cc                      | custom         | [""  ,""  ,"cc",""  ,""  ,""  ,""  ,""  ]    |
+    | C4  | dd                      | custom         | [""  ,""  ,""  ,"dd",""  ,""  ,""  ,""  ]    |
+    | C5  | ee                      | custom         | [""  ,""  ,""  ,""  ,"ee",""  ,""  ,""  ]    |
+    | C6  | ff                      | custom         | [""  ,""  ,""  ,""  ,""  ,"ff",""  ,""  ]    |
+    | C7  | gg                      | custom         | [""  ,""  ,""  ,""  ,""  ,""  ,"gg",""  ]    |
+    | C8  | hh                      | custom         | [""  ,""  ,""  ,""  ,""  ,""  ,""  ,"hh"]    |
     | CA  | my caption              | caption        | my caption                                   |
     | CN  | CALLNUM123              | call_number    | CALLNUM123                                   |
     | CY  | pubplace                | pub_loc        | pubplace                                     |

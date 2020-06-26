@@ -21,6 +21,16 @@ const add =
     ( acc[key] = value
     , acc );
 
+const custom_add =
+  /*
+    {key: 'custom', value: ['C1', 'foo']} -> acc.custom[0] = foo
+    {key: 'custom', value: ['C8', 'foo']} -> acc.custom[7] = foo
+  */
+  (acc, {value: [k, v]}) =>
+    ( acc.custom = acc.custom || Array(8).fill('')
+    , acc.custom[k[1] - 1] = v
+    , acc );
+
 const defaults =
   acc =>
     Object.assign
@@ -39,6 +49,7 @@ const to_record =
     , 'arch_loc'      , add
     , 'call_number'   , add
     , 'caption'       , add
+    , 'custom'        , custom_add
     , 'db_name'       , add
     , 'pub_year'      , add
     , 'pub_loc'       , add
