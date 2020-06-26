@@ -38,17 +38,19 @@ ER  -
 
 ## Conversion Table
 
-| Tag | Key            | Description          |
-|:----|:---------------|:---------------------|
-| TY  | type           | Reference type       |
-| AB  | abstract       | Abstract             |
-| AD  | author_address | Author address       |
-| AN  | acc_number     | Accession number     |
-| AV  | arch_loc       | Location in archives |
-| DA  | date           | Date                 |
-| KW  | keyword        | Keywords             |
-| PY  | pub_year       | Publication year     |
-| UR  | url            | Web/URL              |
+| Tag | Key            | Description                              |
+|:----|:---------------|:-----------------------------------------|
+| TY  | type           | Reference type                           |
+| AB  | abstract       | Abstract                                 |
+| AD  | author_address | Author address                           |
+| AN  | acc_number     | Accession number                         |
+| AV  | arch_loc       | Location in archives                     |
+| DA  | date           | Date                                     |
+| KW  | keyword        | Keywords                                 |
+| PY  | pub_year       | Publication year                         |
+| RP  | reprint        | Reprint status                           |
+| RP  | reprint_date   | Reprint date when status is "ON REQUEST" |
+| UR  | url            | Web/URL                                  |
 
 ## Development
 

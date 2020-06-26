@@ -16,6 +16,7 @@ const lexer =
       , DA: "DA"
       , KW: "KW"
       , PY: "PY"
+      , RP: "RP"
       , UR: "UR"
       , ER: "ER"
       , TY_VAL: [ "ABST"   , "ADVS"  , "AGGR"
@@ -38,6 +39,7 @@ const lexer =
                 , "STAT"   , "THES"  , "UNBILL"
                 , "UNPD"   , "VIDEO"
                 ]
+      , RP_CONTENT: /(?:IN FILE|NOT IN FILE|ON REQUEST \(\d{2}\/\d{2}\/\d{4}\))/
       , DATE_CONTENT: /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/
       , PUBYEAR_CONTENT : /\d{4}/
       , CONTENT: /[a-zA-Z0-9 \-\.':/;]+/

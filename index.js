@@ -6,6 +6,11 @@ const nearley = require('nearley');
 const grammar = require('./grammar.js');
 const multifun = require('@customcommander/multifun');
 
+const zip =
+  keys => values =>
+    keys.reduce((acc, k, i) =>
+      ( acc[k] = values[i], acc ), {});
+
 const append =
   (acc, {key, value}) =>
     ( acc[key] = (acc[key] || []).concat(value)
@@ -15,6 +20,13 @@ const add =
   (acc, {key, value}) =>
     ( acc[key] = value
     , acc );
+
+const defaults =
+  acc =>
+    Object.assign
+      ( { reprint: 'NOT IN FILE'
+        }
+      , acc );
 
 const to_record =
   multifun
@@ -26,8 +38,17 @@ const to_record =
     , 'author_address', add
     , 'arch_loc'      , add
     , 'pub_year'      , add
-    , 'date'          , (acc, {value: [year, month, day, info]}) =>
-                          ( acc.date = {year, month, day, info}
+    , 'date'          , (acc, {value}) =>
+                          ( acc.date = zip(['year', 'month', 'day', 'info'])(value)
+                          , acc )
+    , 'reprint'       , (acc, {value}) => /* when reprint is on request, it's value is set to  "ON REQUEST (dd/mm/yyyy)" */
+                          ( acc.reprint = ( value === 'IN FILE'     ? 'IN FILE'
+                                          : value === 'NOT IN FILE' ? 'NOT IN FILE'
+                                                                    : 'ON REQUEST' )
+                          , acc.reprint_date = ( acc.reprint !== 'ON REQUEST'
+                                                  ? undefined
+                                                  : zip(['month', 'day', 'year'])
+                                                      (value.match(/(\d{2})\/(\d{2})\/(\d{4})/).slice(1)))
                           , acc )
     , acc => acc
     );
@@ -38,7 +59,7 @@ const process_ast =
       ( ([head, tail]) =>
           tail.reduce
             ( to_record
-            , {type: head.value}
+            , defaults({type: head.value})
             )
       );
 

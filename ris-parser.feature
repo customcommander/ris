@@ -68,9 +68,21 @@ Scenario Outline: Other tags
   Then I will find a reference where '<field>' is set to '<value>'
 
   Examples:
-    | tag | content      | field          | value       |
-    | AB  | foobar       | abstract       | foobar      |
-    | AD  | fulham road  | author_address | fulham road |
-    | AN  | 12ABC        | acc_number     | 12ABC       |
-    | AV  | 99ABC        | arch_loc       | 99ABC       |
-    | PY  | 2014         | pub_year       | "2014"      |
+    | tag | content                 | field          | value                                        |
+    | AB  | foobar                  | abstract       | foobar                                       |
+    | AD  | fulham road             | author_address | fulham road                                  |
+    | AN  | 12ABC                   | acc_number     | 12ABC                                        |
+    | AV  | 99ABC                   | arch_loc       | 99ABC                                        |
+    | RP  | IN FILE                 | reprint        | IN FILE                                      |
+    | RP  | NOT IN FILE             | reprint        | NOT IN FILE                                  |
+    | RP  | ON REQUEST (06/26/2020) | reprint_date   | {"year": "2020", "month": "06", "day": "26"} |
+    | PY  | 2014                    | pub_year       | "2014"                                       |
+
+Scenario: Default values
+  Given I have this RIS file
+    """
+    TY  - JOUR
+    ER  - 
+    """
+  When I parse the file
+  Then I will find a reference where 'reprint' is set to 'NOT IN FILE'
