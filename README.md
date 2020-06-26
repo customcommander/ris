@@ -47,6 +47,7 @@ ER  -
 | AV  | arch_loc       | Location in archives                     |
 | CA  | caption        | Caption                                  |
 | CN  | call_number    | Call number                              |
+| CY  | pub_loc        | Place published                          |
 | DA  | date           | Date                                     |
 | KW  | keyword        | Keywords                                 |
 | PY  | pub_year       | Publication year                         |

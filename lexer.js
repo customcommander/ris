@@ -37,6 +37,7 @@ const lexer =
       , AV: /AV(?=  - )/
       , CA: /CA(?=  - )/
       , CN: /CN(?=  - )/
+      , CY: /CY(?=  - )/
       , DA: /DA(?=  - )/
       , KW: /KW(?=  - )/
       , PY: /PY(?=  - )/

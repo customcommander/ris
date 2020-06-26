@@ -24,6 +24,7 @@ OTHER_TAG   ->  ( KEYWORD
                 | RP_STATUS
                 | CAPTION
                 | CALL_NUMBER
+                | PUB_LOC
                 )
                 {% ([[d]]) => d %}
 
@@ -34,6 +35,7 @@ ARCH_LOC    ->  %AV %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'arch_loc'   
 RP_STATUS   ->  %RP %SEP %RP_CONTENT __ {% ([,,{value}]) => ({key: 'reprint'       , value}) %}
 CAPTION     ->  %CA %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'caption'       , value}) %}
 CALL_NUMBER ->  %CN %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'call_number'   , value}) %}
+PUB_LOC     ->  %CY %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'pub_loc'   , value}) %}
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>
