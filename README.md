@@ -46,6 +46,7 @@ ER  -
 | AN  | acc_number     | Accession number                         |
 | AV  | arch_loc       | Location in archives                     |
 | CA  | caption        | Caption                                  |
+| CN  | call_number    | Call number                              |
 | DA  | date           | Date                                     |
 | KW  | keyword        | Keywords                                 |
 | PY  | pub_year       | Publication year                         |
