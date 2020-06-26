@@ -27,11 +27,13 @@ function id(x) { return x[0]; }
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR_ADDR"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["ACC_NUMBER"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["ARCH_LOC"]},
+    {"name": "OTHER_TAG$subexpression$1", "symbols": ["RP_STATUS"]},
     {"name": "OTHER_TAG", "symbols": ["OTHER_TAG$subexpression$1"], "postprocess": ([[d]]) => d},
     {"name": "ABSTRACT", "symbols": [(lexer.has("AB") ? {type: "AB"} : AB), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'abstract'      , value})},
     {"name": "AUTHOR_ADDR", "symbols": [(lexer.has("AD") ? {type: "AD"} : AD), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_address', value})},
     {"name": "ACC_NUMBER", "symbols": [(lexer.has("AN") ? {type: "AN"} : AN), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'acc_number'    , value})},
     {"name": "ARCH_LOC", "symbols": [(lexer.has("AV") ? {type: "AV"} : AV), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'arch_loc'      , value})},
+    {"name": "RP_STATUS", "symbols": [(lexer.has("RP") ? {type: "RP"} : RP), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("RP_CONTENT") ? {type: "RP_CONTENT"} : RP_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'reprint'       , value})},
     {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},
     {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "KEYWORD", "symbols": [(lexer.has("KW") ? {type: "KW"} : KW), (lexer.has("SEP") ? {type: "SEP"} : SEP), "KEYWORD$ebnf$1"], "postprocess":  ([,,lines]) =>

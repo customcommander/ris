@@ -21,13 +21,15 @@ OTHER_TAG   ->  ( KEYWORD
                 | AUTHOR_ADDR
                 | ACC_NUMBER
                 | ARCH_LOC
+                | RP_STATUS
                 )
                 {% ([[d]]) => d %}
 
-ABSTRACT    ->  %AB %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'abstract'      , value}) %}
-AUTHOR_ADDR ->  %AD %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'author_address', value}) %}
-ACC_NUMBER  ->  %AN %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'acc_number'    , value}) %}
-ARCH_LOC    ->  %AV %SEP %CONTENT __  {% ([,,{value}]) => ({key: 'arch_loc'      , value}) %}
+ABSTRACT    ->  %AB %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'abstract'      , value}) %}
+AUTHOR_ADDR ->  %AD %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'author_address', value}) %}
+ACC_NUMBER  ->  %AN %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'acc_number'    , value}) %}
+ARCH_LOC    ->  %AV %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'arch_loc'      , value}) %}
+RP_STATUS   ->  %RP %SEP %RP_CONTENT __ {% ([,,{value}]) => ({key: 'reprint'       , value}) %}
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>
@@ -60,6 +62,8 @@ URL         ->  %UR %SEP LINE:+
                           }
                         )
                 %}
+
+
 
 LINE        ->  %CONTENT __
                 {% ([{value}]) => value %}

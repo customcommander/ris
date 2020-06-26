@@ -6,6 +6,7 @@ KW  - bar
 KW  - baz
 DA  - 2020/06/25/SuperConf
 PY  - 1981
+RP  - IN FILE
 ER  - 
 
 TY  - BOOK
@@ -15,6 +16,7 @@ KW  - bar
 UR  - http://example.com; http://example.org;
 http://example.net
 PY  - 2014
+RP  - ON REQUEST (06/26/2020)
 ER  - 
 
 TY  - CHAP
