@@ -50,6 +50,7 @@ const lexer =
       , DB: /DB(?=  - )/
       , DO: /DO(?=  - )/
       , DP: /DP(?=  - )/
+      , ET: /ET(?=  - )/
       , KW: /KW(?=  - )/
       , PY: /PY(?=  - )/
       , RP: /RP(?=  - )/
