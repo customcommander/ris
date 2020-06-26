@@ -28,6 +28,7 @@ OTHER_TAG   ->  ( KEYWORD
                 | DB_NAME
                 | DB_PROV
                 | CUSTOM
+                | DOI
                 )
                 {% ([[d]]) => d %}
 
@@ -41,6 +42,7 @@ CALL_NUMBER ->  %CN %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'call_number'
 PUB_LOC     ->  %CY %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'pub_loc'       , value}) %}
 DB_NAME     ->  %DB %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'db_name'       , value}) %}
 DB_PROV     ->  %DP %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'db_provider'   , value}) %}
+DOI         ->  %DO %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'doi'           , value}) %}
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>

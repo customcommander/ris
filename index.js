@@ -52,6 +52,7 @@ const to_record =
     , 'custom'        , custom_add
     , 'db_name'       , add
     , 'db_provider'   , add
+    , 'doi'           , add
     , 'pub_year'      , add
     , 'pub_loc'       , add
     , 'date'          , (acc, {value}) =>
