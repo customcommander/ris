@@ -76,6 +76,7 @@ Scenario Outline: Other tags
     | CA  | my caption              | caption        | my caption                                   |
     | RP  | IN FILE                 | reprint        | IN FILE                                      |
     | RP  | NOT IN FILE             | reprint        | NOT IN FILE                                  |
+    | RP  | ON REQUEST (06/26/2020) | reprint        | ON REQUEST                                   |
     | RP  | ON REQUEST (06/26/2020) | reprint_date   | {"year": "2020", "month": "06", "day": "26"} |
     | PY  | 2014                    | pub_year       | "2014"                                       |
 
