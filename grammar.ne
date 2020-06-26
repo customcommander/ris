@@ -26,6 +26,7 @@ OTHER_TAG   ->  ( KEYWORD
                 | CALL_NUMBER
                 | PUB_LOC
                 | DATABASE
+                | CUSTOM
                 )
                 {% ([[d]]) => d %}
 
@@ -71,7 +72,8 @@ URL         ->  %UR %SEP LINE:+
                         )
                 %}
 
-
+CUSTOM      ->  (%C1 | %C2 | %C3 | %C4 | %C5 | %C6 | %C7 | %C8) %SEP %CONTENT __
+                {% ([[{value: key}],,{value}]) => ({key: 'custom', value: [key, value]}) %}
 
 LINE        ->  %CONTENT __
                 {% ([{value}]) => value %}
