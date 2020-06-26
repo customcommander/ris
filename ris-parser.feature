@@ -68,29 +68,30 @@ Scenario Outline: Other tags
   Then I will find a reference where '<field>' is set to '<value>'
 
   Examples:
-    | tag | content                 | field          | value                                        |
-    | AB  | foobar                  | abstract       | foobar                                       |
-    | AD  | fulham road             | author_address | fulham road                                  |
-    | AN  | 12ABC                   | acc_number     | 12ABC                                        |
-    | AV  | 99ABC                   | arch_loc       | 99ABC                                        |
-    | C1  | aa                      | custom         | ["aa",""  ,""  ,""  ,""  ,""  ,""  ,""  ]    |
-    | C2  | bb                      | custom         | [""  ,"bb",""  ,""  ,""  ,""  ,""  ,""  ]    |
-    | C3  | cc                      | custom         | [""  ,""  ,"cc",""  ,""  ,""  ,""  ,""  ]    |
-    | C4  | dd                      | custom         | [""  ,""  ,""  ,"dd",""  ,""  ,""  ,""  ]    |
-    | C5  | ee                      | custom         | [""  ,""  ,""  ,""  ,"ee",""  ,""  ,""  ]    |
-    | C6  | ff                      | custom         | [""  ,""  ,""  ,""  ,""  ,"ff",""  ,""  ]    |
-    | C7  | gg                      | custom         | [""  ,""  ,""  ,""  ,""  ,""  ,"gg",""  ]    |
-    | C8  | hh                      | custom         | [""  ,""  ,""  ,""  ,""  ,""  ,""  ,"hh"]    |
-    | CA  | my caption              | caption        | my caption                                   |
-    | CN  | CALLNUM123              | call_number    | CALLNUM123                                   |
-    | CY  | pubplace                | pub_loc        | pubplace                                     |
-    | DB  | mydb345                 | db_name        | mydb345                                      |
-    | DP  | dbprovidedby1           | db_provider    | dbprovidedby1                                |
-    | RP  | IN FILE                 | reprint        | IN FILE                                      |
-    | RP  | NOT IN FILE             | reprint        | NOT IN FILE                                  |
-    | RP  | ON REQUEST (06/26/2020) | reprint        | ON REQUEST                                   |
-    | RP  | ON REQUEST (06/26/2020) | reprint_date   | {"year": "2020", "month": "06", "day": "26"} |
-    | PY  | 2014                    | pub_year       | "2014"                                       |
+    | tag | content                  | field          | value                                        |
+    | AB  | foobar                   | abstract       | foobar                                       |
+    | AD  | fulham road              | author_address | fulham road                                  |
+    | AN  | 12ABC                    | acc_number     | 12ABC                                        |
+    | AV  | 99ABC                    | arch_loc       | 99ABC                                        |
+    | C1  | aa                       | custom         | ["aa",""  ,""  ,""  ,""  ,""  ,""  ,""  ]    |
+    | C2  | bb                       | custom         | [""  ,"bb",""  ,""  ,""  ,""  ,""  ,""  ]    |
+    | C3  | cc                       | custom         | [""  ,""  ,"cc",""  ,""  ,""  ,""  ,""  ]    |
+    | C4  | dd                       | custom         | [""  ,""  ,""  ,"dd",""  ,""  ,""  ,""  ]    |
+    | C5  | ee                       | custom         | [""  ,""  ,""  ,""  ,"ee",""  ,""  ,""  ]    |
+    | C6  | ff                       | custom         | [""  ,""  ,""  ,""  ,""  ,"ff",""  ,""  ]    |
+    | C7  | gg                       | custom         | [""  ,""  ,""  ,""  ,""  ,""  ,"gg",""  ]    |
+    | C8  | hh                       | custom         | [""  ,""  ,""  ,""  ,""  ,""  ,""  ,"hh"]    |
+    | CA  | my caption               | caption        | my caption                                   |
+    | CN  | CALLNUM123               | call_number    | CALLNUM123                                   |
+    | CY  | pubplace                 | pub_loc        | pubplace                                     |
+    | DB  | mydb345                  | db_name        | mydb345                                      |
+    | DP  | dbprovidedby1            | db_provider    | dbprovidedby1                                |
+    | DO  | 10.1177/0003122411414817 | doi            | 10.1177/0003122411414817                     |
+    | RP  | IN FILE                  | reprint        | IN FILE                                      |
+    | RP  | NOT IN FILE              | reprint        | NOT IN FILE                                  |
+    | RP  | ON REQUEST (06/26/2020)  | reprint        | ON REQUEST                                   |
+    | RP  | ON REQUEST (06/26/2020)  | reprint_date   | {"year": "2020", "month": "06", "day": "26"} |
+    | PY  | 2014                     | pub_year       | "2014"                                       |
 
 Scenario: Default values
   Given I have this RIS file

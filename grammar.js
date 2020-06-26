@@ -34,6 +34,7 @@ function id(x) { return x[0]; }
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["DB_NAME"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["DB_PROV"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["CUSTOM"]},
+    {"name": "OTHER_TAG$subexpression$1", "symbols": ["DOI"]},
     {"name": "OTHER_TAG", "symbols": ["OTHER_TAG$subexpression$1"], "postprocess": ([[d]]) => d},
     {"name": "ABSTRACT", "symbols": [(lexer.has("AB") ? {type: "AB"} : AB), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'abstract'      , value})},
     {"name": "AUTHOR_ADDR", "symbols": [(lexer.has("AD") ? {type: "AD"} : AD), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_address', value})},
@@ -45,6 +46,7 @@ function id(x) { return x[0]; }
     {"name": "PUB_LOC", "symbols": [(lexer.has("CY") ? {type: "CY"} : CY), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'pub_loc'       , value})},
     {"name": "DB_NAME", "symbols": [(lexer.has("DB") ? {type: "DB"} : DB), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'db_name'       , value})},
     {"name": "DB_PROV", "symbols": [(lexer.has("DP") ? {type: "DP"} : DP), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'db_provider'   , value})},
+    {"name": "DOI", "symbols": [(lexer.has("DO") ? {type: "DO"} : DO), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'doi'           , value})},
     {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},
     {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "KEYWORD", "symbols": [(lexer.has("KW") ? {type: "KW"} : KW), (lexer.has("SEP") ? {type: "SEP"} : SEP), "KEYWORD$ebnf$1"], "postprocess":  ([,,lines]) =>
