@@ -74,6 +74,7 @@ Scenario Outline: Other tags
     | AN  | 12ABC                   | acc_number     | 12ABC                                        |
     | AV  | 99ABC                   | arch_loc       | 99ABC                                        |
     | CA  | my caption              | caption        | my caption                                   |
+    | CN  | CALLNUM123              | call_number    | CALLNUM123                                   |
     | RP  | IN FILE                 | reprint        | IN FILE                                      |
     | RP  | NOT IN FILE             | reprint        | NOT IN FILE                                  |
     | RP  | ON REQUEST (06/26/2020) | reprint        | ON REQUEST                                   |
