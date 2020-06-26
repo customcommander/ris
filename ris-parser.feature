@@ -87,6 +87,7 @@ Scenario Outline: Other tags
     | DB  | mydb345                  | db_name        | mydb345                                      |
     | DP  | dbprovidedby1            | db_provider    | dbprovidedby1                                |
     | DO  | 10.1177/0003122411414817 | doi            | 10.1177/0003122411414817                     |
+    | ET  | 4th Ed.                  | edition        | 4th Ed.                                      |
     | RP  | IN FILE                  | reprint        | IN FILE                                      |
     | RP  | NOT IN FILE              | reprint        | NOT IN FILE                                  |
     | RP  | ON REQUEST (06/26/2020)  | reprint        | ON REQUEST                                   |

@@ -60,6 +60,7 @@ ER  -
 | DB  | db_name        | Database name                                 |
 | DB  | db_provider    | Database provider                             |
 | DO  | doi            | DOI (Digital Object Identifier)               |
+| ET  | edition        | Edition                                       |
 | KW  | keyword        | Keywords                                      |
 | PY  | pub_year       | Publication year                              |
 | RP  | reprint        | Reprint status                                |
