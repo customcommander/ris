@@ -57,7 +57,8 @@ ER  -
 | CN  | call_number    | Call number                                   |
 | CY  | pub_loc        | Place published                               |
 | DA  | date           | Date                                          |
-| DB  | db_name        | Name of database                              |
+| DB  | db_name        | Database name                                 |
+| DB  | db_provider    | Database provider                             |
 | KW  | keyword        | Keywords                                      |
 | PY  | pub_year       | Publication year                              |
 | RP  | reprint        | Reprint status                                |

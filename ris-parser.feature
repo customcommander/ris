@@ -85,6 +85,7 @@ Scenario Outline: Other tags
     | CN  | CALLNUM123              | call_number    | CALLNUM123                                   |
     | CY  | pubplace                | pub_loc        | pubplace                                     |
     | DB  | mydb345                 | db_name        | mydb345                                      |
+    | DP  | dbprovidedby1           | db_provider    | dbprovidedby1                                |
     | RP  | IN FILE                 | reprint        | IN FILE                                      |
     | RP  | NOT IN FILE             | reprint        | NOT IN FILE                                  |
     | RP  | ON REQUEST (06/26/2020) | reprint        | ON REQUEST                                   |

@@ -51,6 +51,7 @@ const to_record =
     , 'caption'       , add
     , 'custom'        , custom_add
     , 'db_name'       , add
+    , 'db_provider'   , add
     , 'pub_year'      , add
     , 'pub_loc'       , add
     , 'date'          , (acc, {value}) =>
