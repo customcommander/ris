@@ -8,18 +8,41 @@ const lexer =
   moo.compile
     ( { NL: { match: /\n/, lineBreaks: true }
       , SEP: "  - "
-      , TY: "TY"
-      , AB: "AB"
-      , AD: "AD"
-      , AN: "AN"
-      , AV: "AV"
-      , CA: "CA"
-      , DA: "DA"
-      , KW: "KW"
-      , PY: "PY"
-      , RP: "RP"
-      , UR: "UR"
-      , ER: "ER"
+      /*
+      These tokens define the start of a new record entry:
+
+      TY  - JOUR
+      KW  - foo
+      ER  - 
+
+      So they should be followed by `  - ` (SPACE SPACE HYPHEN SPACE)
+      to be considered as such.
+
+      We use a positive lookahead to make sure that
+      they aren't accidentally detected when parsing tag content.
+
+      For example:
+
+      KW  - TY foo bar
+
+      In this case `TY` shouldn't be interpreted as a token but
+      as part of the content of the `KW` tag.
+
+      >>>
+      */
+      , TY: /TY(?=  - )/
+      , AB: /AB(?=  - )/
+      , AD: /AD(?=  - )/
+      , AN: /AN(?=  - )/
+      , AV: /AV(?=  - )/
+      , CA: /CA(?=  - )/
+      , DA: /DA(?=  - )/
+      , KW: /KW(?=  - )/
+      , PY: /PY(?=  - )/
+      , RP: /RP(?=  - )/
+      , UR: /UR(?=  - )/
+      , ER: /ER(?=  - )/
+      /* <<< */
       , TY_VAL: [ "ABST"   , "ADVS"  , "AGGR"
                 , "ANCIENT", "ART"   , "BILL"
                 , "BLOG"   , "BOOK"  , "CASE"
