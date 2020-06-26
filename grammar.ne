@@ -22,6 +22,7 @@ OTHER_TAG   ->  ( KEYWORD
                 | ACC_NUMBER
                 | ARCH_LOC
                 | RP_STATUS
+                | CAPTION
                 )
                 {% ([[d]]) => d %}
 
@@ -30,6 +31,7 @@ AUTHOR_ADDR ->  %AD %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'author_addre
 ACC_NUMBER  ->  %AN %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'acc_number'    , value}) %}
 ARCH_LOC    ->  %AV %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'arch_loc'      , value}) %}
 RP_STATUS   ->  %RP %SEP %RP_CONTENT __ {% ([,,{value}]) => ({key: 'reprint'       , value}) %}
+CAPTION     ->  %CA %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'caption'       , value}) %}
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>

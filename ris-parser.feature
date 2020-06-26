@@ -73,6 +73,7 @@ Scenario Outline: Other tags
     | AD  | fulham road             | author_address | fulham road                                  |
     | AN  | 12ABC                   | acc_number     | 12ABC                                        |
     | AV  | 99ABC                   | arch_loc       | 99ABC                                        |
+    | CA  | my caption              | caption        | my caption                                   |
     | RP  | IN FILE                 | reprint        | IN FILE                                      |
     | RP  | NOT IN FILE             | reprint        | NOT IN FILE                                  |
     | RP  | ON REQUEST (06/26/2020) | reprint_date   | {"year": "2020", "month": "06", "day": "26"} |

@@ -45,6 +45,7 @@ ER  -
 | AD  | author_address | Author address                           |
 | AN  | acc_number     | Accession number                         |
 | AV  | arch_loc       | Location in archives                     |
+| CA  | caption        | Caption                                  |
 | DA  | date           | Date                                     |
 | KW  | keyword        | Keywords                                 |
 | PY  | pub_year       | Publication year                         |
