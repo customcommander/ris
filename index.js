@@ -40,6 +40,7 @@ const to_record =
     , 'call_number'   , add
     , 'caption'       , add
     , 'pub_year'      , add
+    , 'pub_loc'       , add
     , 'date'          , (acc, {value}) =>
                           ( acc.date = zip(['year', 'month', 'day', 'info'])(value)
                           , acc )
