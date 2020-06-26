@@ -39,6 +39,7 @@ const to_record =
     , 'arch_loc'      , add
     , 'call_number'   , add
     , 'caption'       , add
+    , 'db_name'       , add
     , 'pub_year'      , add
     , 'pub_loc'       , add
     , 'date'          , (acc, {value}) =>
