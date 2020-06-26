@@ -88,6 +88,7 @@ Scenario Outline: Other tags
     | DP  | dbprovidedby1            | db_provider    | dbprovidedby1                                |
     | DO  | 10.1177/0003122411414817 | doi            | 10.1177/0003122411414817                     |
     | ET  | 4th Ed.                  | edition        | 4th Ed.                                      |
+    | J2  | R2D2                     | title_alt      | R2D2                                         |
     | RP  | IN FILE                  | reprint        | IN FILE                                      |
     | RP  | NOT IN FILE              | reprint        | NOT IN FILE                                  |
     | RP  | ON REQUEST (06/26/2020)  | reprint        | ON REQUEST                                   |
