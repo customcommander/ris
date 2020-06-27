@@ -58,6 +58,7 @@ const lexer =
       , DO: /DO(?=  - )/
       , DP: /DP(?=  - )/
       , ED: /ED(?=  - )/
+      , EP: /EP(?=  - )/
       , ET: /ET(?=  - )/
       , J2: /J2(?=  - )/
       , KW: /KW(?=  - )/
