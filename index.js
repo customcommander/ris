@@ -65,6 +65,7 @@ const to_record =
     , 'CP'            , add
     , 'ED'            , add
     , 'EP'            , add
+    , 'ID'            , add
     , 'db_name'       , add
     , 'db_provider'   , add
     , 'doi'           , add

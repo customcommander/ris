@@ -122,6 +122,7 @@ Scenario Outline: Other tags
     | ED  | ED VALUE                 | ED             | ED VALUE                                     |
     | EP  | EP VALUE                 | EP             | EP VALUE                                     |
     | ET  | 4th Ed.                  | edition        | 4th Ed.                                      |
+    | ID  | ID VALUE                 | ID             | ID VALUE                                     |
     | J2  | R2D2                     | title_alt      | R2D2                                         |
     | RP  | IN FILE                  | reprint        | IN FILE                                      |
     | RP  | NOT IN FILE              | reprint        | NOT IN FILE                                  |
