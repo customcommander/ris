@@ -61,6 +61,7 @@ const to_record =
     , 'call_number'   , add
     , 'caption'       , add
     , 'custom'        , custom_add
+    , 'CT'            , add
     , 'db_name'       , add
     , 'db_provider'   , add
     , 'doi'           , add
