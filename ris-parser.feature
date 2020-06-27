@@ -57,6 +57,35 @@ Scenario Outline: DA - Date
     | /06//         | date  | {"year": ""    , "month": "06", "day": ""  , "info": ""}     |
     | 2020//25/Conf | date  | {"year": "2020", "month": ""  , "day": "25", "info": "Conf"} |
 
+Scenario Outline: Authors
+  Given I have this RIS file
+    """
+    TY  - JOUR
+    AU  - Doe, John
+    A2  - Doe, John
+    A3  - Doe, John
+    A4  - Doe, John
+    <tag>  - <content>
+    ER  - 
+    """
+  When I parse the file
+  Then I will find a reference where '<field>' is set to '<value>'
+
+  Examples:
+    | tag | content               | field      | value                                                                                                                 |
+    | AU  | Phillips, A.J         | author     | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"A.J","suffix":""}]         |
+    | AU  | Phillips, Albert John | author     | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"Albert John","suffix":""}] |
+    | AU  | Phillips,A.J.,Sr.     | author     | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"A.J.","suffix":"Sr."}]     |
+    | A2  | Phillips, A.J         | author_sec | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"A.J","suffix":""}]         |
+    | A2  | Phillips, Albert John | author_sec | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"Albert John","suffix":""}] |
+    | A2  | Phillips,A.J.,Sr.     | author_sec | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"A.J.","suffix":"Sr."}]     |
+    | A3  | Phillips, A.J         | author_ter | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"A.J","suffix":""}]         |
+    | A3  | Phillips, Albert John | author_ter | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"Albert John","suffix":""}] |
+    | A3  | Phillips,A.J.,Sr.     | author_ter | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"A.J.","suffix":"Sr."}]     |
+    | A4  | Phillips, A.J         | author_sub | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"A.J","suffix":""}]         |
+    | A4  | Phillips, Albert John | author_sub | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"Albert John","suffix":""}] |
+    | A4  | Phillips,A.J.,Sr.     | author_sub | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"A.J.","suffix":"Sr."}]     |
+
 Scenario Outline: Other tags
   Given I have this RIS file
     """

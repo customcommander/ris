@@ -34,6 +34,10 @@ const lexer =
       , AB: /AB(?=  - )/
       , AD: /AD(?=  - )/
       , AN: /AN(?=  - )/
+      , AU: /AU(?=  - )/
+      , A2: /A2(?=  - )/
+      , A3: /A3(?=  - )/
+      , A4: /A4(?=  - )/
       , AV: /AV(?=  - )/
       , C1: /C1(?=  - )/
       , C2: /C2(?=  - )/
@@ -80,6 +84,9 @@ const lexer =
                 ]
       , RP_CONTENT: /(?:IN FILE|NOT IN FILE|ON REQUEST \(\d{2}\/\d{2}\/\d{4}\))/
       , DATE_CONTENT: /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/
+      , NAME_CONTENT: { match: /[a-zA-Z \-]+,[a-zA-Z \-\.]+(?:,[a-zA-Z\.]+)*/
+                      , value:  name => name.split(',').map(part => part.trim())
+                      }
       , PUBYEAR_CONTENT : /\d{4}/
       , CONTENT: /[a-zA-Z0-9 \-\.':/;]+/
       }
