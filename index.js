@@ -63,6 +63,7 @@ const to_record =
     , 'custom'        , custom_add
     , 'CT'            , add
     , 'CP'            , add
+    , 'ED'            , add
     , 'db_name'       , add
     , 'db_provider'   , add
     , 'doi'           , add

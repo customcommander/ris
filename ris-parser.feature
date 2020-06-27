@@ -119,6 +119,7 @@ Scenario Outline: Other tags
     | DB  | mydb345                  | db_name        | mydb345                                      |
     | DP  | dbprovidedby1            | db_provider    | dbprovidedby1                                |
     | DO  | 10.1177/0003122411414817 | doi            | 10.1177/0003122411414817                     |
+    | ED  | ED VALUE                 | ED             | ED VALUE                                     |
     | ET  | 4th Ed.                  | edition        | 4th Ed.                                      |
     | J2  | R2D2                     | title_alt      | R2D2                                         |
     | RP  | IN FILE                  | reprint        | IN FILE                                      |
