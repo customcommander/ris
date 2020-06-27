@@ -35,6 +35,7 @@ OTHER_TAG   ->  ( KEYWORD
                 | AUTHOR2
                 | AUTHOR3
                 | AUTHOR4
+                | SINGLE_LINE_ENTRY
                 )
                 {% ([[d]]) => d %}
 
@@ -55,6 +56,15 @@ AUTHOR1     ->  %AU %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author'   
 AUTHOR2     ->  %A2 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_sec'    , value}) %}
 AUTHOR3     ->  %A3 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_ter'    , value}) %}
 AUTHOR4     ->  %A4 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_sub'    , value}) %}
+BT_ENTRY    ->  %BT %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'bt'            , value}) %}
+
+SINGLE_LINE_ENTRY ->
+  (%BT)
+  %SEP
+  %CONTENT __
+  {% ([[{value: key}],,{value}]) => ({key, value}) %}
+
+
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>

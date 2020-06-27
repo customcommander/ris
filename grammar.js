@@ -41,6 +41,7 @@ function id(x) { return x[0]; }
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR2"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR3"]},
     {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR4"]},
+    {"name": "OTHER_TAG$subexpression$1", "symbols": ["SINGLE_LINE_ENTRY"]},
     {"name": "OTHER_TAG", "symbols": ["OTHER_TAG$subexpression$1"], "postprocess": ([[d]]) => d},
     {"name": "ABSTRACT", "symbols": [(lexer.has("AB") ? {type: "AB"} : AB), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'abstract'      , value})},
     {"name": "AUTHOR_ADDR", "symbols": [(lexer.has("AD") ? {type: "AD"} : AD), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_address', value})},
@@ -59,6 +60,9 @@ function id(x) { return x[0]; }
     {"name": "AUTHOR2", "symbols": [(lexer.has("A2") ? {type: "A2"} : A2), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("NAME_CONTENT") ? {type: "NAME_CONTENT"} : NAME_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_sec'    , value})},
     {"name": "AUTHOR3", "symbols": [(lexer.has("A3") ? {type: "A3"} : A3), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("NAME_CONTENT") ? {type: "NAME_CONTENT"} : NAME_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_ter'    , value})},
     {"name": "AUTHOR4", "symbols": [(lexer.has("A4") ? {type: "A4"} : A4), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("NAME_CONTENT") ? {type: "NAME_CONTENT"} : NAME_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_sub'    , value})},
+    {"name": "BT_ENTRY", "symbols": [(lexer.has("BT") ? {type: "BT"} : BT), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'bt'            , value})},
+    {"name": "SINGLE_LINE_ENTRY$subexpression$1", "symbols": [(lexer.has("BT") ? {type: "BT"} : BT)]},
+    {"name": "SINGLE_LINE_ENTRY", "symbols": ["SINGLE_LINE_ENTRY$subexpression$1", (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([[{value: key}],,{value}]) => ({key, value})},
     {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},
     {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "KEYWORD", "symbols": [(lexer.has("KW") ? {type: "KW"} : KW), (lexer.has("SEP") ? {type: "SEP"} : SEP), "KEYWORD$ebnf$1"], "postprocess":  ([,,lines]) =>
