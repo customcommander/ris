@@ -16,6 +16,7 @@ ER  -
 
 TY  - BOOK
 BT  - this is a bt value
+CT  - this is a CT value
 DA  - ///
 KW  - foo
 KW  - bar

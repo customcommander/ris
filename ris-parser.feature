@@ -113,6 +113,7 @@ Scenario Outline: Other tags
     | C8  | hh                       | custom         | [""  ,""  ,""  ,""  ,""  ,""  ,""  ,"hh"]    |
     | CA  | my caption               | caption        | my caption                                   |
     | CN  | CALLNUM123               | call_number    | CALLNUM123                                   |
+    | CT  | CT VALUE                 | CT             | CT VALUE                                     |
     | CY  | pubplace                 | pub_loc        | pubplace                                     |
     | DB  | mydb345                  | db_name        | mydb345                                      |
     | DP  | dbprovidedby1            | db_provider    | dbprovidedby1                                |
