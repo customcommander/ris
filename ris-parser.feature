@@ -102,6 +102,7 @@ Scenario Outline: Other tags
     | AD  | fulham road              | author_address | fulham road                                  |
     | AN  | 12ABC                    | acc_number     | 12ABC                                        |
     | AV  | 99ABC                    | arch_loc       | 99ABC                                        |
+    | BT  | BT VALUE                 | BT             | BT VALUE                                     |
     | C1  | aa                       | custom         | ["aa",""  ,""  ,""  ,""  ,""  ,""  ,""  ]    |
     | C2  | bb                       | custom         | [""  ,"bb",""  ,""  ,""  ,""  ,""  ,""  ]    |
     | C3  | cc                       | custom         | [""  ,""  ,"cc",""  ,""  ,""  ,""  ,""  ]    |

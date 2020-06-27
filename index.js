@@ -57,6 +57,7 @@ const to_record =
     , 'author_ter'    , name_add
     , 'author_sub'    , name_add
     , 'arch_loc'      , add
+    , 'BT'            , add
     , 'call_number'   , add
     , 'caption'       , add
     , 'custom'        , custom_add
