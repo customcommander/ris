@@ -62,6 +62,7 @@ const to_record =
     , 'caption'       , add
     , 'custom'        , custom_add
     , 'CT'            , add
+    , 'CP'            , add
     , 'db_name'       , add
     , 'db_provider'   , add
     , 'doi'           , add
