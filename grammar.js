@@ -62,6 +62,7 @@ function id(x) { return x[0]; }
     {"name": "AUTHOR4", "symbols": [(lexer.has("A4") ? {type: "A4"} : A4), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("NAME_CONTENT") ? {type: "NAME_CONTENT"} : NAME_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_sub'    , value})},
     {"name": "BT_ENTRY", "symbols": [(lexer.has("BT") ? {type: "BT"} : BT), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'bt'            , value})},
     {"name": "SINGLE_LINE_ENTRY$subexpression$1", "symbols": [(lexer.has("BT") ? {type: "BT"} : BT)]},
+    {"name": "SINGLE_LINE_ENTRY$subexpression$1", "symbols": [(lexer.has("CP") ? {type: "CP"} : CP)]},
     {"name": "SINGLE_LINE_ENTRY$subexpression$1", "symbols": [(lexer.has("CT") ? {type: "CT"} : CT)]},
     {"name": "SINGLE_LINE_ENTRY", "symbols": ["SINGLE_LINE_ENTRY$subexpression$1", (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([[{value: key}],,{value}]) => ({key, value})},
     {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},

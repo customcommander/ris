@@ -50,6 +50,7 @@ const lexer =
       , C8: /C8(?=  - )/
       , CA: /CA(?=  - )/
       , CN: /CN(?=  - )/
+      , CP: /CP(?=  - )/
       , CT: /CT(?=  - )/
       , CY: /CY(?=  - )/
       , DA: /DA(?=  - )/

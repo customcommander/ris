@@ -59,7 +59,7 @@ AUTHOR4     ->  %A4 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_sub
 BT_ENTRY    ->  %BT %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'bt'            , value}) %}
 
 SINGLE_LINE_ENTRY ->
-  (%BT | %CT)
+  (%BT | %CP | %CT)
   %SEP
   %CONTENT __
   {% ([[{value: key}],,{value}]) => ({key, value}) %}
