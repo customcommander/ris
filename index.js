@@ -31,6 +31,12 @@ const custom_add =
     , acc.custom[k[1] - 1] = v
     , acc );
 
+const name_add =
+  (acc, {key, value: [last_name, first_name, suffix = '']}) =>
+    ( acc[key] = acc[key] || []
+    , acc[key].push({last_name, first_name, suffix})
+    , acc );
+
 const defaults =
   acc =>
     Object.assign
@@ -46,6 +52,10 @@ const to_record =
     , 'abstract'      , add
     , 'acc_number'    , add
     , 'author_address', add
+    , 'author'        , name_add
+    , 'author_sec'    , name_add
+    , 'author_ter'    , name_add
+    , 'author_sub'    , name_add
     , 'arch_loc'      , add
     , 'call_number'   , add
     , 'caption'       , add

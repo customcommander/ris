@@ -44,6 +44,10 @@ ER  -
 | AB  | abstract       | Abstract                                      |
 | AD  | author_address | Author address                                |
 | AN  | acc_number     | Accession number                              |
+| AU  | author         | Primary author(s)                             |
+| A2  | author_sec     | Secondary author(s)                           |
+| A3  | author_ter     | Tertiary author(s)                            |
+| A4  | author_sub     | Subsidiary author(s)                          |
 | AV  | arch_loc       | Location in archives                          |
 | C1  | custom         | Custom field 1; entry 0 in the `custom` array |
 | C2  | custom         | Custom field 2; entry 1 in the `custom` array |

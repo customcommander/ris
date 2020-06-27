@@ -31,22 +31,30 @@ OTHER_TAG   ->  ( KEYWORD
                 | DOI
                 | EDITION
                 | TITLE_ALT
+                | AUTHOR1
+                | AUTHOR2
+                | AUTHOR3
+                | AUTHOR4
                 )
                 {% ([[d]]) => d %}
 
-ABSTRACT    ->  %AB %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'abstract'      , value}) %}
-AUTHOR_ADDR ->  %AD %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'author_address', value}) %}
-ACC_NUMBER  ->  %AN %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'acc_number'    , value}) %}
-ARCH_LOC    ->  %AV %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'arch_loc'      , value}) %}
-RP_STATUS   ->  %RP %SEP %RP_CONTENT __ {% ([,,{value}]) => ({key: 'reprint'       , value}) %}
-CAPTION     ->  %CA %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'caption'       , value}) %}
-CALL_NUMBER ->  %CN %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'call_number'   , value}) %}
-PUB_LOC     ->  %CY %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'pub_loc'       , value}) %}
-DB_NAME     ->  %DB %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'db_name'       , value}) %}
-DB_PROV     ->  %DP %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'db_provider'   , value}) %}
-DOI         ->  %DO %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'doi'           , value}) %}
-EDITION     ->  %ET %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'edition'       , value}) %}
-TITLE_ALT   ->  %J2 %SEP %CONTENT __    {% ([,,{value}]) => ({key: 'title_alt'     , value}) %}
+ABSTRACT    ->  %AB %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'abstract'      , value}) %}
+AUTHOR_ADDR ->  %AD %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'author_address', value}) %}
+ACC_NUMBER  ->  %AN %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'acc_number'    , value}) %}
+ARCH_LOC    ->  %AV %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'arch_loc'      , value}) %}
+RP_STATUS   ->  %RP %SEP %RP_CONTENT __   {% ([,,{value}]) => ({key: 'reprint'       , value}) %}
+CAPTION     ->  %CA %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'caption'       , value}) %}
+CALL_NUMBER ->  %CN %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'call_number'   , value}) %}
+PUB_LOC     ->  %CY %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'pub_loc'       , value}) %}
+DB_NAME     ->  %DB %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'db_name'       , value}) %}
+DB_PROV     ->  %DP %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'db_provider'   , value}) %}
+DOI         ->  %DO %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'doi'           , value}) %}
+EDITION     ->  %ET %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'edition'       , value}) %}
+TITLE_ALT   ->  %J2 %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'title_alt'     , value}) %}
+AUTHOR1     ->  %AU %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author'        , value}) %}
+AUTHOR2     ->  %A2 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_sec'    , value}) %}
+AUTHOR3     ->  %A3 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_ter'    , value}) %}
+AUTHOR4     ->  %A4 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_sub'    , value}) %}
 
 KEYWORD     ->  %KW %SEP LINE:+
                 {% ([,,lines]) =>
