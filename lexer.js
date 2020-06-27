@@ -60,6 +60,7 @@ const lexer =
       , ED: /ED(?=  - )/
       , EP: /EP(?=  - )/
       , ET: /ET(?=  - )/
+      , ID: /ID(?=  - )/
       , J2: /J2(?=  - )/
       , KW: /KW(?=  - )/
       , PY: /PY(?=  - )/
