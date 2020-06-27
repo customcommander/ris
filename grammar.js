@@ -64,6 +64,7 @@ function id(x) { return x[0]; }
     {"name": "SINGLE_LINE_ENTRY$subexpression$1", "symbols": [(lexer.has("BT") ? {type: "BT"} : BT)]},
     {"name": "SINGLE_LINE_ENTRY$subexpression$1", "symbols": [(lexer.has("CP") ? {type: "CP"} : CP)]},
     {"name": "SINGLE_LINE_ENTRY$subexpression$1", "symbols": [(lexer.has("CT") ? {type: "CT"} : CT)]},
+    {"name": "SINGLE_LINE_ENTRY$subexpression$1", "symbols": [(lexer.has("ED") ? {type: "ED"} : ED)]},
     {"name": "SINGLE_LINE_ENTRY", "symbols": ["SINGLE_LINE_ENTRY$subexpression$1", (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([[{value: key}],,{value}]) => ({key, value})},
     {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},
     {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
