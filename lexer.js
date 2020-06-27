@@ -39,7 +39,6 @@ const lexer =
       , A3: /A3(?=  - )/
       , A4: /A4(?=  - )/
       , AV: /AV(?=  - )/
-      , BT: /BT(?=  - )/
       , C1: /C1(?=  - )/
       , C2: /C2(?=  - )/
       , C3: /C3(?=  - )/
@@ -50,24 +49,19 @@ const lexer =
       , C8: /C8(?=  - )/
       , CA: /CA(?=  - )/
       , CN: /CN(?=  - )/
-      , CP: /CP(?=  - )/
-      , CT: /CT(?=  - )/
       , CY: /CY(?=  - )/
       , DA: /DA(?=  - )/
       , DB: /DB(?=  - )/
       , DO: /DO(?=  - )/
       , DP: /DP(?=  - )/
-      , ED: /ED(?=  - )/
-      , EP: /EP(?=  - )/
       , ET: /ET(?=  - )/
-      , ID: /ID(?=  - )/
-      , IS: /IS(?=  - )/
       , J2: /J2(?=  - )/
       , KW: /KW(?=  - )/
       , PY: /PY(?=  - )/
       , RP: /RP(?=  - )/
       , UR: /UR(?=  - )/
       , ER: /ER(?=  - )/
+      , TAG: /(?:BT|CP|CT|ED|EP|ID|IS)(?=  - )/
       /* <<< */
       , TY_VAL: [ "ABST"   , "ADVS"  , "AGGR"
                 , "ANCIENT", "ART"   , "BILL"
