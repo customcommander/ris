@@ -13,7 +13,7 @@ Scenario: Returns a list of references
     ER  - 
     """
   When I parse the file
-  Then I will get a list of references
+  Then I will get a list of 3 references
 
 # List taken from https://en.wikipedia.org/wiki/RIS_(file_format)
 Scenario: Support all tags from the two major versions of the RIS specification
