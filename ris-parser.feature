@@ -187,8 +187,9 @@ Scenario: URLs
     TY  - JOUR
     KW  - foo
     UR  - url1
-    UR  - url2; url3
     KW  - bar
+    UR  - url2; url3
+    KW  - baz
     UR  - url4;
     url5;
     url6;
