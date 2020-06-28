@@ -30,47 +30,11 @@ TY  - CHAP
 ER  - 
 `);
 
-//=> [ { "type": "JOUR" }
-//=> , { "type": "BOOK" }
-//=> , { "type": "CHAP" }
+//=> [ { TY: "JOUR" }
+//=> , { TY: "BOOK" }
+//=> , { TY: "CHAP" }
 //=> ]
 ```
-
-## Conversion Table
-
-| Tag | Key            | Description                                   |
-|:----|:---------------|:----------------------------------------------|
-| TY  | type           | Reference type                                |
-| AB  | abstract       | Abstract                                      |
-| AD  | author_address | Author address                                |
-| AN  | acc_number     | Accession number                              |
-| AU  | author         | Primary author(s)                             |
-| A2  | author_sec     | Secondary author(s)                           |
-| A3  | author_ter     | Tertiary author(s)                            |
-| A4  | author_sub     | Subsidiary author(s)                          |
-| AV  | arch_loc       | Location in archives                          |
-| C1  | custom         | Custom field 1; entry 0 in the `custom` array |
-| C2  | custom         | Custom field 2; entry 1 in the `custom` array |
-| C3  | custom         | Custom field 3; entry 2 in the `custom` array |
-| C4  | custom         | Custom field 4; entry 3 in the `custom` array |
-| C5  | custom         | Custom field 5; entry 4 in the `custom` array |
-| C6  | custom         | Custom field 6; entry 5 in the `custom` array |
-| C7  | custom         | Custom field 7; entry 6 in the `custom` array |
-| C8  | custom         | Custom field 8; entry 7 in the `custom` array |
-| CA  | caption        | Caption                                       |
-| CN  | call_number    | Call number                                   |
-| CY  | pub_loc        | Place published                               |
-| DA  | date           | Date                                          |
-| DB  | db_name        | Database name                                 |
-| DB  | db_provider    | Database provider                             |
-| DO  | doi            | DOI (Digital Object Identifier)               |
-| ET  | edition        | Edition                                       |
-| J2  | title_alt      | Alternate title                               |
-| KW  | keyword        | Keywords                                      |
-| PY  | pub_year       | Publication year                              |
-| RP  | reprint        | Reprint status                                |
-| RP  | reprint_date   | Reprint date when status is "ON REQUEST"      |
-| UR  | url            | Web/URL                                       |
 
 ## Development
 

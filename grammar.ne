@@ -4,98 +4,46 @@
 @lexer lexer
 @builtin "whitespace.ne"
 
-RIS         ->  _ RECORD:+
-                {% ([, d]) => d %}
+ris ->
+  _ reference:+
+    {% ([,references]) => references %}
 
-RECORD      ->  RTYPE OTHER_TAG:* EOR
-                {% ast => ast.filter(x => x !== null) %}
+reference ->
+  start entry:* end
+    {% ([type, entries]) => [type, entries] %}
 
-RTYPE       ->  %TY %SEP %TY_VAL __
-                {% ([,,{value}]) => ({key: 'type', value}) %}
+start ->
+  %type %sep %type_value %newline
+    {% ([{value: key},,{value}]) => ({key, value}) %}
 
-OTHER_TAG   ->  ( KEYWORD
-                | URL
-                | DATE
-                | PUBYEAR
-                | ABSTRACT
-                | AUTHOR_ADDR
-                | ACC_NUMBER
-                | ARCH_LOC
-                | RP_STATUS
-                | CAPTION
-                | CALL_NUMBER
-                | PUB_LOC
-                | DB_NAME
-                | DB_PROV
-                | CUSTOM
-                | DOI
-                | EDITION
-                | TITLE_ALT
-                | AUTHOR1
-                | AUTHOR2
-                | AUTHOR3
-                | AUTHOR4
-                | TAG_ENTRY
-                )
-                {% ([[d]]) => d %}
+end ->
+  %end %sep _
+    {% () => null %}
 
-ABSTRACT    ->  %AB %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'abstract'      , value}) %}
-AUTHOR_ADDR ->  %AD %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'author_address', value}) %}
-ACC_NUMBER  ->  %AN %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'acc_number'    , value}) %}
-ARCH_LOC    ->  %AV %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'arch_loc'      , value}) %}
-RP_STATUS   ->  %RP %SEP %RP_CONTENT __   {% ([,,{value}]) => ({key: 'reprint'       , value}) %}
-CAPTION     ->  %CA %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'caption'       , value}) %}
-CALL_NUMBER ->  %CN %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'call_number'   , value}) %}
-PUB_LOC     ->  %CY %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'pub_loc'       , value}) %}
-DB_NAME     ->  %DB %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'db_name'       , value}) %}
-DB_PROV     ->  %DP %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'db_provider'   , value}) %}
-DOI         ->  %DO %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'doi'           , value}) %}
-EDITION     ->  %ET %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'edition'       , value}) %}
-TITLE_ALT   ->  %J2 %SEP %CONTENT __      {% ([,,{value}]) => ({key: 'title_alt'     , value}) %}
-AUTHOR1     ->  %AU %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author'        , value}) %}
-AUTHOR2     ->  %A2 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_sec'    , value}) %}
-AUTHOR3     ->  %A3 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_ter'    , value}) %}
-AUTHOR4     ->  %A4 %SEP %NAME_CONTENT __ {% ([,,{value}]) => ({key: 'author_sub'    , value}) %}
+entry ->
+  (entry_std | entry_name | entry_date | entry_pubyear | entry_reprint)
+    {% ([[entry]]) => entry %}
 
-TAG_ENTRY -> %TAG %SEP %CONTENT __ {% ([tag,,content]) => ({key: tag.value, value: content.value}) %}
+entry_std ->
+  %std %sep std_value:+
+    {% ([{value: key},,value]) => ({key, value: value.join(' ')}) %}
 
-KEYWORD     ->  %KW %SEP LINE:+
-                {% ([,,lines]) =>
-                        ( { key: 'keyword'
-                          , value: lines.join(' ')
-                          }
-                        )
-                %}
+std_value ->
+  %std_value %newline
+    {% ([{value}]) => value %}
 
-DATE        ->  %DA %SEP %DATE_CONTENT __
-                {% ([,,{value}]) =>
-                        ( { key: 'date'
-                          , value: value.split('/')
-                          }
-                        )
-                %}
+entry_name ->
+  %name %sep %name_value %newline
+    {% ([{value: key},,{value}]) => ({key, value}) %}
 
-PUBYEAR     ->  %PY %SEP %PUBYEAR_CONTENT __
-                {% ([,,{value}]) =>
-                        ( { key: 'pub_year'
-                          , value
-                          }
-                        )
-                %}
+entry_date ->
+  %date %sep %date_value %newline
+    {% ([{value: key},,{value}]) => ({key, value}) %}
 
-URL         ->  %UR %SEP LINE:+
-                {% ([,,lines]) =>
-                        ( { key: 'url'
-                          , value: lines.flatMap(line => line.split(';').map(url => url.trim()).filter(Boolean))
-                          }
-                        )
-                %}
+entry_pubyear ->
+  %pubyear %sep %pubyear_value %newline
+    {% ([{value: key},,{value}]) => ({key, value}) %}
 
-CUSTOM      ->  (%C1 | %C2 | %C3 | %C4 | %C5 | %C6 | %C7 | %C8) %SEP %CONTENT __
-                {% ([[{value: key}],,{value}]) => ({key: 'custom', value: [key, value]}) %}
-
-LINE        ->  %CONTENT __
-                {% ([{value}]) => value %}
-
-EOR         ->  %ER %SEP _
-                {% () => null %}
+entry_reprint ->
+  %reprint %sep %reprint_value %newline
+    {% ([{value: key},,{value}]) => ({key, value}) %}
