@@ -253,7 +253,7 @@ Scenario Outline: Authors
     | A4  | Phillips, Albert John | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"Albert John","suffix":""}] |
     | A4  | Phillips,A.J.,Sr.     | [{"last_name":"Doe","first_name":"John","suffix":""},{"last_name":"Phillips","first_name":"A.J.","suffix":"Sr."}]     |
 
-Scenario Outline: Other tags
+Scenario Outline: RP
   Given I have this RIS file
     """
     TY  - JOUR
@@ -265,37 +265,9 @@ Scenario Outline: Other tags
 
   Examples:
     | tag | content                  | value                                                                  |
-    | AB  | foobar                   | foobar                                                                 |
-    | AD  | fulham road              | fulham road                                                            |
-    | AN  | 12ABC                    | 12ABC                                                                  |
-    | AV  | 99ABC                    | 99ABC                                                                  |
-    | BT  | BT VALUE                 | BT VALUE                                                               |
-    | C1  | aa                       | aa                                                                     |
-    | C2  | bb                       | bb                                                                     |
-    | C3  | cc                       | cc                                                                     |
-    | C4  | dd                       | dd                                                                     |
-    | C5  | ee                       | ee                                                                     |
-    | C6  | ff                       | ff                                                                     |
-    | C7  | gg                       | gg                                                                     |
-    | C8  | hh                       | hh                                                                     |
-    | CA  | my caption               | my caption                                                             |
-    | CN  | CALLNUM123               | CALLNUM123                                                             |
-    | CP  | CP VALUE                 | CP VALUE                                                               |
-    | CT  | CT VALUE                 | CT VALUE                                                               |
-    | CY  | pubplace                 | pubplace                                                               |
-    | DB  | mydb345                  | mydb345                                                                |
-    | DP  | dbprovidedby1            | dbprovidedby1                                                          |
-    | DO  | 10.1177/0003122411414817 | 10.1177/0003122411414817                                               |
-    | ED  | ED VALUE                 | ED VALUE                                                               |
-    | EP  | EP VALUE                 | EP VALUE                                                               |
-    | ET  | 4th Ed.                  | 4th Ed.                                                                |
-    | ID  | ID VALUE                 | ID VALUE                                                               |
-    | IS  | IS VALUE                 | IS VALUE                                                               |
-    | J2  | R2D2                     | R2D2                                                                   |
     | RP  | IN FILE                  | {"status":"IN FILE"}                                                   |
     | RP  | NOT IN FILE              | {"status":"NOT IN FILE"}                                               |
     | RP  | ON REQUEST (06/26/2020)  | {"status":"ON REQUEST","date":{"year":"2020","month":"06","day":"26"}} |
-    | PY  | 2014                     | "2014"                                                                 |
 
 Scenario: Default values
   Given I have this RIS file
