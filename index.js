@@ -29,7 +29,8 @@ const defaults =
       , acc );
 
 const OPS =
-  { A2: name_add
+  { A1: name_add
+  , A2: name_add
   , A3: name_add
   , A4: name_add
   , AB: add
@@ -62,9 +63,31 @@ const OPS =
   , ET: add
   , ID: add
   , IS: add
+  , J1: add
   , J2: add
+  , JA: add
+  , JF: add
+  , JO: add
   , KW: append
+  , L1: add
+  , L2: add
+  , L3: add
+  , L4: add
+  , LA: add
+  , LB: add
+  , LK: add
+  , M1: add
+  , M2: add
+  , M3: add
+  , N1: add
+  , N2: add
+  , NV: add
+  , OP: add
+  , PB: add
+  , PP: add
   , PY: add
+  , RI: add
+  , RN: add
   , RP: (acc, {value: {status, date}}) =>
           ( acc.RP = status !== 'ON REQUEST'
                         ? {status}
@@ -73,13 +96,32 @@ const OPS =
                                          , day: date[1]
                                          }}
           , acc )
+  , SE: add
+  , SN: add
+  , SP: add
+  , ST: add
+  , T1: add
+  , T2: add
+  , T3: add
+  , TA: add
+  , TI: add
+  , TT: add
   , TY: add
+  , U1: add
+  , U2: add
+  , U3: add
+  , U4: add
+  , U5: add
   , UR: (acc, {value}) =>
       ( acc.UR = (acc.UR || []).concat(
           value.split(';')
             .map(url => url.trim())
               .filter(Boolean))
       , acc )
+  , VL: add
+  , VO: add
+  , Y1: add
+  , Y2: add
   };
 
 const process_ast =
