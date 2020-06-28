@@ -4,12 +4,6 @@
 
 const nearley = require('nearley');
 const grammar = require('./grammar.js');
-const multifun = require('@customcommander/multifun');
-
-const zip =
-  keys => values =>
-    keys.reduce((acc, k, i) =>
-      ( acc[k] = values[i], acc ), {});
 
 const append =
   (acc, {key, value}) =>
@@ -21,16 +15,6 @@ const add =
     ( acc[key] = value
     , acc );
 
-const custom_add =
-  /*
-    {key: 'custom', value: ['C1', 'foo']} -> acc.custom[0] = foo
-    {key: 'custom', value: ['C8', 'foo']} -> acc.custom[7] = foo
-  */
-  (acc, {value: [k, v]}) =>
-    ( acc.custom = acc.custom || Array(8).fill('')
-    , acc.custom[k[1] - 1] = v
-    , acc );
-
 const name_add =
   (acc, {key, value: [last_name, first_name, suffix = '']}) =>
     ( acc[key] = acc[key] || []
@@ -40,62 +24,71 @@ const name_add =
 const defaults =
   acc =>
     Object.assign
-      ( { reprint: 'NOT IN FILE'
+      ( { RP: {status: 'NOT IN FILE'}
         }
       , acc );
 
-const to_record =
-  multifun
-    ( (acc, {key}) => key
-    , 'keyword'       , append
-    , 'url'           , append
-    , 'abstract'      , add
-    , 'acc_number'    , add
-    , 'author_address', add
-    , 'author'        , name_add
-    , 'author_sec'    , name_add
-    , 'author_ter'    , name_add
-    , 'author_sub'    , name_add
-    , 'arch_loc'      , add
-    , 'BT'            , add
-    , 'call_number'   , add
-    , 'caption'       , add
-    , 'custom'        , custom_add
-    , 'CT'            , add
-    , 'CP'            , add
-    , 'ED'            , add
-    , 'EP'            , add
-    , 'ID'            , add
-    , 'IS'            , add
-    , 'db_name'       , add
-    , 'db_provider'   , add
-    , 'doi'           , add
-    , 'edition'       , add
-    , 'pub_year'      , add
-    , 'pub_loc'       , add
-    , 'title_alt'     , add
-    , 'date'          , (acc, {value}) =>
-                          ( acc.date = zip(['year', 'month', 'day', 'info'])(value)
-                          , acc )
-    , 'reprint'       , (acc, {value}) => /* when reprint is on request, it's value is set to  "ON REQUEST (dd/mm/yyyy)" */
-                          ( acc.reprint = ( value === 'IN FILE'     ? 'IN FILE'
-                                          : value === 'NOT IN FILE' ? 'NOT IN FILE'
-                                                                    : 'ON REQUEST' )
-                          , acc.reprint_date = ( acc.reprint !== 'ON REQUEST'
-                                                  ? undefined
-                                                  : zip(['month', 'day', 'year'])
-                                                      (value.match(/(\d{2})\/(\d{2})\/(\d{4})/).slice(1)))
-                          , acc )
-    , acc => acc
-    );
+const OPS =
+  { A2: name_add
+  , A3: name_add
+  , A4: name_add
+  , AB: add
+  , AD: add
+  , AN: add
+  , AU: name_add
+  , AV: add
+  , BT: add
+  , C1: add
+  , C2: add
+  , C3: add
+  , C4: add
+  , C5: add
+  , C6: add
+  , C7: add
+  , C8: add
+  , CA: add
+  , CN: add
+  , CP: add
+  , CT: add
+  , CY: add
+  , DA: (acc, {value: [year, month, day, info]}) =>
+          ( acc.DA = {year, month, day, info}
+          , acc )
+  , DB: add
+  , DO: add
+  , DP: add
+  , ED: add
+  , EP: add
+  , ET: add
+  , ID: add
+  , IS: add
+  , J2: add
+  , KW: append
+  , PY: add
+  , RP: (acc, {value: {status, date}}) =>
+          ( acc.RP = status !== 'ON REQUEST'
+                        ? {status}
+                        : {status, date: { year: date[2]
+                                         , month: date[0]
+                                         , day: date[1]
+                                         }}
+          , acc )
+  , TY: add
+  , UR: (acc, {value}) =>
+      ( acc.UR = (acc.UR || []).concat(
+          value.split(';')
+            .map(url => url.trim())
+              .filter(Boolean))
+      , acc )
+  };
 
 const process_ast =
   ast =>
     ast.map
-      ( ([head, tail]) =>
+      ( ([{key, value}, tail]) =>
           tail.reduce
-            ( to_record
-            , defaults({type: head.value})
+            ( (ref, entry) => OPS[entry.key](ref, entry)
+            , defaults({[key]: value})
             )
       );
 

@@ -6,8 +6,8 @@ const moo = require('moo');
 
 const lexer =
   moo.compile
-    ( { NL: { match: /\n/, lineBreaks: true }
-      , SEP: "  - "
+    ( { newline: {match: /\n/, lineBreaks: true}
+      , sep: "  - "
       /*
       These tokens define the start of a new record entry:
 
@@ -30,66 +30,54 @@ const lexer =
 
       >>>
       */
-      , TY: /TY(?=  - )/
-      , AB: /AB(?=  - )/
-      , AD: /AD(?=  - )/
-      , AN: /AN(?=  - )/
-      , AU: /AU(?=  - )/
-      , A2: /A2(?=  - )/
-      , A3: /A3(?=  - )/
-      , A4: /A4(?=  - )/
-      , AV: /AV(?=  - )/
-      , C1: /C1(?=  - )/
-      , C2: /C2(?=  - )/
-      , C3: /C3(?=  - )/
-      , C4: /C4(?=  - )/
-      , C5: /C5(?=  - )/
-      , C6: /C6(?=  - )/
-      , C7: /C7(?=  - )/
-      , C8: /C8(?=  - )/
-      , CA: /CA(?=  - )/
-      , CN: /CN(?=  - )/
-      , CY: /CY(?=  - )/
-      , DA: /DA(?=  - )/
-      , DB: /DB(?=  - )/
-      , DO: /DO(?=  - )/
-      , DP: /DP(?=  - )/
-      , ET: /ET(?=  - )/
-      , J2: /J2(?=  - )/
-      , KW: /KW(?=  - )/
-      , PY: /PY(?=  - )/
-      , RP: /RP(?=  - )/
-      , UR: /UR(?=  - )/
-      , ER: /ER(?=  - )/
-      , TAG: /(?:BT|CP|CT|ED|EP|ID|IS)(?=  - )/
+      , type: /TY(?=  - )/
+      , end: /ER(?=  - )/
+      , std: /(?:AB|AD|AN|AV|BT|C1|C2|C3|C4|C5|C6|C7|C8|CA|CN|CP|CT|CY|DB|DO|DP|ED|EP|ET|ID|IS|J2|KW|UR)(?=  - )/
+      , name: /(?:A2|A3|A4|AU)(?=  - )/
+      , date: /DA(?=  - )/
+      , pubyear: /PY(?=  - )/
+      , reprint: /RP(?=  - )/
       /* <<< */
-      , TY_VAL: [ "ABST"   , "ADVS"  , "AGGR"
-                , "ANCIENT", "ART"   , "BILL"
-                , "BLOG"   , "BOOK"  , "CASE"
-                , "CHAP"   , "CHART" , "CLSWK"
-                , "COMP"   , "CONF"  , "CPAPER"
-                , "CTLG"   , "DATA"  , "DBASE"
-                , "DICT"   , "EBOOK" , "ECHAP"
-                , "EDBOOK" , "EJOUR" , "ELEC"
-                , "ENCYC"  , "EQUA"  , "FIGURE"
-                , "GEN"    , "GOVDOC", "GRNT"
-                , "HEAR"   , "ICOMM" , "INPR"
-                , "JFULL"  , "JOUR"  , "LEGAL"
-                , "MANSCPT", "MAP"   , "MGZN"
-                , "MPCT"   , "MULTI" , "MUSIC"
-                , "NEWS"   , "PAMP"  , "PAT"
-                , "PCOMM"  , "RPRT"  , "SER"
-                , "SLIDE"  , "SOUND" , "STAND"
-                , "STAT"   , "THES"  , "UNBILL"
-                , "UNPD"   , "VIDEO"
-                ]
-      , RP_CONTENT: /(?:IN FILE|NOT IN FILE|ON REQUEST \(\d{2}\/\d{2}\/\d{4}\))/
-      , DATE_CONTENT: /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/
-      , NAME_CONTENT: { match: /[a-zA-Z \-]+,[a-zA-Z \-\.]+(?:,[a-zA-Z\.]+)*/
-                      , value:  name => name.split(',').map(part => part.trim())
-                      }
-      , PUBYEAR_CONTENT : /\d{4}/
-      , CONTENT: /[a-zA-Z0-9 \-\.':/;]+/
+      , type_value:
+          [ "ABST"   , "ADVS"  , "AGGR"
+          , "ANCIENT", "ART"   , "BILL"
+          , "BLOG"   , "BOOK"  , "CASE"
+          , "CHAP"   , "CHART" , "CLSWK"
+          , "COMP"   , "CONF"  , "CPAPER"
+          , "CTLG"   , "DATA"  , "DBASE"
+          , "DICT"   , "EBOOK" , "ECHAP"
+          , "EDBOOK" , "EJOUR" , "ELEC"
+          , "ENCYC"  , "EQUA"  , "FIGURE"
+          , "GEN"    , "GOVDOC", "GRNT"
+          , "HEAR"   , "ICOMM" , "INPR"
+          , "JFULL"  , "JOUR"  , "LEGAL"
+          , "MANSCPT", "MAP"   , "MGZN"
+          , "MPCT"   , "MULTI" , "MUSIC"
+          , "NEWS"   , "PAMP"  , "PAT"
+          , "PCOMM"  , "RPRT"  , "SER"
+          , "SLIDE"  , "SOUND" , "STAND"
+          , "STAT"   , "THES"  , "UNBILL"
+          , "UNPD"   , "VIDEO"
+          ]
+      , reprint_value:
+          { match: /(?:IN FILE|NOT IN FILE|ON REQUEST \(\d{2}\/\d{2}\/\d{4}\))/
+          , value: m => m.startsWith('ON REQUEST')
+                      ? { status: 'ON REQUEST', date: m.match(/(\d{2})\/(\d{2})\/(\d{4})/).slice(1) }
+                      : { status: m }
+          }
+      , date_value:
+          { match: /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/
+          , value: m => m.split('/')
+          }
+      , name_value:
+          { match: /[a-zA-Z \-]+,[a-zA-Z \-\.]+(?:,[a-zA-Z\.]+)*/
+          , value: name => name.split(',').map(part => part.trim())
+          }
+      , pubyear_value : /\d{4}/
+      , std_value:
+            { match: /[a-zA-Z0-9 \-\t:\/\.;]+/
+            , value: m => m.trim()
+            }
       }
     );
 

@@ -21,6 +21,7 @@ ED  - this is a ED value
 DA  - ///
 KW  - foo
 KW  - bar
+baz
 UR  - http://example.com; http://example.org;
 http://example.net
 PY  - 2014
@@ -35,6 +36,52 @@ TY  - CHAP
 DA  - 2020///SuperConf
 UR  - http://example.net
 KW  - TY foo
-UR  - http://example.com; http://example.org
+UR  - http://example.com; http://example.org;
 CN  - CALLNUM123
+ER  - 
+
+TY  - JOUR
+A2  - Doe, John
+A2  - Doe, John
+A3  - Doe, John
+A3  - Doe, John
+A4  - Doe, John
+A4  - Doe, John
+AB  - my abstract
+AD  - my address
+AN  - my accession number
+AU  - Doe, John
+AU  - Doe, John
+AV  - my location in archive
+BT  - my bt value
+C1  - custom field 1
+C2  - custom field 2
+C3  - custom field 3
+C4  - custom field 4
+C5  - custom field 5
+C6  - custom field 6
+C7  - custom field 7
+C8  - custom field 8
+CA  - my caption
+CN  - my call number
+CP  - my cp value
+CT  - my title of unpublished reference
+CY  - my place of publication
+DA  - 2020/06/27/SuperConf
+DB  - my database name
+DO  - my doi
+DP  - my database provider
+ED  - my editor
+EP  - my end page
+ET  - my edition
+ID  - my reference id
+IS  - my issue number
+J2  - my alternate title
+KW  - my keyword 1
+KW  - my keyword 2
+KW  - my keyword 3
+PY  - 2020
+RP  - IN FILE
+UR  - http://example.com
+UR  - http://example.org
 ER  - 

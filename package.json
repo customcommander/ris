@@ -15,7 +15,6 @@
     "lexer.js"
   ],
   "dependencies": {
-    "@customcommander/multifun": "^1.0.1",
     "moo": "^0.5.1",
     "nearley": "^2.19.4"
   },
@@ -25,7 +24,8 @@
   },
   "scripts": {
     "test": "make",
-    "sample": "make sample"
+    "sample": "make sample",
+    "parse": "make parse"
   },
   "publishConfig": {
     "access": "public"

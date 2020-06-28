@@ -3,6 +3,9 @@ burrito-test: /tmp/ris.burrito-test
 sample: grammar.js sample.ris
 	cat sample.ris | yarn -s nearley-test -q grammar.js | tee out.txt
 
+parse: grammar.js
+	node -p -e 'const fs = require("fs"); const parse = require("./index.js"); console.log(parse(fs.readFileSync("./sample.ris","utf-8")));'
+
 grammar.js: grammar.ne lexer.js
 	yarn -s nearleyc $^ > $@
 

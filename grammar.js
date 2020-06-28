@@ -12,96 +12,30 @@ function id(x) { return x[0]; }
     {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", "wschar"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": function(d) {return null;}},
     {"name": "wschar", "symbols": [/[ \t\n\v\f]/], "postprocess": id},
-    {"name": "RIS$ebnf$1", "symbols": ["RECORD"]},
-    {"name": "RIS$ebnf$1", "symbols": ["RIS$ebnf$1", "RECORD"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "RIS", "symbols": ["_", "RIS$ebnf$1"], "postprocess": ([, d]) => d},
-    {"name": "RECORD$ebnf$1", "symbols": []},
-    {"name": "RECORD$ebnf$1", "symbols": ["RECORD$ebnf$1", "OTHER_TAG"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "RECORD", "symbols": ["RTYPE", "RECORD$ebnf$1", "EOR"], "postprocess": ast => ast.filter(x => x !== null)},
-    {"name": "RTYPE", "symbols": [(lexer.has("TY") ? {type: "TY"} : TY), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("TY_VAL") ? {type: "TY_VAL"} : TY_VAL), "__"], "postprocess": ([,,{value}]) => ({key: 'type', value})},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["KEYWORD"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["URL"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["DATE"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["PUBYEAR"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["ABSTRACT"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR_ADDR"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["ACC_NUMBER"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["ARCH_LOC"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["RP_STATUS"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["CAPTION"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["CALL_NUMBER"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["PUB_LOC"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["DB_NAME"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["DB_PROV"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["CUSTOM"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["DOI"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["EDITION"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["TITLE_ALT"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR1"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR2"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR3"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["AUTHOR4"]},
-    {"name": "OTHER_TAG$subexpression$1", "symbols": ["TAG_ENTRY"]},
-    {"name": "OTHER_TAG", "symbols": ["OTHER_TAG$subexpression$1"], "postprocess": ([[d]]) => d},
-    {"name": "ABSTRACT", "symbols": [(lexer.has("AB") ? {type: "AB"} : AB), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'abstract'      , value})},
-    {"name": "AUTHOR_ADDR", "symbols": [(lexer.has("AD") ? {type: "AD"} : AD), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_address', value})},
-    {"name": "ACC_NUMBER", "symbols": [(lexer.has("AN") ? {type: "AN"} : AN), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'acc_number'    , value})},
-    {"name": "ARCH_LOC", "symbols": [(lexer.has("AV") ? {type: "AV"} : AV), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'arch_loc'      , value})},
-    {"name": "RP_STATUS", "symbols": [(lexer.has("RP") ? {type: "RP"} : RP), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("RP_CONTENT") ? {type: "RP_CONTENT"} : RP_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'reprint'       , value})},
-    {"name": "CAPTION", "symbols": [(lexer.has("CA") ? {type: "CA"} : CA), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'caption'       , value})},
-    {"name": "CALL_NUMBER", "symbols": [(lexer.has("CN") ? {type: "CN"} : CN), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'call_number'   , value})},
-    {"name": "PUB_LOC", "symbols": [(lexer.has("CY") ? {type: "CY"} : CY), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'pub_loc'       , value})},
-    {"name": "DB_NAME", "symbols": [(lexer.has("DB") ? {type: "DB"} : DB), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'db_name'       , value})},
-    {"name": "DB_PROV", "symbols": [(lexer.has("DP") ? {type: "DP"} : DP), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'db_provider'   , value})},
-    {"name": "DOI", "symbols": [(lexer.has("DO") ? {type: "DO"} : DO), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'doi'           , value})},
-    {"name": "EDITION", "symbols": [(lexer.has("ET") ? {type: "ET"} : ET), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'edition'       , value})},
-    {"name": "TITLE_ALT", "symbols": [(lexer.has("J2") ? {type: "J2"} : J2), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'title_alt'     , value})},
-    {"name": "AUTHOR1", "symbols": [(lexer.has("AU") ? {type: "AU"} : AU), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("NAME_CONTENT") ? {type: "NAME_CONTENT"} : NAME_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author'        , value})},
-    {"name": "AUTHOR2", "symbols": [(lexer.has("A2") ? {type: "A2"} : A2), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("NAME_CONTENT") ? {type: "NAME_CONTENT"} : NAME_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_sec'    , value})},
-    {"name": "AUTHOR3", "symbols": [(lexer.has("A3") ? {type: "A3"} : A3), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("NAME_CONTENT") ? {type: "NAME_CONTENT"} : NAME_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_ter'    , value})},
-    {"name": "AUTHOR4", "symbols": [(lexer.has("A4") ? {type: "A4"} : A4), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("NAME_CONTENT") ? {type: "NAME_CONTENT"} : NAME_CONTENT), "__"], "postprocess": ([,,{value}]) => ({key: 'author_sub'    , value})},
-    {"name": "TAG_ENTRY", "symbols": [(lexer.has("TAG") ? {type: "TAG"} : TAG), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([tag,,content]) => ({key: tag.value, value: content.value})},
-    {"name": "KEYWORD$ebnf$1", "symbols": ["LINE"]},
-    {"name": "KEYWORD$ebnf$1", "symbols": ["KEYWORD$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "KEYWORD", "symbols": [(lexer.has("KW") ? {type: "KW"} : KW), (lexer.has("SEP") ? {type: "SEP"} : SEP), "KEYWORD$ebnf$1"], "postprocess":  ([,,lines]) =>
-        ( { key: 'keyword'
-          , value: lines.join(' ')
-          }
-        )
-                        },
-    {"name": "DATE", "symbols": [(lexer.has("DA") ? {type: "DA"} : DA), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("DATE_CONTENT") ? {type: "DATE_CONTENT"} : DATE_CONTENT), "__"], "postprocess":  ([,,{value}]) =>
-        ( { key: 'date'
-          , value: value.split('/')
-          }
-        )
-                        },
-    {"name": "PUBYEAR", "symbols": [(lexer.has("PY") ? {type: "PY"} : PY), (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("PUBYEAR_CONTENT") ? {type: "PUBYEAR_CONTENT"} : PUBYEAR_CONTENT), "__"], "postprocess":  ([,,{value}]) =>
-        ( { key: 'pub_year'
-          , value
-          }
-        )
-                        },
-    {"name": "URL$ebnf$1", "symbols": ["LINE"]},
-    {"name": "URL$ebnf$1", "symbols": ["URL$ebnf$1", "LINE"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "URL", "symbols": [(lexer.has("UR") ? {type: "UR"} : UR), (lexer.has("SEP") ? {type: "SEP"} : SEP), "URL$ebnf$1"], "postprocess":  ([,,lines]) =>
-        ( { key: 'url'
-          , value: lines.flatMap(line => line.split(';').map(url => url.trim()).filter(Boolean))
-          }
-        )
-                        },
-    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C1") ? {type: "C1"} : C1)]},
-    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C2") ? {type: "C2"} : C2)]},
-    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C3") ? {type: "C3"} : C3)]},
-    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C4") ? {type: "C4"} : C4)]},
-    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C5") ? {type: "C5"} : C5)]},
-    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C6") ? {type: "C6"} : C6)]},
-    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C7") ? {type: "C7"} : C7)]},
-    {"name": "CUSTOM$subexpression$1", "symbols": [(lexer.has("C8") ? {type: "C8"} : C8)]},
-    {"name": "CUSTOM", "symbols": ["CUSTOM$subexpression$1", (lexer.has("SEP") ? {type: "SEP"} : SEP), (lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([[{value: key}],,{value}]) => ({key: 'custom', value: [key, value]})},
-    {"name": "LINE", "symbols": [(lexer.has("CONTENT") ? {type: "CONTENT"} : CONTENT), "__"], "postprocess": ([{value}]) => value},
-    {"name": "EOR", "symbols": [(lexer.has("ER") ? {type: "ER"} : ER), (lexer.has("SEP") ? {type: "SEP"} : SEP), "_"], "postprocess": () => null}
+    {"name": "ris$ebnf$1", "symbols": ["reference"]},
+    {"name": "ris$ebnf$1", "symbols": ["ris$ebnf$1", "reference"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "ris", "symbols": ["_", "ris$ebnf$1"], "postprocess": ([,references]) => references},
+    {"name": "reference$ebnf$1", "symbols": []},
+    {"name": "reference$ebnf$1", "symbols": ["reference$ebnf$1", "entry"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "reference", "symbols": ["start", "reference$ebnf$1", "end"], "postprocess": ([type, entries]) => [type, entries]},
+    {"name": "start", "symbols": [(lexer.has("type") ? {type: "type"} : type), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("type_value") ? {type: "type_value"} : type_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
+    {"name": "end", "symbols": [(lexer.has("end") ? {type: "end"} : end), (lexer.has("sep") ? {type: "sep"} : sep), "_"], "postprocess": () => null},
+    {"name": "entry$subexpression$1", "symbols": ["entry_std"]},
+    {"name": "entry$subexpression$1", "symbols": ["entry_name"]},
+    {"name": "entry$subexpression$1", "symbols": ["entry_date"]},
+    {"name": "entry$subexpression$1", "symbols": ["entry_pubyear"]},
+    {"name": "entry$subexpression$1", "symbols": ["entry_reprint"]},
+    {"name": "entry", "symbols": ["entry$subexpression$1"], "postprocess": ([[entry]]) => entry},
+    {"name": "entry_std$ebnf$1", "symbols": ["std_value"]},
+    {"name": "entry_std$ebnf$1", "symbols": ["entry_std$ebnf$1", "std_value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "entry_std", "symbols": [(lexer.has("std") ? {type: "std"} : std), (lexer.has("sep") ? {type: "sep"} : sep), "entry_std$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join(' ')})},
+    {"name": "std_value", "symbols": [(lexer.has("std_value") ? {type: "std_value"} : std_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value}]) => value},
+    {"name": "entry_name", "symbols": [(lexer.has("name") ? {type: "name"} : name), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("name_value") ? {type: "name_value"} : name_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
+    {"name": "entry_date", "symbols": [(lexer.has("date") ? {type: "date"} : date), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("date_value") ? {type: "date_value"} : date_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
+    {"name": "entry_pubyear", "symbols": [(lexer.has("pubyear") ? {type: "pubyear"} : pubyear), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("pubyear_value") ? {type: "pubyear_value"} : pubyear_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
+    {"name": "entry_reprint", "symbols": [(lexer.has("reprint") ? {type: "reprint"} : reprint), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("reprint_value") ? {type: "reprint_value"} : reprint_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})}
 ]
-  , ParserStart: "RIS"
+  , ParserStart: "ris"
 }
 if (typeof module !== 'undefined'&& typeof module.exports !== 'undefined') {
    module.exports = grammar;
