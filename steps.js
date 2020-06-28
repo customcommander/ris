@@ -10,8 +10,8 @@ defineStep('I parse the file', function () {
   this.list = sut(this.file);
 });
 
-defineStep('I will get a list of references', function () {
-  assert(this.list.length > 0);
+defineStep('I will get a list of {int} reference(s)', function (count) {
+  assert.equal(this.list.length, count);
 });
 
 defineStep('I will find a reference where {string} is set to {string}', function (field, value) {
