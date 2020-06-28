@@ -33,3 +33,7 @@ defineStep('I will find a reference where {string} is set to', function (field, 
   }
   assert.deepStrictEqual(this.list[0][field], expected_value);
 });
+
+defineStep('I will find a reference with {word} as a key', function (key) {
+  assert(typeof this.list[0][key] !== 'undefined');
+});
