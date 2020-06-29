@@ -136,12 +136,9 @@ const process_ast =
 
 const parse = text => {
   const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
-  try {
-    parser.feed(text);
-    return process_ast(parser.results[0]);
-  } catch (e) {
-    // ...
-  }
+  parser.feed(text);
+  if (parser.results.length > 1) throw new Error('grammar is ambiguous');
+  return process_ast(parser.results[0]);
 };
 
 module.exports = parse;
