@@ -5,6 +5,11 @@
 const nearley = require('nearley');
 const grammar = require('./grammar.js');
 
+const zip =
+  (keys, values) =>
+    keys.reduce((o, k, i) =>
+      (o[k] = values[i], o), {});
+
 const append =
   (acc, {key, value}) =>
     ( acc[key] = (acc[key] || []).concat(value)
@@ -15,10 +20,20 @@ const add =
     ( acc[key] = value
     , acc );
 
+// Convert US date to date object
+// e.g. "06/30/2020" -> {year: "2020", month: "06", day: "30"}
+const from_mdy =
+  str =>
+    zip(['month', 'day', 'year'], str.split('/'));
+
+const name_obj =
+  ([last_name = '', first_name = '', suffix = '']) =>
+    ({last_name, first_name, suffix});
+
 const name_add =
-  (acc, {key, value: [last_name, first_name, suffix = '']}) =>
+  (acc, {key, value}) =>
     ( acc[key] = acc[key] || []
-    , acc[key].push({last_name, first_name, suffix})
+    , acc[key].push(name_obj(value.split(',').map(s => s.trim())))
     , acc );
 
 const defaults =
@@ -52,8 +67,11 @@ const OPS =
   , CP: add
   , CT: add
   , CY: add
-  , DA: (acc, {value: [year, month, day, info]}) =>
-          ( acc.DA = {year, month, day, info}
+  , DA: (acc, {value}) =>
+          ( acc.DA =
+              ( /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/.test(value)
+                  ? zip(['year', 'month', 'day', 'info'], value.split('/'))
+                  : value )
           , acc )
   , DB: add
   , DO: add
@@ -88,13 +106,11 @@ const OPS =
   , PY: add
   , RI: add
   , RN: add
-  , RP: (acc, {value: {status, date}}) =>
-          ( acc.RP = status !== 'ON REQUEST'
-                        ? {status}
-                        : {status, date: { year: date[2]
-                                         , month: date[0]
-                                         , day: date[1]
-                                         }}
+  , RP: (acc, {value}) =>
+          ( acc.RP = (value === 'IN FILE' || value === 'NOT IN FILE')
+                        ? { status: value }
+                        : { status: 'ON REQUEST'
+                          , date: from_mdy(value.match(/\d{2}\/\d{2}\/\d{4}/)[0]) }
           , acc )
   , SE: add
   , SN: add
