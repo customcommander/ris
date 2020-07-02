@@ -1,0 +1,51 @@
+[
+  {
+    "A1": [
+      {
+        "first_name": "Jacek",
+        "last_name": "Borysow",
+        "suffix": ""
+      },
+      {
+        "first_name": "Lothar",
+        "last_name": "Frommhold",
+        "suffix": ""
+      },
+      {
+        "first_name": "George",
+        "last_name": "Birnbaum",
+        "suffix": ""
+      }
+    ],
+    "DO": "10.1086/166112",
+    "JO": "The Astrophysical Journal",
+    "KW": [
+      "Absorption Spectra",
+      "Helium",
+      "Hydrogen",
+      "Planetary Atmospheres",
+      "Planetary Radiation",
+      "Cool Stars",
+      "Far Infrared Radiation",
+      "Molecular Collisions",
+      "Molecular Rotation",
+      "Atomic and Molecular Physics",
+      "LABORATORY SPECTRA",
+      "MOLECULAR PROCESSES",
+      "PLANETS: SPECTRA"
+    ],
+    "N2": "The zeroth, first, and second spectral moments of the rototranslational collision-induced absorption (RT CIA) spectra of hydrogen-helium mixtures are calculated from the fundamental theory, for temperatures from 40 to 3000 K. With the help of simple analytical functions of three parameters and the information given, the RT CIA spectra of H2-He pairs can be generated on computers of small capacity, with rms deviations from exact quantum profiles of not more than a few percent. Such representations of the CIA spectra are of interest for work related to the atmospheres of the outer planets and cool stars. The theoretical spectra are in close agreement with existing laboratory measurements at various temperatures from about 77 to 3000 K.",
+    "RP": {
+      "status": "NOT IN FILE"
+    },
+    "SN": "0004-637X",
+    "SP": "509",
+    "T1": "Collision-induced Rototranslational Absorption Spectra of H 2-He Pairs at Temperatures from 40 to 3000 K",
+    "TY": "JOUR",
+    "UR": [
+      "https://ui.adsabs.harvard.edu/abs/1988ApJ...326..509B"
+    ],
+    "VL": "326",
+    "Y1": "1988/03/1"
+  }
+]

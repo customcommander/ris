@@ -13,37 +13,18 @@ reference ->
     {% ([type, entries]) => [type, entries] %}
 
 start ->
-  %type %sep %type_value %newline
+  %type %sep %value %newline
     {% ([{value: key},,{value}]) => ({key, value}) %}
 
 end ->
-  %end %sep _
+  %end %sep %value:* _
     {% () => null %}
 
 entry ->
-  (entry_std | entry_name | entry_date | entry_pubyear | entry_reprint)
-    {% ([[entry]]) => entry %}
-
-entry_std ->
-  %std %sep std_value:+
+  %tag %sep value:+
     {% ([{value: key},,value]) => ({key, value: value.join(' ')}) %}
 
-std_value ->
-  %std_value %newline
+value ->
+  %value %newline
     {% ([{value}]) => value %}
 
-entry_name ->
-  %name %sep %name_value %newline
-    {% ([{value: key},,{value}]) => ({key, value}) %}
-
-entry_date ->
-  %date %sep %date_value %newline
-    {% ([{value: key},,{value}]) => ({key, value}) %}
-
-entry_pubyear ->
-  %pubyear %sep %pubyear_value %newline
-    {% ([{value: key},,{value}]) => ({key, value}) %}
-
-entry_reprint ->
-  %reprint %sep %reprint_value %newline
-    {% ([{value: key},,{value}]) => ({key, value}) %}

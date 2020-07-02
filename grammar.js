@@ -18,22 +18,14 @@ function id(x) { return x[0]; }
     {"name": "reference$ebnf$1", "symbols": []},
     {"name": "reference$ebnf$1", "symbols": ["reference$ebnf$1", "entry"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "reference", "symbols": ["start", "reference$ebnf$1", "end"], "postprocess": ([type, entries]) => [type, entries]},
-    {"name": "start", "symbols": [(lexer.has("type") ? {type: "type"} : type), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("type_value") ? {type: "type_value"} : type_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
-    {"name": "end", "symbols": [(lexer.has("end") ? {type: "end"} : end), (lexer.has("sep") ? {type: "sep"} : sep), "_"], "postprocess": () => null},
-    {"name": "entry$subexpression$1", "symbols": ["entry_std"]},
-    {"name": "entry$subexpression$1", "symbols": ["entry_name"]},
-    {"name": "entry$subexpression$1", "symbols": ["entry_date"]},
-    {"name": "entry$subexpression$1", "symbols": ["entry_pubyear"]},
-    {"name": "entry$subexpression$1", "symbols": ["entry_reprint"]},
-    {"name": "entry", "symbols": ["entry$subexpression$1"], "postprocess": ([[entry]]) => entry},
-    {"name": "entry_std$ebnf$1", "symbols": ["std_value"]},
-    {"name": "entry_std$ebnf$1", "symbols": ["entry_std$ebnf$1", "std_value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "entry_std", "symbols": [(lexer.has("std") ? {type: "std"} : std), (lexer.has("sep") ? {type: "sep"} : sep), "entry_std$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join(' ')})},
-    {"name": "std_value", "symbols": [(lexer.has("std_value") ? {type: "std_value"} : std_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value}]) => value},
-    {"name": "entry_name", "symbols": [(lexer.has("name") ? {type: "name"} : name), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("name_value") ? {type: "name_value"} : name_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
-    {"name": "entry_date", "symbols": [(lexer.has("date") ? {type: "date"} : date), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("date_value") ? {type: "date_value"} : date_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
-    {"name": "entry_pubyear", "symbols": [(lexer.has("pubyear") ? {type: "pubyear"} : pubyear), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("pubyear_value") ? {type: "pubyear_value"} : pubyear_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
-    {"name": "entry_reprint", "symbols": [(lexer.has("reprint") ? {type: "reprint"} : reprint), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("reprint_value") ? {type: "reprint_value"} : reprint_value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})}
+    {"name": "start", "symbols": [(lexer.has("type") ? {type: "type"} : type), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("value") ? {type: "value"} : value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
+    {"name": "end$ebnf$1", "symbols": []},
+    {"name": "end$ebnf$1", "symbols": ["end$ebnf$1", (lexer.has("value") ? {type: "value"} : value)], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "end", "symbols": [(lexer.has("end") ? {type: "end"} : end), (lexer.has("sep") ? {type: "sep"} : sep), "end$ebnf$1", "_"], "postprocess": () => null},
+    {"name": "entry$ebnf$1", "symbols": ["value"]},
+    {"name": "entry$ebnf$1", "symbols": ["entry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "entry", "symbols": [(lexer.has("tag") ? {type: "tag"} : tag), (lexer.has("sep") ? {type: "sep"} : sep), "entry$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join(' ')})},
+    {"name": "value", "symbols": [(lexer.has("value") ? {type: "value"} : value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value}]) => value}
 ]
   , ParserStart: "ris"
 }

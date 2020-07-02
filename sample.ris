@@ -21,7 +21,7 @@ ED  - this is a ED value
 DA  - ///
 KW  - foo
 KW  - bar
-baz
+      baz
 UR  - http://example.com; http://example.org;
 http://example.net
 PY  - 2014

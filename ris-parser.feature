@@ -277,3 +277,12 @@ Scenario: Default values
     """
   When I parse the file
   Then I will find a reference where 'RP' is set to '{"status": "NOT IN FILE"}'
+
+Scenario Outline: Samples
+  Given I have this file <ris>
+  When I parse the file
+  Then I will get a list of references as seen in file <response>
+
+  Examples:
+    | ris    | response |
+    | 01.ris | 01.json  |
