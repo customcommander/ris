@@ -4,6 +4,8 @@
 
 const nearley = require('nearley');
 const grammar = require('./grammar.js');
+const type_map = require('./type-map.json');
+const tag_map = require('./tag-map.json');
 
 const zip =
   (keys, values) =>
@@ -155,6 +157,17 @@ const parse = text => {
   parser.feed(text);
   if (parser.results.length > 1) throw new Error('grammar is ambiguous');
   return process_ast(parser.results[0]);
+};
+
+parse.map = text => {
+  const parsed = parse(text);
+  return parsed.map(
+    p => Object.keys(p).reduce(
+      (mapped, key) => {
+        const new_key = tag_map[`${p.TY}.${key}`] || (key === 'TY' ? '@type' : key);
+        mapped[new_key] = new_key !== '@type' ? p[key] : type_map[p.TY];
+        return mapped;
+      }, {}));
 };
 
 module.exports = parse;

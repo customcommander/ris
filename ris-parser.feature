@@ -286,3 +286,14 @@ Scenario Outline: Samples
   Examples:
     | ris    | response |
     | 01.ris | 01.json  |
+
+Scenario: Remapping tags
+  Given I have this RIS file
+    """
+    TY  - JOUR
+    AB  - this is my abstract
+    ER  - 
+    """
+  When I parse the file and rename the tags
+  Then I will find a reference where '@type' is set to 'Journal'
+  Then I will find a reference where 'abstract' is set to 'this is my abstract'

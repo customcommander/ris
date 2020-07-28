@@ -16,6 +16,10 @@ defineStep('I parse the file', function () {
   this.list = sut(this.file);
 });
 
+defineStep('I parse the file and rename the tags', function () {
+  this.list = sut.map(this.file);
+});
+
 defineStep('I will get a list of {int} reference(s)', function (count) {
   assert.equal(this.list.length, count);
 });

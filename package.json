@@ -12,7 +12,9 @@
   "files": [
     "index.js",
     "grammar.js",
-    "lexer.js"
+    "lexer.js",
+    "tag-map.json",
+    "type-map.json"
   ],
   "dependencies": {
     "moo": "^0.5.1",
