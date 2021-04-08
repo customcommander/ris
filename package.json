@@ -21,7 +21,7 @@
     "nearley": "^2.19.4"
   },
   "devDependencies": {
-    "cucumber": "^6.0.5",
+    "@cucumber/cucumber": "^7.1.0",
     "semantic-release": "^17.2.3"
   },
   "scripts": {
