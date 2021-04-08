@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "^7.1.0",
-    "semantic-release": "^17.2.3"
+    "semantic-release": "^17.4.2"
   },
   "scripts": {
     "test": "make",
