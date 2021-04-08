@@ -10,10 +10,18 @@ jobs:
     name: publish
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: docker run -e NPM_TOKEN -e GH_TOKEN --rm --mount type=bind,src=$GITHUB_WORKSPACE,dst=/workspaces/ris -w /workspaces/ris customcommander/tagtical sh -c 'yarn && yarn semantic-release --no-ci'
+      - name: Setup
+        run: docker run -e NPM_TOKEN -e GH_TOKEN -d -i --rm --name risbox -v $GITHUB_WORKSPACE:/workspaces/dev customcommander/webdev
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Release
+        run: >
+          docker exec risbox yarn &&
+          docker exec risbox yarn semantic-release --no-ci
+      - name: Cleanup
+        run: docker kill risbox
