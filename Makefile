@@ -19,6 +19,9 @@ tag-map.csv: doc/tag.jq tag-map.json
 markdown-type:
 	@jq -M -S -r -f doc/type.jq type-map.json | awk -F"," -f doc/type.awk
 
+example.ris: doc/example.jq tag-map.json
+	@jq -M -S -r -f $^ | tee $@
+
 /tmp/ris.test: grammar.js index.js ris-parser.feature steps.js
 	yarn cucumber-js --require steps.js ris-parser.feature
 	touch $@

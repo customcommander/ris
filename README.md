@@ -146,3 +146,11 @@ The following command will:
 ```
 make sample
 ```
+
+## example.ris
+
+The [example.ris](./example.ris) file contains one record (reference) of every type with every field:
+
+```
+make example.ris
+```
