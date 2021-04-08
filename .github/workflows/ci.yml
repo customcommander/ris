@@ -10,5 +10,13 @@ jobs:
     name: unit tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: docker run --rm --mount type=bind,src=$GITHUB_WORKSPACE,dst=/workspaces/ris -w /workspaces/ris customcommander/tagtical sh -c 'yarn && make test burrito-test'
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        run: docker run -d -i --rm --name risbox -v $GITHUB_WORKSPACE:/workspaces/dev customcommander/webdev
+      - name: Test
+        run: >
+          docker exec risbox yarn &&
+          docker exec risbox make test burrito-test
+      - name: Cleanup
+        run: docker kill risbox
