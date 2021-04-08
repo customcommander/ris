@@ -12,13 +12,12 @@ parse: grammar.js
 grammar.js: grammar.ne lexer.js
 	yarn -s nearleyc $^ > $@
 
+tag-map.csv: doc/tag.jq tag-map.json
+	@jq -M -S -r -f $^ > $@
+
 # Output Markdown table for all possible types
 markdown-type:
 	@jq -M -S -r -f doc/type.jq type-map.json | awk -F"," -f doc/type.awk
-
-# Output Markdown table for the tag map
-markdown-tag:
-	@jq -M -S -r -f doc/tag.jq tag-map.json | awk -F"," -f doc/tag.awk
 
 /tmp/ris.test: grammar.js index.js ris-parser.feature steps.js
 	yarn cucumber-js --require steps.js ris-parser.feature
