@@ -1,4 +1,4 @@
-# Copyright (c) 2020 Julien Gonzalez <hello@spinjs.com>
+# Copyright (c) 2021 Julien Gonzalez <hello@spinjs.com>
 
 @{% const lexer = require("./lexer.js"); %}
 @lexer lexer
