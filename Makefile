@@ -15,6 +15,9 @@ grammar.js: grammar.ne lexer.js
 tag-map.csv: doc/tag.jq tag-map.json
 	@jq -M -S -r -f $^ > $@
 
+fields-matrix.csv: doc/fields-matrix.jq fields.json
+	@jq -M -r -f $^ > $@
+
 # Output Markdown table for all possible types
 markdown-type:
 	@jq -M -S -r -f doc/type.jq type-map.json | awk -F"," -f doc/type.awk
