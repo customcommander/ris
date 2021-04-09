@@ -1,7 +1,6 @@
 {
   "name": "ris-dev",
   "image": "customcommander/webdev",
-  "workspaceFolder": "/workspace/dev",
   "postCreateCommand": "yarn",
   "settings": {
     "terminal.integrated.shell.*": "/bin/bash"
