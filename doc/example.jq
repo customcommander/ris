@@ -13,7 +13,7 @@ def field_record:
     elif $f == "RP" then
       "\($f)  - IN FILE"
     else
-      "\($f)  - \(.key)_\(.value)"
+      "\($f)  - \(.key)"
     end;
 
   to_entries
