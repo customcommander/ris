@@ -68,89 +68,22 @@ ER  -
 //=> ]
 ```
 
-See the complete [map for each type of RIS reference](./tag-map.csv).
+See the complete [map for each type of RIS reference](./resources/fields-map.csv).
 
 
 ## Reference Types
 
-Source: https://en.wikipedia.org/wiki/RIS_(file_format)
-
-| TY | Description |
-|:---|:------------|
-|ABST|Abstract|
-|ADVS|Audiovisual material|
-|AGGR|Aggregated Database|
-|ANCIENT|Ancient Text|
-|ART|Art Work|
-|BILL|Bill|
-|BLOG|Blog|
-|BOOK|Whole book|
-|CASE|Case|
-|CHAP|Book chapter|
-|CHART|Chart|
-|CLSWK|Classical Work|
-|COMP|Computer program|
-|CONF|Conference proceeding|
-|CPAPER|Conference paper|
-|CTLG|Catalog|
-|DATA|Data file|
-|DBASE|Online Database|
-|DICT|Dictionary|
-|EBOOK|Electronic Book|
-|ECHAP|Electronic Book Section|
-|EDBOOK|Edited Book|
-|EJOUR|Electronic Article|
-|ELEC|Web Page|
-|ENCYC|Encyclopedia|
-|EQUA|Equation|
-|FIGURE|Figure|
-|GEN|Generic|
-|GOVDOC|Government Document|
-|GRANT|Grant|
-|HEAR|Hearing|
-|ICOMM|Internet Communication|
-|INPR|In Press|
-|JFULL|Journal (full)|
-|JOUR|Journal|
-|LEGAL|Legal Rule or Regulation|
-|MANSCPT|Manuscript|
-|MAP|Map|
-|MGZN|Magazine article|
-|MPCT|Motion picture|
-|MULTI|Online Multimedia|
-|MUSIC|Music score|
-|NEWS|Newspaper|
-|PAMP|Pamphlet|
-|PAT|Patent|
-|PCOMM|Personal communication|
-|RPRT|Report|
-|SER|Serial publication|
-|SLIDE|Slide|
-|SOUND|Sound recording|
-|STAND|Standard|
-|STAT|Statute|
-|THES|Thesis/Dissertation|
-|UNBILL|Unenacted Bill|
-|UNPB|Unpublished work|
-|VIDEO|Video recording|
+See [list of reference types](./resources/types.csv). Based on https://en.wikipedia.org/wiki/RIS_(file_format).
 
 ## Development
 
 The following command will:
 
 1.  Compile the grammar.
-2.  Test the grammar against the `sample.ris` file.
+2.  Test the grammar against the [dev.ris](./resources/dev.ris) file.
 3.  Output the result to the standard output.
 4.  Write the output to `out.txt`. (This file is ignored by Git.)
 
 ```
 make sample
-```
-
-## example.ris
-
-The [example.ris](./example.ris) file contains one record (reference) of every type with every field:
-
-```
-make example.ris
 ```

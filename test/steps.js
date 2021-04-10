@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert').strict;
 const { defineStep } = require('@cucumber/cucumber');
-const sut = require('./');
+const sut = require('../');
 
 defineStep('I have this RIS file', function (file) {
   this.file = file;
