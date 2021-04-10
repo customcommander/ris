@@ -22,8 +22,12 @@
 
 const parse = require('@customcommander/ris');
 const assert = require('assert').strict;
-const fs = require('fs');
 
-const records = parse(fs.readFileSync('sample.ris', 'utf-8'));
+const records = parse(`
+TY  - JOUR
+TI  - The Burrito Test
+UR  - https://github.com/customcommander/ris
+ER  - 
+`);
 
 assert(records.length > 0);

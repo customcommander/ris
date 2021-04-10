@@ -1,4 +1,3 @@
-example.ris
-node_modules
+node_modules/
 out.txt
 yarn-error.log

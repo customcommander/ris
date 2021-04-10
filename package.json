@@ -10,11 +10,8 @@
     "academia"
   ],
   "files": [
-    "index.js",
-    "grammar.js",
-    "lexer.js",
-    "tag-map.json",
-    "type-map.json"
+    "src",
+    "!src/grammar.ne"
   ],
   "dependencies": {
     "moo": "^0.5.1",

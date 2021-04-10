@@ -1,42 +1,37 @@
 test: /tmp/ris.test
 burrito-test: /tmp/ris.burrito-test
-sample: grammar.js sample.ris
-	cat sample.ris | yarn -s nearley-test -q grammar.js | tee out.txt
+sample: src/grammar.js resources/dev.ris
+	cat resources/dev.ris | yarn -s nearley-test -q src/grammar.js | tee out.txt
 
-samples/%.json: samples/%.ris
-	node -p -e 'const fs = require("fs"); const parse = require("./index.js"); JSON.stringify(parse(fs.readFileSync("$^","utf-8")));' | jq --sort-keys '.' > $@
+parse: src/grammar.js
+	node -p -e 'const fs = require("fs"); const parse = require("./index.js"); console.log(parse(fs.readFileSync("./resources/dev.ris","utf-8")));'
 
-parse: grammar.js
-	node -p -e 'const fs = require("fs"); const parse = require("./index.js"); console.log(parse(fs.readFileSync("./sample.ris","utf-8")));'
+src/grammar.js: src/grammar.ne src/lexer.js
+	yarn -s nearleyc $< > $@
 
-grammar.js: grammar.ne lexer.js
-	yarn -s nearleyc $^ > $@
+resources/fields-map.csv: resources/fields-map.jq src/fields-map.json
+	jq -M -S -r -f $^ > $@
 
-tag-map.csv: doc/tag.jq tag-map.json
-	@jq -M -S -r -f $^ > $@
+resources/fields.csv: resources/fields.jq resources/fields.json
+	jq -M -r -f $^ > $@
 
-fields-matrix.csv: doc/fields-matrix.jq fields.json
-	@jq -M -r -f $^ > $@
+resources/full.ris: resources/full.jq  src/fields-map.json
+	jq -M -r -f $^ > $@
 
-# Output Markdown table for all possible types
-markdown-type:
-	@jq -M -S -r -f doc/type.jq type-map.json | awk -F"," -f doc/type.awk
+resources/types.csv: resources/types.jq src/type-map.json
+	jq -M -r -f $^ > $@
 
-example.ris: doc/example.jq tag-map.json
-	@jq -M -S -r -f $^ | tee $@
-
-/tmp/ris.test: grammar.js index.js ris-parser.feature steps.js
-	yarn cucumber-js --require steps.js ris-parser.feature
+/tmp/ris.test: src/grammar.js index.js test/ris-parser.feature test/steps.js
+	yarn cucumber-js --require test/steps.js test/ris-parser.feature
 	touch $@
 
-/tmp/ris.burrito-test: /tmp/ris.tgz burrito.test.js
+/tmp/ris.burrito-test: /tmp/ris.tgz test/burrito.test.js
 	rm -rf /tmp/burrito
 	mkdir /tmp/burrito
-	cp burrito.test.js /tmp/burrito
-	cp sample.ris /tmp/burrito
+	cp test/burrito.test.js /tmp/burrito
 	cd /tmp/burrito && yarn init -y && yarn add file:/tmp/ris.tgz && yarn install && node burrito.test.js
 	touch $@
 
-/tmp/ris.tgz: index.js grammar.js package.json
+/tmp/ris.tgz: index.js src/grammar.js src/parser.js src/fields-map.json src/type-map.json package.json
 	yarn cache clean
 	yarn pack --force --filename $@
