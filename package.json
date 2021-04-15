@@ -1,24 +1,22 @@
 {
   "name": "@customcommander/ris",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "browser": "dist/browser.min.js",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "ris",
     "reference",
     "bibliography",
     "academia"
   ],
-  "files": [
-    "src",
-    "!src/grammar.ne"
-  ],
-  "dependencies": {
-    "moo": "^0.5.1",
-    "nearley": "^2.20.1"
-  },
   "devDependencies": {
     "@cucumber/cucumber": "^7.1.0",
+    "moo": "^0.5.1",
+    "nearley": "^2.20.1",
     "semantic-release": "^17.4.2"
   },
   "scripts": {

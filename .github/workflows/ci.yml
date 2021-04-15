@@ -17,6 +17,6 @@ jobs:
       - name: Test
         run: >
           docker exec risbox yarn &&
-          docker exec risbox make test burrito-test
+          docker exec risbox make test
       - name: Cleanup
         run: docker kill risbox
