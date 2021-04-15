@@ -4,24 +4,36 @@ A package for parsing bibliographic content in the [RIS format][ris-file-format]
 
 [ris-file-format]: https://en.wikipedia.org/wiki/RIS_(file_format)
 
-## Install
-
-```
-yarn add @customcommander/ris
-```
-
-or
-
-```
-npm -i @customcommander/ris
-```
-
 ## Usage
 
-```javascript
-const parse = require('@customcommander/ris');
+### Node.js
 
-parse(`
+```javascript
+const RIS = require('@customcommander/ris');
+
+RIS(`
+TY  - JOUR
+TI  - Foo
+ER  - 
+TY  - BOOK
+TI  - Bar
+ER  - 
+TY  - CHAP
+TI  - Baz
+ER  - 
+`);
+//=> [ {TY: 'JOUR', TI: 'Foo'}
+//=> , {TY: 'BOOK', TI: 'Bar'}
+//=> , {TY: 'CHAP', TI: 'Baz'}]
+```
+
+### Browser
+
+```html
+<script src="./node_modules/@customcommander/ris/dist/browser.min.js"></script>
+
+<script>
+RIS(`
 TY  - JOUR
 ER  - 
 TY  - BOOK
@@ -29,43 +41,35 @@ ER  -
 TY  - CHAP
 ER  - 
 `);
-
-//=> [ { TY: "JOUR" }
-//=> , { TY: "BOOK" }
-//=> , { TY: "CHAP" }
-//=> ]
+//=> [ {TY: 'JOUR', TI: 'Foo'}
+//=> , {TY: 'BOOK', TI: 'Bar'}
+//=> , {TY: 'CHAP', TI: 'Baz'}]
+</script>
 ```
+
 
 ## Mapping Tag
 
 RIS tags are quite terse. They can be mapped to human-friendly names:
 
 ```javascript
-const parse = require('@customcommander/ris');
+const RIS = require('@customcommander/ris');
 
-parse(`
+RIS(`
 TY  - JOUR
 AB  - this is my abstract
 ER  - 
 `);
-
-//=> [ { TY: "JOUR"
-//=>   , AB: "this is my abstract"
-//=>   }
-//=> ]
+//=> [{TY: "JOUR", AB: "this is my abstract"}]
 
 // vs
 
-parse.map(`
+RIS.map(`
 TY  - JOUR
 AB  - this is my abstract
 ER  - 
 `);
-
-//=> [ { '@type': "Journal"
-//=>   , abstract: "this is my abstract"
-//=>   }
-//=> ]
+//=> [{'@type': "Journal", abstract: "this is my abstract"}]
 ```
 
 See the complete [map for each type of RIS reference](./resources/fields-map.csv).

@@ -1,5 +1,7 @@
+CC=java -jar /devtools/closure-compiler/compiler.jar
+
 test: /tmp/ris.test
-burrito-test: /tmp/ris.burrito-test
+
 sample: src/grammar.js resources/dev.ris
 	cat resources/dev.ris | yarn -s nearley-test -q src/grammar.js | tee out.txt
 
@@ -21,17 +23,32 @@ resources/full.ris: resources/full.jq  src/fields-map.json
 resources/types.csv: resources/types.jq src/type-map.json
 	jq -M -r -f $^ > $@
 
-/tmp/ris.test: src/grammar.js index.js test/ris-parser.feature test/steps.js
-	yarn cucumber-js --require test/steps.js test/ris-parser.feature
+/tmp/ris.test: dist/index.js $(shell find test -type f)
+	yarn cucumber-js --require test/steps.js test/**/*.feature
 	touch $@
 
-/tmp/ris.burrito-test: /tmp/ris.tgz test/burrito.test.js
-	rm -rf /tmp/burrito
-	mkdir /tmp/burrito
-	cp test/burrito.test.js /tmp/burrito
-	cd /tmp/burrito && yarn init -y && yarn add file:/tmp/ris.tgz && yarn install && node burrito.test.js
-	touch $@
+dist/browser.min.js: $(shell find src -type f) package.json
+	mkdir -p $(@D)
+	$(CC) \
+		--isolation_mode IIFE \
+		--assume_function_wrapper \
+		--compilation_level SIMPLE \
+		--module_resolution NODE \
+		--process_common_js_modules \
+		--externs src/externs.js \
+		--js src/index.js \
+		--js src/parser.js \
+		--js src/grammar.js \
+		--js src/lexer.js \
+		--js src/type-map.json \
+		--js src/fields-map.json \
+		--language_in ECMASCRIPT_NEXT \
+		--language_out ECMASCRIPT5_STRICT \
+		--js node_modules/moo/package.json \
+		--js node_modules/moo/moo.js \
+		--js node_modules/nearley/package.json \
+		--js node_modules/nearley/lib/nearley.js \
+		--js_output_file $@
 
-/tmp/ris.tgz: index.js src/grammar.js src/parser.js src/fields-map.json src/type-map.json package.json
-	yarn cache clean
-	yarn pack --force --filename $@
+dist/index.js: dist/browser.min.js
+	sed 's/window.RIS/module.exports/' $< > $@
