@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert').strict;
 const { defineStep } = require('@cucumber/cucumber');
-const sut = require('../');
 
 defineStep('I have this RIS file', function (file) {
   this.file = file;
@@ -12,12 +11,12 @@ defineStep('I have this file {word}', function (file) {
   this.file = fs.readFileSync(path.join(__dirname, 'samples', file), 'utf-8');
 });
 
-defineStep('I parse the file', function () {
-  this.list = sut(this.file);
+defineStep('I parse the file', async function () {
+  this.list = await this.parse(this.file);
 });
 
-defineStep('I parse the file and rename the tags', function () {
-  this.list = sut.map(this.file);
+defineStep('I parse the file and rename the tags', async function () {
+  this.list = await this.parseMap(this.file);
 });
 
 defineStep('I will get a list of {int} reference(s)', function (count) {
