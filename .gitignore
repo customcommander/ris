@@ -1,3 +1,4 @@
+dist/
 node_modules/
 out.txt
 yarn-error.log

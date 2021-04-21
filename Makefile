@@ -1,4 +1,6 @@
 CC=java -jar /devtools/closure-compiler/compiler.jar
+src_files=$(shell find src -type f)
+dist_files=$(patsubst src/%,dist/%,$(src_files)) dist/browser.min.js
 
 test: /tmp/ris.test
 
@@ -23,32 +25,20 @@ resources/full.ris: resources/full.jq  src/fields-map.json
 resources/types.csv: resources/types.jq src/type-map.json
 	jq -M -r -f $^ > $@
 
-/tmp/ris.test: dist/index.js $(shell find test -type f)
-	yarn cucumber-js --require test/steps.js test/**/*.feature
+/tmp/ris.test: dist $(shell find test -type f)
+	yarn cucumber-js --require 'test/*.js' --world-parameters '{"browser": false}' test/features
+	yarn cucumber-js --require 'test/*.js' --world-parameters '{"browser": true}' test/features
 	touch $@
 
-dist/browser.min.js: $(shell find src -type f) package.json
-	mkdir -p $(@D)
-	$(CC) \
-		--isolation_mode IIFE \
-		--assume_function_wrapper \
-		--compilation_level SIMPLE \
-		--module_resolution NODE \
-		--process_common_js_modules \
-		--externs src/externs.js \
-		--js src/index.js \
-		--js src/parser.js \
-		--js src/grammar.js \
-		--js src/lexer.js \
-		--js src/type-map.json \
-		--js src/fields-map.json \
-		--language_in ECMASCRIPT_NEXT \
-		--language_out ECMASCRIPT5_STRICT \
-		--js node_modules/moo/package.json \
-		--js node_modules/moo/moo.js \
-		--js node_modules/nearley/package.json \
-		--js node_modules/nearley/lib/nearley.js \
-		--js_output_file $@
+dist: $(dist_files) dist/browser.min.js
 
-dist/index.js: dist/browser.min.js
-	sed 's/window.RIS/module.exports/' $< > $@
+dist/browser.min.js: $(src_files)
+	mkdir -p $(@D)
+	yarn -s browserify --standalone RIS src/index.js > /tmp/ris.js
+	$(CC) --js /tmp/ris.js --language_in ECMASCRIPT_NEXT --language_out ECMASCRIPT5_STRICT > $@
+
+dist/%: src/%
+	mkdir -p $(@D)
+	cp $< $@
+
+clean:; rm -rfv dist

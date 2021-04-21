@@ -15,8 +15,8 @@
   ],
   "devDependencies": {
     "@cucumber/cucumber": "^7.1.0",
-    "moo": "^0.5.1",
-    "nearley": "^2.20.1",
+    "browserify": "^17.0.0",
+    "puppeteer": "^9.0.0",
     "semantic-release": "^17.4.2"
   },
   "scripts": {
@@ -26,5 +26,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "moo": "^0.5.1",
+    "nearley": "^2.20.1"
   }
 }
