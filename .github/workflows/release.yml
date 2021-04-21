@@ -22,6 +22,7 @@ jobs:
       - name: Release
         run: >
           docker exec risbox yarn &&
+          docker exec risbox make dist &&
           docker exec risbox yarn semantic-release --no-ci
       - name: Cleanup
         run: docker kill risbox
