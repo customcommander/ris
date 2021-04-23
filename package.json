@@ -1,17 +1,28 @@
 {
   "name": "@customcommander/ris",
+  "description": "Read/write bibliographic records in RIS format.",
   "version": "1.0.0",
   "main": "dist/index.js",
   "browser": "dist/browser.min.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/customcommander/ris.git"
+  },
+  "homepage": "https://github.com/customcommander/ris",
+  "bugs": {
+    "url": "https://github.com/customcommander/ris/issues",
+    "email": "hello@spinjs.com"
+  },
   "files": [
     "dist"
   ],
   "keywords": [
-    "ris",
-    "reference",
+    "academia",
     "bibliography",
-    "academia"
+    "citation",
+    "reference-manager",
+    "ris-format"
   ],
   "devDependencies": {
     "@cucumber/cucumber": "^7.1.0",
