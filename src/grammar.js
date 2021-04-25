@@ -32,10 +32,8 @@ const processName = (name) => {
   };
 }
 
-const processUrls = value =>
-  ( /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/.test(value)
-    ? zip(['year', 'month', 'day', 'info'], value.split('/'))
-    : value );
+const processAccessDate = value =>
+  zip(['year', 'month', 'day', 'info'], value.split('/'));
 
 var grammar = {
     Lexer: lexer,
@@ -69,11 +67,9 @@ var grammar = {
         ({ key,
            value: lines.flatMap(line =>
                     line.split(';').map(s => s.trim()).filter(Boolean))}) },
-    {"name": "dateaccessEntry$ebnf$1", "symbols": ["value"]},
-    {"name": "dateaccessEntry$ebnf$1", "symbols": ["dateaccessEntry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "dateaccessEntry", "symbols": [(lexer.has("dateaccess") ? {type: "dateaccess"} : dateaccess), (lexer.has("sep") ? {type: "sep"} : sep), "dateaccessEntry$ebnf$1"], "postprocess":  ([{value: key},/*sep (ignored)*/, lines]) =>
+    {"name": "dateaccessEntry", "symbols": [(lexer.has("dateaccess") ? {type: "dateaccess"} : dateaccess), (lexer.has("sep") ? {type: "sep"} : sep), "value"], "postprocess":  ([{value: key},/*sep (ignored)*/, value]) =>
         ({ key
-         , value: processUrls(lines.join(''))}) },
+         , value: processAccessDate(value)}) },
     {"name": "reprintEntry", "symbols": [(lexer.has("reprint") ? {type: "reprint"} : reprint), (lexer.has("sep") ? {type: "sep"} : sep), "value"], "postprocess":  ([{value: key},/*sep (ignored)*/, value]) =>
         ({ key
          , value: ((value === 'IN FILE' || value === 'NOT IN FILE')

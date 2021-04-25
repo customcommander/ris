@@ -79,6 +79,122 @@ See the complete [map for each type of RIS reference](./resources/fields-map.csv
 
 See [list of reference types](./resources/types.csv). Based on https://en.wikipedia.org/wiki/RIS_(file_format).
 
+## Mendeley
+
+Bibliographic records in RIS format can be converted to Mendeley references:
+
+```javascript
+RIS.toMendeley(`
+TY  - JOUR
+TI  - Mission to the Moon
+AU  - Armstrong, Neil
+DA  - 1969/07/20
+ER  - 
+`);
+//=> [{ type: 'journal'
+//=>  , authors: [{last_name: 'Armstrong', first_name: 'Neil'}]
+//=>  , accessed: '1969-07-20'
+//=>  , title: 'Mission to the Moon' }]
+```
+
+**Warning:** not all RIS fields can be mapped to a Mendeley fields. The following tables show which RIS fields are supported by Mendeley.
+
+**Warning:** each Mendeley references is validated before it is returned. If one field in the reference is invalid the _entire_ reference is discarded. e.g.,
+
+
+```javascript
+RIS.toMendeley(`
+TY  - JOUR
+AU  - Armstrong, Neil
+DA  - 1969/07/20
+ER  - 
+`);
+//=> []
+// In Mendeley all references MUST have a title!
+```
+
+### All Records
+
+| RIS | Mendeley         |
+|:----|:-----------------|
+| A1  | authors          |
+| A2  | editors          |
+| A3  | authors          |
+| A4  | authors          |
+| AB  | abstract         |
+| AN  | identifiers.pmid |
+| AU  | authors          |
+| CY  | city             |
+| DA  | accessed         |
+| DO  | identifiers.doi  |
+| ET  | edition          |
+| IS  | issue            |
+| KW  | keywords         |
+| L1  | websites         |
+| L4  | websites         |
+| LA  | language         |
+| LB  | tags             |
+| N1  | notes            |
+| PB  | publisher        |
+| PY  | year             |
+| RN  | notes            |
+| SE  | chapter          |
+| SN  | identifiers.isbn |
+| SP  | pages            |
+| ST  | short_title      |
+| T2  | source           |
+| T3  | series           |
+| TA  | authors          |
+| TI  | title            |
+| UR  | websites         |
+| VL  | volume           |
+
+### PAT Records
+
+| RIS | Mendeley                  |
+|:----|:--------------------------|
+| C6  | patent_legal_status       |
+| M1  | patent_application_number |
+
+### JOUR & JFULL Records
+
+| RIS | Mendeley         |
+|:----|:-----------------|
+| SN | identifiers.issn |
+
+### RPRT Records
+
+| RIS | Mendeley         |
+|:----|:-----------------|
+| VL  | series_number    |
+
+### Types Conversion
+
+| RIS       | Mendeley               |
+|:----------|:-----------------------|
+| BILL      | bill                   |
+| BOOK      | book                   |
+| CASE      | case                   |
+| CHAP      | book_section           |
+| COMP      | computer_program       |
+| CONF      | conference_proceedings |
+| ENCYC     | encyclopedia_article   |
+| GEN       | generic                |
+| HEAR      | hearing                |
+| ICOMM     | web_page               |
+| JFULL     | journal                |
+| JOUR      | journal                |
+| MGZN      | magazine_article       |
+| MPCT      | film                   |
+| NEWS      | newspaper_article      |
+| PAT       | patent                 |
+| RPRT      | report                 |
+| STAT      | statute                |
+| THES      | thesis                 |
+| UNPB      | working_paper          |
+| *Others* | generic                 |
+
+
 ## Development
 
 The following command will:
