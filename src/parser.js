@@ -28,16 +28,6 @@ const from_mdy =
   str =>
     zip(['month', 'day', 'year'], str.split('/'));
 
-const name_obj =
-  ([last_name = '', first_name = '', suffix = '']) =>
-    ({last_name, first_name, suffix});
-
-const name_add =
-  (acc, {key, value}) =>
-    ( acc[key] = acc[key] || []
-    , acc[key].push(name_obj(value.split(',').map(s => s.trim())))
-    , acc );
-
 const defaults =
   acc =>
     Object.assign
@@ -46,14 +36,14 @@ const defaults =
       , acc );
 
 const OPS =
-  { A1: name_add
-  , A2: name_add
-  , A3: name_add
-  , A4: name_add
+  { A1: append
+  , A2: append
+  , A3: append
+  , A4: append
   , AB: add
   , AD: add
   , AN: add
-  , AU: name_add
+  , AU: append
   , AV: add
   , BT: add
   , C1: add
@@ -121,7 +111,7 @@ const OPS =
   , T1: add
   , T2: add
   , T3: add
-  , TA: add
+  , TA: append
   , TI: add
   , TT: add
   , TY: add

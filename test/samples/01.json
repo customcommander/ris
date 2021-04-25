@@ -4,17 +4,20 @@
       {
         "first_name": "Jacek",
         "last_name": "Borysow",
-        "suffix": ""
+        "suffix": "",
+        "initials": ""
       },
       {
         "first_name": "Lothar",
         "last_name": "Frommhold",
-        "suffix": ""
+        "suffix": "",
+        "initials": ""
       },
       {
         "first_name": "George",
         "last_name": "Birnbaum",
-        "suffix": ""
+        "suffix": "",
+        "initials": ""
       }
     ],
     "DO": "10.1086/166112",

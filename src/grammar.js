@@ -2,7 +2,26 @@
 // http://github.com/Hardmath123/nearley
 (function () {
 function id(x) { return x[0]; }
- const lexer = require("./lexer.js"); var grammar = {
+ const lexer = require("./lexer.js"); 
+
+
+const processName = (name) => {
+  const initialsRegex = /(?:[a-zA-Z]\.)+/
+  const [part1, part2 = '', part3 = ''] = name.split(',').map(s => s.trim());
+  const [firstname = '', initials = ''] = part2.split(/( +)/g).reduce(([fname, init], str) =>
+   initialsRegex.test(str)
+      ? [fname, init + str]
+      : [fname + str, init], ['', '']);
+
+  return {
+    last_name: part1,
+    first_name: firstname.trim(),
+    suffix: part3,
+    initials: initials.trim()
+  };
+}
+
+var grammar = {
     Lexer: lexer,
     ParserRules: [
     {"name": "_$ebnf$1", "symbols": []},
@@ -22,9 +41,12 @@ function id(x) { return x[0]; }
     {"name": "end$ebnf$1", "symbols": []},
     {"name": "end$ebnf$1", "symbols": ["end$ebnf$1", (lexer.has("value") ? {type: "value"} : value)], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "end", "symbols": [(lexer.has("end") ? {type: "end"} : end), (lexer.has("sep") ? {type: "sep"} : sep), "end$ebnf$1", "_"], "postprocess": () => null},
-    {"name": "entry$ebnf$1", "symbols": ["value"]},
-    {"name": "entry$ebnf$1", "symbols": ["entry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "entry", "symbols": [(lexer.has("tag") ? {type: "tag"} : tag), (lexer.has("sep") ? {type: "sep"} : sep), "entry$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join(' ')})},
+    {"name": "entry", "symbols": ["personEntry"], "postprocess": id},
+    {"name": "entry", "symbols": ["otherEntry"], "postprocess": id},
+    {"name": "personEntry", "symbols": [(lexer.has("person") ? {type: "person"} : person), (lexer.has("sep") ? {type: "sep"} : sep), "value"], "postprocess": ([{value: key},,name]) => ({key, value: processName(name)})},
+    {"name": "otherEntry$ebnf$1", "symbols": ["value"]},
+    {"name": "otherEntry$ebnf$1", "symbols": ["otherEntry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "otherEntry", "symbols": [(lexer.has("tag") ? {type: "tag"} : tag), (lexer.has("sep") ? {type: "sep"} : sep), "otherEntry$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join(' ')})},
     {"name": "value", "symbols": [(lexer.has("value") ? {type: "value"} : value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value}]) => value}
 ]
   , ParserStart: "ris"
