@@ -16,6 +16,11 @@ module.exports = class {
     if (!this.browser) return this.RIS.map(str);
     return this.page.evaluate(str_ => RIS.map(str_), str);
   }
+
+  async toMendeley(risContent) {
+    if (!this.browser) return this.RIS.toMendeley(risContent);
+    return this.page.evaluate(risContent_ => RIS.toMendeley(risContent_), risContent);
+  }
 };
 
 module.exports.init = async function () {

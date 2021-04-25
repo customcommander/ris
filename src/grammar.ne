@@ -33,10 +33,8 @@ const processName = (name) => {
   };
 }
 
-const processUrls = value =>
-  ( /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/.test(value)
-    ? zip(['year', 'month', 'day', 'info'], value.split('/'))
-    : value );
+const processAccessDate = value =>
+  zip(['year', 'month', 'day', 'info'], value.split('/'));
 
 %}
 
@@ -75,10 +73,10 @@ urlEntry ->
                   line.split(';').map(s => s.trim()).filter(Boolean))}) %}
 
 dateaccessEntry ->
-  %dateaccess %sep value:+
-    {% ([{value: key},/*sep (ignored)*/, lines]) =>
+  %dateaccess %sep value
+    {% ([{value: key},/*sep (ignored)*/, value]) =>
       ({ key
-       , value: processUrls(lines.join(''))}) %}
+       , value: processAccessDate(value)}) %}
 
 reprintEntry ->
   %reprint %sep value

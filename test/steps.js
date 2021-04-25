@@ -7,6 +7,10 @@ defineStep('I have this RIS file', function (file) {
   this.file = file;
 });
 
+defineStep('I convert this to Mendeley', async function (file) {
+  this.list = await this.toMendeley(file);
+});
+
 defineStep('I have this file {word}', function (file) {
   this.file = fs.readFileSync(path.join(__dirname, 'samples', file), 'utf-8');
 });
@@ -50,4 +54,10 @@ defineStep('I will find a reference where {string} is set to', function (field, 
 
 defineStep('I will find a reference with {word} as a key', function (key) {
   assert(typeof this.list[0][key] !== 'undefined');
+});
+
+// TODO: make this works for lists of more than one element.
+defineStep('I will get this object', function (text) {
+  const obj = JSON.parse(text);
+  assert.deepStrictEqual(this.list[0], obj);
 });

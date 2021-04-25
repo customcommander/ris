@@ -1,0 +1,250 @@
+{
+  "$id": "mendeley://schemas/document.json",
+  "type": "object",
+  "required": [
+    "title",
+    "type"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "abstract": {
+      "type": "string",
+      "maxLength": 10000
+    },
+    "accessed": {
+      "type": "string",
+      "format": "date"
+    },
+    "authors": {
+      "description": "Person; same schema for editors and translators.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "last_name"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "last_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "first_name": {
+            "type": "string",
+            "maxLength": 255
+          }
+        }
+      }
+    },
+    "chapter": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "citation_key": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "code": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "day": {
+      "type": "number"
+    },
+    "department": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "edition": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "editors": {
+      "$ref": "document.json#/properties/authors"
+    },
+    "genre": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "identifiers": {
+      "description": "All identifiers in Mendeley are strings; we define one schema and reuse it for all the others.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "arxiv": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "doi": {
+          "$ref": "document.json#/properties/identifiers/properties/arxiv"
+        },
+        "isbn": {
+          "$ref": "document.json#/properties/identifiers/properties/arxiv"
+        },
+        "issn": {
+          "$ref": "document.json#/properties/identifiers/properties/arxiv"
+        },
+        "pmid": {
+          "$ref": "document.json#/properties/identifiers/properties/arxiv"
+        },
+        "scopus": {
+          "$ref": "document.json#/properties/identifiers/properties/arxiv"
+        },
+        "pui": {
+          "$ref": "document.json#/properties/identifiers/properties/arxiv"
+        },
+        "pii": {
+          "$ref": "document.json#/properties/identifiers/properties/arxiv"
+        },
+        "sgr": {
+          "$ref": "document.json#/properties/identifiers/properties/arxiv"
+        }
+      }
+    },
+    "institution": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "issue": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 300
+      }
+    },
+    "language": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "medium": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "month": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "pages": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "patent_application_number": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "patent_legal_status": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "patent_owner": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "publisher": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "reprint_edition": {
+      "type": "string",
+      "maxLength": 10
+    },
+    "revision": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "series": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "series_editor": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "series_number": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "short_title": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "source": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "source_type": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 100
+      }
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "translators": {
+      "$ref": "document.json#/properties/authors"
+    },
+    "type": {
+      "enum": [
+        "bill",
+        "book_section",
+        "book",
+        "case",
+        "computer_program",
+        "conference_proceedings",
+        "encyclopedia_article",
+        "film",
+        "generic",
+        "hearing",
+        "journal",
+        "magazine_article",
+        "newspaper_article",
+        "patent",
+        "report",
+        "statute",
+        "television_broadcast",
+        "thesis",
+        "web_page",
+        "working_paper"
+      ]
+    },
+    "user_context": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "volume": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "websites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "year": {
+      "type": "number"
+    }
+  }
+}
