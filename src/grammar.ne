@@ -6,6 +6,11 @@
 
 @{%
 
+const zip =
+  (keys, values) =>
+    keys.reduce((o, k, i) =>
+      (o[k] = values[i], o), {});
+
 const processName = (name) => {
   const initialsRegex = /(?:[a-zA-Z]\.)+/
   const [part1, part2 = '', part3 = ''] = name.split(',').map(s => s.trim());
@@ -21,6 +26,11 @@ const processName = (name) => {
     initials: initials.trim()
   };
 }
+
+const processUrls = value =>
+  ( /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/.test(value)
+    ? zip(['year', 'month', 'day', 'info'], value.split('/'))
+    : value );
 
 %}
 
@@ -41,9 +51,10 @@ end ->
     {% () => null %}
 
 entry ->
-    personEntry {% id %}
-  | urlEntry    {% id %}
-  | otherEntry  {% id %}
+    personEntry     {% id %}
+  | urlEntry        {% id %}
+  | dateaccessEntry {% id %}
+  | otherEntry      {% id %}
 
 personEntry ->
   %person %sep value
@@ -55,6 +66,12 @@ urlEntry ->
       ({ key,
          value: lines.flatMap(line =>
                   line.split(';').map(s => s.trim()).filter(Boolean))}) %}
+
+dateaccessEntry ->
+  %dateaccess %sep value:+
+    {% ([{value: key},/*sep (ignored)*/, lines]) =>
+      ({ key
+       , value: processUrls(lines.join(''))}) %}
 
 otherEntry ->
   %tag %sep value:+

@@ -10,6 +10,7 @@ const lexer =
       , sep: "  - "
       , type: /TY(?=  - )/
       , person: /(?:AU|A1|A2|A3|A4|TA)(?=  - )/
+      , dateaccess: /DA(?=  - )/
       , url: /UR(?=  - )/
       , end: /ER(?=  - )/
       , tag: /[A-Z][A-Z0-9](?=  - )/
