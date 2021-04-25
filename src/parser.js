@@ -59,12 +59,7 @@ const OPS =
   , CP: add
   , CT: add
   , CY: add
-  , DA: (acc, {value}) =>
-          ( acc.DA =
-              ( /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/.test(value)
-                  ? zip(['year', 'month', 'day', 'info'], value.split('/'))
-                  : value )
-          , acc )
+  , DA: add
   , DB: add
   , DO: add
   , DP: add

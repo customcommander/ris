@@ -5,6 +5,11 @@ function id(x) { return x[0]; }
  const lexer = require("./lexer.js"); 
 
 
+const zip =
+  (keys, values) =>
+    keys.reduce((o, k, i) =>
+      (o[k] = values[i], o), {});
+
 const processName = (name) => {
   const initialsRegex = /(?:[a-zA-Z]\.)+/
   const [part1, part2 = '', part3 = ''] = name.split(',').map(s => s.trim());
@@ -20,6 +25,11 @@ const processName = (name) => {
     initials: initials.trim()
   };
 }
+
+const processUrls = value =>
+  ( /(?:\d{4})?\/(?:(?:\d\d)?\/){2}(?:[A-Za-z \-]+)?/.test(value)
+    ? zip(['year', 'month', 'day', 'info'], value.split('/'))
+    : value );
 
 var grammar = {
     Lexer: lexer,
@@ -43,6 +53,7 @@ var grammar = {
     {"name": "end", "symbols": [(lexer.has("end") ? {type: "end"} : end), (lexer.has("sep") ? {type: "sep"} : sep), "end$ebnf$1", "_"], "postprocess": () => null},
     {"name": "entry", "symbols": ["personEntry"], "postprocess": id},
     {"name": "entry", "symbols": ["urlEntry"], "postprocess": id},
+    {"name": "entry", "symbols": ["dateaccessEntry"], "postprocess": id},
     {"name": "entry", "symbols": ["otherEntry"], "postprocess": id},
     {"name": "personEntry", "symbols": [(lexer.has("person") ? {type: "person"} : person), (lexer.has("sep") ? {type: "sep"} : sep), "value"], "postprocess": ([{value: key},,name]) => ({key, value: processName(name)})},
     {"name": "urlEntry$ebnf$1", "symbols": ["value"]},
@@ -51,6 +62,11 @@ var grammar = {
         ({ key,
            value: lines.flatMap(line =>
                     line.split(';').map(s => s.trim()).filter(Boolean))}) },
+    {"name": "dateaccessEntry$ebnf$1", "symbols": ["value"]},
+    {"name": "dateaccessEntry$ebnf$1", "symbols": ["dateaccessEntry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "dateaccessEntry", "symbols": [(lexer.has("dateaccess") ? {type: "dateaccess"} : dateaccess), (lexer.has("sep") ? {type: "sep"} : sep), "dateaccessEntry$ebnf$1"], "postprocess":  ([{value: key},/*sep (ignored)*/, lines]) =>
+        ({ key
+         , value: processUrls(lines.join(''))}) },
     {"name": "otherEntry$ebnf$1", "symbols": ["value"]},
     {"name": "otherEntry$ebnf$1", "symbols": ["otherEntry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "otherEntry", "symbols": [(lexer.has("tag") ? {type: "tag"} : tag), (lexer.has("sep") ? {type: "sep"} : sep), "otherEntry$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join(' ')})},
