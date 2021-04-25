@@ -11,6 +11,12 @@ const zip =
     keys.reduce((o, k, i) =>
       (o[k] = values[i], o), {});
 
+// Convert US date to date object
+// e.g. "06/30/2020" -> {year: "2020", month: "06", day: "30"}
+const from_mdy =
+  str =>
+    zip(['month', 'day', 'year'], str.split('/'));
+
 const processName = (name) => {
   const initialsRegex = /(?:[a-zA-Z]\.)+/
   const [part1, part2 = '', part3 = ''] = name.split(',').map(s => s.trim());
@@ -54,6 +60,7 @@ entry ->
     personEntry     {% id %}
   | urlEntry        {% id %}
   | dateaccessEntry {% id %}
+  | reprintEntry    {% id %}
   | otherEntry      {% id %}
 
 personEntry ->
@@ -72,6 +79,15 @@ dateaccessEntry ->
     {% ([{value: key},/*sep (ignored)*/, lines]) =>
       ({ key
        , value: processUrls(lines.join(''))}) %}
+
+reprintEntry ->
+  %reprint %sep value
+    {% ([{value: key},/*sep (ignored)*/, value]) =>
+      ({ key
+       , value: ((value === 'IN FILE' || value === 'NOT IN FILE')
+                  ? { status: value }
+                  : { status: 'ON REQUEST'
+                    , date: from_mdy(value.match(/\d{2}\/\d{2}\/\d{4}/)[0]) })}) %}
 
 otherEntry ->
   %tag %sep value:+

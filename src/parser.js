@@ -7,11 +7,6 @@ const grammar = require('./grammar.js');
 const type_map = require('./type-map.json');
 const fields_map = require('./fields-map.json');
 
-const zip =
-  (keys, values) =>
-    keys.reduce((o, k, i) =>
-      (o[k] = values[i], o), {});
-
 const append =
   (acc, {key, value}) =>
     ( acc[key] = (acc[key] || []).concat(value)
@@ -21,12 +16,6 @@ const add =
   (acc, {key, value}) =>
     ( acc[key] = value
     , acc );
-
-// Convert US date to date object
-// e.g. "06/30/2020" -> {year: "2020", month: "06", day: "30"}
-const from_mdy =
-  str =>
-    zip(['month', 'day', 'year'], str.split('/'));
 
 const defaults =
   acc =>
@@ -93,12 +82,7 @@ const OPS =
   , PY: add
   , RI: add
   , RN: add
-  , RP: (acc, {value}) =>
-          ( acc.RP = (value === 'IN FILE' || value === 'NOT IN FILE')
-                        ? { status: value }
-                        : { status: 'ON REQUEST'
-                          , date: from_mdy(value.match(/\d{2}\/\d{2}\/\d{4}/)[0]) }
-          , acc )
+  , RP: add
   , SE: add
   , SN: add
   , SP: add
