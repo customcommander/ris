@@ -9,11 +9,10 @@ const lexer =
     ( { newline: {match: /\n/, lineBreaks: true}
       , sep: "  - "
       , type: /TY(?=  - )/
+      , person: /(?:AU|A1|A2|A3|A4|TA)(?=  - )/
       , end: /ER(?=  - )/
       , tag: /[A-Z][A-Z0-9](?=  - )/
-      , value: { match: /.+/
-               , value: m => m.trim()
-               }
+      , value: {match: /.+/, value: m => m.trim()}
       }
     );
 
