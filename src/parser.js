@@ -120,12 +120,7 @@ const OPS =
   , U3: add
   , U4: add
   , U5: add
-  , UR: (acc, {value}) =>
-      ( acc.UR = (acc.UR || []).concat(
-          value.split(';')
-            .map(url => url.trim())
-              .filter(Boolean))
-      , acc )
+  , UR: append
   , VL: add
   , VO: add
   , Y1: add

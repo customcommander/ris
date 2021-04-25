@@ -42,8 +42,15 @@ var grammar = {
     {"name": "end$ebnf$1", "symbols": ["end$ebnf$1", (lexer.has("value") ? {type: "value"} : value)], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "end", "symbols": [(lexer.has("end") ? {type: "end"} : end), (lexer.has("sep") ? {type: "sep"} : sep), "end$ebnf$1", "_"], "postprocess": () => null},
     {"name": "entry", "symbols": ["personEntry"], "postprocess": id},
+    {"name": "entry", "symbols": ["urlEntry"], "postprocess": id},
     {"name": "entry", "symbols": ["otherEntry"], "postprocess": id},
     {"name": "personEntry", "symbols": [(lexer.has("person") ? {type: "person"} : person), (lexer.has("sep") ? {type: "sep"} : sep), "value"], "postprocess": ([{value: key},,name]) => ({key, value: processName(name)})},
+    {"name": "urlEntry$ebnf$1", "symbols": ["value"]},
+    {"name": "urlEntry$ebnf$1", "symbols": ["urlEntry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "urlEntry", "symbols": [(lexer.has("url") ? {type: "url"} : url), (lexer.has("sep") ? {type: "sep"} : sep), "urlEntry$ebnf$1"], "postprocess":  ([{value: key}, /*sep (ignored)*/ , lines]) =>
+        ({ key,
+           value: lines.flatMap(line =>
+                    line.split(';').map(s => s.trim()).filter(Boolean))}) },
     {"name": "otherEntry$ebnf$1", "symbols": ["value"]},
     {"name": "otherEntry$ebnf$1", "symbols": ["otherEntry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "otherEntry", "symbols": [(lexer.has("tag") ? {type: "tag"} : tag), (lexer.has("sep") ? {type: "sep"} : sep), "otherEntry$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join(' ')})},

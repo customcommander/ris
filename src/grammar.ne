@@ -42,11 +42,19 @@ end ->
 
 entry ->
     personEntry {% id %}
-  | otherEntry {% id %}
+  | urlEntry    {% id %}
+  | otherEntry  {% id %}
 
 personEntry ->
   %person %sep value
     {% ([{value: key},,name]) => ({key, value: processName(name)}) %}
+
+urlEntry ->
+  %url %sep value:+
+    {% ([{value: key}, /*sep (ignored)*/ , lines]) =>
+      ({ key,
+         value: lines.flatMap(line =>
+                  line.split(';').map(s => s.trim()).filter(Boolean))}) %}
 
 otherEntry ->
   %tag %sep value:+
