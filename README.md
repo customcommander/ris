@@ -1,6 +1,6 @@
 # RIS
 
-Read/write bibliographic records in [RIS format][ris-file-format].
+Read/write bibliographic records in [RIS format][].
 
 ## Getting Started
 
@@ -76,12 +76,12 @@ ER  -
 //=> [{'@type': "Journal", abstract: "this is my abstract"}]
 ```
 
-See the complete [map for each type of RIS reference](./resources/fields-map.csv).
+See the complete [map for each type of RIS reference](https://github.com/customcommander/ris/blob/master/resources/fields-map.csv).
 
 
 ## Reference Types
 
-See [list of reference types](./resources/types.csv). Based on https://en.wikipedia.org/wiki/RIS_(file_format).
+See [list of reference types](https://github.com/customcommander/ris/blob/master/resources/types.csv). (Based on the [RIS format].)
 
 ## Mendeley
 
@@ -212,4 +212,4 @@ The following command will:
 make sample
 ```
 
-[ris-file-format]: https://en.wikipedia.org/wiki/RIS_(file_format)
+[RIS format]: https://en.wikipedia.org/wiki/RIS_(file_format)
