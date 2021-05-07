@@ -85,7 +85,7 @@ See [list of reference types](https://github.com/customcommander/ris/blob/master
 
 ## Mendeley
 
-Bibliographic records in RIS format can be converted to Mendeley references:
+Bibliographic records in [RIS format] can be converted to Mendeley references:
 
 ```javascript
 RIS.toMendeley(`
@@ -101,10 +101,11 @@ ER  -
 //=>  , title: 'Mission to the Moon' }]
 ```
 
-**Warning:** not all RIS fields can be mapped to a Mendeley fields. The following tables show which RIS fields are supported by Mendeley.
+**Warning:** not all RIS fields can be mapped to Mendeley fields. The following tables show which RIS fields are supported by the [Mendeley Reference Manager].
 
-**Warning:** each Mendeley references is validated before it is returned. If one field in the reference is invalid the _entire_ reference is discarded. e.g.,
+**Warning:** each Mendeley reference is validated before it is returned. If one field in the reference is invalid the _entire_ reference is discarded. e.g.,
 
+In Mendeley a reference MUST have a title (TI entry in RIS) so converting this RIS record will return an empty list:
 
 ```javascript
 RIS.toMendeley(`
@@ -114,65 +115,52 @@ DA  - 1969/07/20
 ER  - 
 `);
 //=> []
-// In Mendeley all references MUST have a title!
 ```
 
-### All Records
+### RIS Conversation Table
 
-| RIS | Mendeley         |
-|:----|:-----------------|
-| A1  | authors          |
-| A2  | editors          |
-| A3  | authors          |
-| A4  | authors          |
-| AB  | abstract         |
-| AN  | identifiers.pmid |
-| AU  | authors          |
-| CY  | city             |
-| DA  | accessed         |
-| DO  | identifiers.doi  |
-| ET  | edition          |
-| IS  | issue            |
-| KW  | keywords         |
-| L1  | websites         |
-| L4  | websites         |
-| LA  | language         |
-| LB  | tags             |
-| N1  | notes            |
-| PB  | publisher        |
-| PY  | year             |
-| RN  | notes            |
-| SE  | chapter          |
-| SN  | identifiers.isbn |
-| SP  | pages            |
-| ST  | short_title      |
-| T2  | source           |
-| T3  | series           |
-| TA  | authors          |
-| TI  | title            |
-| UR  | websites         |
-| VL  | volume           |
+Dependending on their types some entries will be mapped to different fields in Mendeley and whilst others may not be mapped at all.
 
-### PAT Records
+| RIS Type | RIS Entry | Mendeley                  |
+|:---------|:----------|:--------------------------|
+| *any*    | A1        | authors                   |
+| *any*    | A2        | editors                   |
+| *any*    | A3        | authors                   |
+| *any*    | A4        | authors                   |
+| *any*    | AB        | abstract                  |
+| *any*    | AN        | identifiers.pmid          |
+| *any*    | AU        | authors                   |
+| PAT      | C6        | patent_legal_status       |
+| *any*    | CY        | city                      |
+| *any*    | DA        | accessed                  |
+| *any*    | DO        | identifiers.doi           |
+| *any*    | ET        | edition                   |
+| *any*    | IS        | issue                     |
+| *any*    | KW        | keywords                  |
+| *any*    | L1        | websites                  |
+| *any*    | L4        | websites                  |
+| *any*    | LA        | language                  |
+| *any*    | LB        | tags                      |
+| PAT      | M1        | patent_application_number |
+| *any*    | N1        | notes                     |
+| *any*    | PB        | publisher                 |
+| *any*    | PY        | year                      |
+| *any*    | RN        | notes                     |
+| *any*    | SE        | chapter                   |
+| *any*    | SN        | identifiers.isbn          |
+| JFULL    | SN        | identifiers.issn          |
+| JOUR     | SN        | identifiers.issn          |
+| *any*    | SP        | pages                     |
+| *any*    | ST        | short_title               |
+| *any*    | T2        | source                    |
+| *any*    | T3        | series                    |
+| *any*    | TA        | authors                   |
+| *any*    | TI        | title                     |
+| *any*    | UR        | websites                  |
+| *any*    | VL        | volume                    |
+| RPRT     | VL        | series_number             |
 
-| RIS | Mendeley                  |
-|:----|:--------------------------|
-| C6  | patent_legal_status       |
-| M1  | patent_application_number |
-
-### JOUR & JFULL Records
-
-| RIS | Mendeley         |
-|:----|:-----------------|
-| SN | identifiers.issn |
-
-### RPRT Records
-
-| RIS | Mendeley         |
-|:----|:-----------------|
-| VL  | series_number    |
-
-### Types Conversion
+### RIS Type Conversion
 
 | RIS       | Mendeley               |
 |:----------|:-----------------------|
@@ -213,3 +201,4 @@ make sample
 ```
 
 [RIS format]: https://en.wikipedia.org/wiki/RIS_(file_format)
+[Mendeley Reference Manager]: https://www.mendeley.com/reference-manager/
