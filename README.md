@@ -121,71 +121,65 @@ ER  -
 
 Dependending on their types some entries will be mapped to different fields in Mendeley and whilst others may not be mapped at all.
 
-| RIS Type | RIS Entry | Mendeley                  |
-|:---------|:----------|:--------------------------|
-| *any*    | A1        | authors                   |
-| *any*    | A2        | editors                   |
-| *any*    | A3        | authors                   |
-| *any*    | A4        | authors                   |
-| *any*    | AB        | abstract                  |
-| *any*    | AN        | identifiers.pmid          |
-| *any*    | AU        | authors                   |
-| PAT      | C6        | patent_legal_status       |
-| *any*    | CY        | city                      |
-| *any*    | DA        | accessed                  |
-| *any*    | DO        | identifiers.doi           |
-| *any*    | ET        | edition                   |
-| *any*    | IS        | issue                     |
-| *any*    | KW        | keywords                  |
-| *any*    | L1        | websites                  |
-| *any*    | L4        | websites                  |
-| *any*    | LA        | language                  |
-| *any*    | LB        | tags                      |
-| PAT      | M1        | patent_application_number |
-| *any*    | N1        | notes                     |
-| *any*    | PB        | publisher                 |
-| *any*    | PY        | year                      |
-| *any*    | RN        | notes                     |
-| *any*    | SE        | chapter                   |
-| *any*    | SN        | identifiers.isbn          |
-| JFULL    | SN        | identifiers.issn          |
-| JOUR     | SN        | identifiers.issn          |
-| *any*    | SP        | pages                     |
-| *any*    | ST        | short_title               |
-| *any*    | T2        | source                    |
-| *any*    | T3        | series                    |
-| *any*    | TA        | authors                   |
-| *any*    | TI        | title                     |
-| *any*    | UR        | websites                  |
-| *any*    | VL        | volume                    |
-| RPRT     | VL        | series_number             |
-
-### RIS Type Conversion
-
-| RIS       | Mendeley               |
-|:----------|:-----------------------|
-| BILL      | bill                   |
-| BOOK      | book                   |
-| CASE      | case                   |
-| CHAP      | book_section           |
-| COMP      | computer_program       |
-| CONF      | conference_proceedings |
-| ENCYC     | encyclopedia_article   |
-| GEN       | generic                |
-| HEAR      | hearing                |
-| ICOMM     | web_page               |
-| JFULL     | journal                |
-| JOUR      | journal                |
-| MGZN      | magazine_article       |
-| MPCT      | film                   |
-| NEWS      | newspaper_article      |
-| PAT       | patent                 |
-| RPRT      | report                 |
-| STAT      | statute                |
-| THES      | thesis                 |
-| UNPB      | working_paper          |
-| *Others* | generic                 |
-
+| RIS Type | RIS Entry | Mendeley                           |
+|:---------|:----------|:-----------------------------------|
+| *any*    | A1        | authors                            |
+| *any*    | A2        | editors                            |
+| *any*    | A3        | authors                            |
+| *any*    | A4        | authors                            |
+| *any*    | AB        | abstract                           |
+| *any*    | AN        | identifiers.pmid                   |
+| *any*    | AU        | authors                            |
+| PAT      | C6        | patent_legal_status                |
+| *any*    | CY        | city                               |
+| *any*    | DA        | accessed                           |
+| *any*    | DO        | identifiers.doi                    |
+| *any*    | ET        | edition                            |
+| *any*    | IS        | issue                              |
+| *any*    | KW        | keywords                           |
+| *any*    | L1        | websites                           |
+| *any*    | L4        | websites                           |
+| *any*    | LA        | language                           |
+| *any*    | LB        | tags                               |
+| PAT      | M1        | patent_application_number          |
+| *any*    | N1        | notes                              |
+| *any*    | PB        | publisher                          |
+| *any*    | PY        | year                               |
+| *any*    | RN        | notes                              |
+| *any*    | SE        | chapter                            |
+| *any*    | SN        | identifiers.isbn                   |
+| JFULL    | SN        | identifiers.issn                   |
+| JOUR     | SN        | identifiers.issn                   |
+| *any*    | SP        | pages                              |
+| *any*    | ST        | short_title                        |
+| *any*    | T2        | source                             |
+| *any*    | T3        | series                             |
+| *any*    | TA        | authors                            |
+| *any*    | TI        | title                              |
+| BILL     | TY        | type (as *bill*)                   |
+| BOOK     | TY        | type (as *book*)                   |
+| CASE     | TY        | type (as *case*)                   |
+| CHAP     | TY        | type (as *book_section*)           |
+| COMP     | TY        | type (as *computer_program*)       |
+| CONF     | TY        | type (as *conference_proceedings*) |
+| ENCYC    | TY        | type (as *encyclopedia_article*)   |
+| GEN      | TY        | type (as *generic*)                |
+| HEAR     | TY        | type (as *hearing*)                |
+| ICOMM    | TY        | type (as *web_page*)               |
+| JFULL    | TY        | type (as *journal*)                |
+| JOUR     | TY        | type (as *journal*)                |
+| MGZN     | TY        | type (as *magazine_article*)       |
+| MPCT     | TY        | type (as *film*)                   |
+| NEWS     | TY        | type (as *newspaper_article*)      |
+| PAT      | TY        | type (as *patent*)                 |
+| RPRT     | TY        | type (as *report*)                 |
+| STAT     | TY        | type (as *statute*)                |
+| THES     | TY        | type (as *thesis*)                 |
+| UNPB     | TY        | type (as *working_paper*)          |
+| *others* | TY        | generic                            |
+| *any*    | UR        | websites                           |
+| *any*    | VL        | volume                             |
+| RPRT     | VL        | series_number                      |
 
 ## Development
 
