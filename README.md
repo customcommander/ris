@@ -1,10 +1,14 @@
 # RIS
 
-A package for parsing bibliographic content in the [RIS format][ris-file-format].
+Read/write bibliographic records in [RIS format][ris-file-format].
 
-[ris-file-format]: https://en.wikipedia.org/wiki/RIS_(file_format)
+## Getting Started
 
-## Usage
+Whether you intend to use it on Node.js or in a browser you must grab a copy of `@customcommander/ris` using your favourite Node.js package manager e.g.,
+
+```
+npm i @customcommander/ris
+```
 
 ### Node.js
 
@@ -207,3 +211,5 @@ The following command will:
 ```
 make sample
 ```
+
+[ris-file-format]: https://en.wikipedia.org/wiki/RIS_(file_format)
