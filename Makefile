@@ -29,7 +29,7 @@ resources/types.csv: resources/types.jq src/type-map.json
 
 /tmp/ris.test: dist $(shell find test -type f)
 	yarn cucumber-js --require 'test/*.js' --world-parameters '{"browser": false}' test/features
-	yarn cucumber-js --require 'test/*.js' --world-parameters '{"browser": true}' test/features
+	yarn cucumber-js --require 'test/*.js' --tags '@browser' --world-parameters '{"browser": true}' test/features
 	touch $@
 
 dist: $(dist_files) dist/browser.min.js
