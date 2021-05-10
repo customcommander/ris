@@ -11,6 +11,11 @@ defineStep('I convert this to Mendeley', async function (file) {
   this.list = await this.toMendeley(file);
 });
 
+defineStep('I convert this from Mendeley', async function (json) {
+  const references = JSON.parse(json);
+  this.risContent = await this.fromMendeley(references);
+});
+
 defineStep('I have this file {word}', function (file) {
   this.file = fs.readFileSync(path.join(__dirname, 'samples', file), 'utf-8');
 });
@@ -60,4 +65,8 @@ defineStep('I will find a reference with {word} as a key', function (key) {
 defineStep('I will get this object', function (text) {
   const obj = JSON.parse(text);
   assert.deepStrictEqual(this.list[0], obj);
+});
+
+defineStep('I will get this RIS file', function (expected) {
+  assert.deepStrictEqual(this.risContent, expected);
 });

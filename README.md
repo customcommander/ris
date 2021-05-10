@@ -181,6 +181,28 @@ Dependending on their types some entries will be mapped to different fields in M
 | *any*    | VL        | volume                             |
 | RPRT     | VL        | series_number                      |
 
+### From Mendeley to RIS
+
+It is also possible to generate RIS records from Mendeley references: (using the above table)
+
+```javascript
+RIS.fromMendeley([{ type: 'journal'
+                  , title: 'Moon 69'
+                  , year: 1969
+                  , authors: [{last_name: 'Armstrong', first_name: 'Neil'}]
+                  , identifiers: {doi: 'doi/123'}}]);
+
+//=> TY  - JOUR
+//=> TI  - Moon 69
+//=> PY  - 1969
+//=> AU  - Armstrong, Neil
+//=> DO  - doi/123
+//=> ER  - 
+//=>
+```
+
+*Note: Mendeley references are validated against [this schema](https://github.com/customcommander/ris/blob/master/src/mendeley.schema.json) before they converted into RIS records so it is possible to end up with less or no records at all if the Mendeley references are not valid.*
+
 ## Development
 
 The following command will:
