@@ -4,3 +4,4 @@
  */
 module.exports = require('./parser.js');
 module.exports.toMendeley = require('./mendeley').to;
+module.exports.fromMendeley = require('./mendeley').from;

@@ -21,6 +21,11 @@ module.exports = class {
     if (!this.browser) return this.RIS.toMendeley(risContent);
     return this.page.evaluate(risContent_ => RIS.toMendeley(risContent_), risContent);
   }
+
+  async fromMendeley(references) {
+    if (!this.browser) return this.RIS.fromMendeley(references);
+    return this.page.evaluate(references_ => RIS.fromMendeley(references_), references);
+  }
 };
 
 module.exports.init = async function () {

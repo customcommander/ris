@@ -506,6 +506,7 @@ Scenario: Report records
 # The point is to show validation does occur.
 # Not sure it's worth testing all fields as this would be quite long
 # and expensive to do.
+@browser
 Scenario Outline: Validate Mendeley documents
   Given I convert this to Mendeley
     """
@@ -522,3 +523,71 @@ Scenario Outline: Validate Mendeley documents
     | DA  | 2004                         |
     | DA  | 2021/02/29                   |
     | ET  | no longer than 20 characters |
+
+# From Mendeley to RIS
+
+@browser
+Scenario: Mendeley references can be exported to RIS
+  Given I convert this from Mendeley
+    """
+    [ { "type": "journal"
+      , "title": "lorem ipsum"
+      , "authors": [ {"last_name": "Doe"}
+                   , {"last_name": "Doe", "first_name": "Jane"}
+                   ]
+      , "editors": [ {"last_name": "Foo", "first_name": "Bar"}]
+      , "accessed": "2021-05-09"
+      , "websites": [ "https://example.com/1"
+                    , "https://example.com/2"
+                    , "https://example.com/3"
+                    ]
+      , "keywords": [ "abc"
+                    , "def"
+                    , "ghi"
+                    ]
+      , "institution": "University123"
+      , "identifiers": { "doi": "doi123"
+                       , "pmid": "pmid123"
+                       , "arxiv": "arxiv123"
+                       }
+      }
+    ]
+    """
+  Then I will get this RIS file
+    """
+    TY  - JOUR
+    TI  - lorem ipsum
+    AU  - Doe
+    AU  - Doe, Jane
+    A2  - Foo, Bar
+    DA  - 2021/05/09
+    UR  - https://example.com/1
+    UR  - https://example.com/2
+    UR  - https://example.com/3
+    KW  - abc
+    KW  - def
+    KW  - ghi
+    AU  - University123
+    DO  - doi123
+    AN  - pmid123
+    ER  - 
+
+    """
+
+@browser
+Scenario: Invalid Mendeley references are ignored
+  Given I convert this from Mendeley
+    """
+    [ {"type": "journal", "title": "lorem ipsum", "year": "not a number"}
+    , {"type": "journal", "title": "additional fields not allowed", "answer": 42}
+    , {"type": "foobarx", "title": "not a valid title"}
+    , {"type": "journal", "title": "this works"}
+    ]
+    """
+  Then I will get this RIS file
+    """
+    TY  - JOUR
+    TI  - this works
+    ER  - 
+
+    """
