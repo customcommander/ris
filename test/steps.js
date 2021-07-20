@@ -24,10 +24,6 @@ defineStep('I parse the file', async function () {
   this.list = await this.parse(this.file);
 });
 
-defineStep('I parse the file and rename the tags', async function () {
-  this.list = await this.parseMap(this.file);
-});
-
 defineStep('I will get a list of {int} reference(s)', function (count) {
   assert.equal(this.list.length, count);
 });
