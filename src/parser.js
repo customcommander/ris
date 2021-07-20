@@ -63,6 +63,11 @@ const parse = text => {
 };
 
 parse.map = text => {
+  console.warn(`
+    **DEPRECATION NOTICE**
+    @customcommander/ris map method will be removed in v5.
+    See https://github.com/customcommander/ris/issues/36
+  `);
   const parsed = parse(text);
   return parsed.map(
     p => Object.keys(p).reduce(
