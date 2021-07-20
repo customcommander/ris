@@ -15,16 +15,16 @@ src/grammar.js: src/grammar.ne src/lexer.js
 resources/all.ris: resources/all.jq resources/all.json
 	jq -M -S -r -f $^ > $@
 
-resources/fields-map.csv: resources/fields-map.jq src/fields-map.json
+resources/fields-map.csv: resources/fields-map.jq resources/fields-map.json
 	jq -M -S -r -f $^ > $@
 
 resources/fields.csv: resources/fields.jq resources/fields.json
 	jq -M -r -f $^ > $@
 
-resources/full.ris: resources/full.jq  src/fields-map.json
+resources/full.ris: resources/full.jq  resources/fields-map.json
 	jq -M -r -f $^ > $@
 
-resources/types.csv: resources/types.jq src/type-map.json
+resources/types.csv: resources/types.jq resources/type-map.json
 	jq -M -r -f $^ > $@
 
 /tmp/ris.test: dist $(shell find test -type f)

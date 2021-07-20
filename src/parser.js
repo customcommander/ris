@@ -4,8 +4,6 @@
 
 const nearley = require('nearley');
 const grammar = require('./grammar.js');
-const type_map = require('./type-map.json');
-const fields_map = require('./fields-map.json');
 
 const append =
   (acc, {key, value}) =>
@@ -60,22 +58,6 @@ const parse = text => {
   parser.feed(text);
   if (parser.results.length > 1) throw new Error('grammar is ambiguous');
   return process_ast(parser.results[0]);
-};
-
-parse.map = text => {
-  console.warn(`
-    **DEPRECATION NOTICE**
-    @customcommander/ris map method will be removed in v5.
-    See https://github.com/customcommander/ris/issues/36
-  `);
-  const parsed = parse(text);
-  return parsed.map(
-    p => Object.keys(p).reduce(
-      (mapped, key) => {
-        const new_key = fields_map[`${p.TY}.${key}`] || (key === 'TY' ? '@type' : key);
-        mapped[new_key] = new_key !== '@type' ? p[key] : type_map[p.TY];
-        return mapped;
-      }, {}));
 };
 
 module.exports = parse;
