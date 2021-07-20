@@ -40,7 +40,7 @@
     "access": "public"
   },
   "dependencies": {
-    "ajv": "^8.1.0",
+    "ajv": "^8.6.2",
     "ajv-formats": "^2.0.2",
     "moo": "^0.5.1",
     "nearley": "^2.20.1"
