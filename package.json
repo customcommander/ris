@@ -29,7 +29,7 @@
     "@cucumber/cucumber": "^7.3.0",
     "browserify": "^17.0.0",
     "puppeteer": "^10.1.0",
-    "semantic-release": "^17.4.2"
+    "semantic-release": "^17.4.4"
   },
   "scripts": {
     "test": "make",
