@@ -51,34 +51,6 @@ ER  -
 </script>
 ```
 
-
-## Mapping Tag
-
-RIS tags are quite terse. They can be mapped to human-friendly names:
-
-```javascript
-const RIS = require('@customcommander/ris');
-
-RIS(`
-TY  - JOUR
-AB  - this is my abstract
-ER  - 
-`);
-//=> [{TY: "JOUR", AB: "this is my abstract"}]
-
-// vs
-
-RIS.map(`
-TY  - JOUR
-AB  - this is my abstract
-ER  - 
-`);
-//=> [{'@type': "Journal", abstract: "this is my abstract"}]
-```
-
-See the complete [map for each type of RIS reference](https://github.com/customcommander/ris/blob/master/resources/fields-map.csv).
-
-
 ## Reference Types
 
 See [list of reference types](https://github.com/customcommander/ris/blob/master/resources/types.csv). (Based on the [RIS format].)
