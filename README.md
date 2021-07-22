@@ -4,7 +4,7 @@ Read/write bibliographic records in [RIS format][].
 
 ## Getting Started
 
-Whether you intend to use it on Node.js or in a browser you must grab a copy of `@customcommander/ris` using your favourite Node.js package manager e.g.,
+Whether you intend to use it on Node.js or in a browser you must grab a copy of `@customcommander/ris` e.g.,
 
 ```
 npm i @customcommander/ris
@@ -15,7 +15,7 @@ npm i @customcommander/ris
 ```javascript
 const RIS = require('@customcommander/ris');
 
-RIS(`
+RIS.parser(`
 TY  - JOUR
 TI  - Foo
 ER  - 
@@ -26,9 +26,9 @@ TY  - CHAP
 TI  - Baz
 ER  - 
 `);
-//=> [ {TY: 'JOUR', TI: 'Foo'}
-//=> , {TY: 'BOOK', TI: 'Bar'}
-//=> , {TY: 'CHAP', TI: 'Baz'}]
+//=> [ {TY: ['JOUR'], TI: ['Foo']}
+//=> , {TY: ['BOOK'], TI: ['Bar']}
+//=> , {TY: ['CHAP'], TI: ['Baz']}]
 ```
 
 ### Browser
@@ -37,23 +37,40 @@ ER  -
 <script src="./node_modules/@customcommander/ris/dist/browser.min.js"></script>
 
 <script>
-RIS(`
+RIS.parser(`
 TY  - JOUR
+TI  - Foo
 ER  - 
 TY  - BOOK
+TI  - Bar
 ER  - 
 TY  - CHAP
+TI  - Baz
 ER  - 
 `);
-//=> [ {TY: 'JOUR', TI: 'Foo'}
-//=> , {TY: 'BOOK', TI: 'Bar'}
-//=> , {TY: 'CHAP', TI: 'Baz'}]
+//=> [ {TY: ['JOUR'], TI: ['Foo']}
+//=> , {TY: ['BOOK'], TI: ['Bar']}
+//=> , {TY: ['CHAP'], TI: ['Baz']}]
 </script>
 ```
 
-## Reference Types
+## How Does It Work?
 
-See [list of reference types](https://github.com/customcommander/ris/blob/master/resources/types.csv). (Based on the [RIS format].)
+The parser returns an array of objects (one per reference). Each key in an object is named after the corresponding RIS tag and holds an array containing all the entries for that tag. (Some tags can appear multiple times.)
+
+### Additional Processing
+
+Some tags like `DA` or `RP` have special formatting rules. The parser supports them but won't enforce them meaning that any content that doesn't comply is returned as is (i.e. as a string).
+
+| Tag | Content (example)       | After processing                                                              |
+|:----|:------------------------|:------------------------------------------------------------------------------|
+| DA  | 2020/06/25/             | {"year": "2020", "month": "06", "day": "25", "info": ""}                      |
+| DA  | ///                     | {"year": ""    , "month": ""  , "day": ""  , "info": ""}                      |
+| DA  | /06//                   | {"year": ""    , "month": "06", "day": ""  , "info": ""}                      |
+| DA  | 2020//25/Conf           | {"year": "2020", "month": ""  , "day": "25", "info": "Conf"}                  |
+| RP  | IN FILE                 | {"status": "IN FILE"}                                                         |
+| RP  | NOT IN FILE             | {"status": "NOT IN FILE"}                                                     |
+| RP  | ON REQUEST (06/26/2020) | {"status": "ON REQUEST","date": {"year": "2020", "month": "06", "day": "26"}} |
 
 ## Mendeley
 
@@ -77,7 +94,7 @@ ER  -
 
 **Warning:** each Mendeley reference is validated before it is returned. If one field in the reference is invalid the _entire_ reference is discarded. e.g.,
 
-In Mendeley a reference MUST have a title (TI entry in RIS) so converting this RIS record will return an empty list:
+In Mendeley a reference *MUST* have a title (`TI` entry in RIS) so converting this RIS record will return an empty list:
 
 ```javascript
 RIS.toMendeley(`
@@ -188,5 +205,10 @@ The following command will:
 make sample
 ```
 
+## Further Resources
+
+1. See my interpretation of the [RIS specification][].
+
 [RIS format]: https://en.wikipedia.org/wiki/RIS_(file_format)
 [Mendeley Reference Manager]: https://www.mendeley.com/reference-manager/
+[RIS specification]: https://gist.github.com/customcommander/74687e0b9a7829b98d62fbaf4b663efd

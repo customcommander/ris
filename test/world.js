@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const sut = require('../');
+const sut = require('..');
 
 module.exports = class {
   constructor({parameters}) {
@@ -8,8 +8,8 @@ module.exports = class {
   }
 
   async parse(str) {
-    if (!this.browser) return this.RIS(str);
-    return this.page.evaluate(str_ => RIS(str_), str);
+    if (!this.browser) return this.RIS.parser(str);
+    return this.page.evaluate(str_ => RIS.parser(str_), str);
   }
 
   async toMendeley(risContent) {

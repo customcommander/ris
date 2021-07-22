@@ -13,7 +13,7 @@ const lexer =
       , dateaccess: /DA(?=  - )/
       , reprint: /RP(?=  - )/
       , url: /UR(?=  - )/
-      , end: /ER(?=  - )/
+      , end: /ER  - ?/
       , tag: /[A-Z][A-Z0-9](?=  - )/
       , value: {match: /.+/, value: m => m.trim()}
       }

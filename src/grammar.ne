@@ -34,7 +34,17 @@ const processName = (name) => {
 }
 
 const processAccessDate = value =>
-  zip(['year', 'month', 'day', 'info'], value.split('/'));
+  (value.includes('/')
+    ? zip(['year', 'month', 'day', 'info'], value.split('/'))
+    : value);
+
+const processRP = value => {
+  const match = value.match(/^(IN FILE|NOT IN FILE|ON REQUEST)(?:\s+\((\d{2})\/(\d{2})\/(\d{4})\))?$/);
+  if (!match) return value;
+  const [, status, month, day, year] = match;
+  if (status != 'ON REQUEST') return {status};
+  return {status, date: {year, month, day}};
+};
 
 %}
 
@@ -51,7 +61,7 @@ start ->
     {% ([{value: key},,{value}]) => ({key, value}) %}
 
 end ->
-  %end %sep %value:* _
+  %end %value:* _
     {% () => null %}
 
 entry ->
@@ -82,10 +92,7 @@ reprintEntry ->
   %reprint %sep value
     {% ([{value: key},/*sep (ignored)*/, value]) =>
       ({ key
-       , value: ((value === 'IN FILE' || value === 'NOT IN FILE')
-                  ? { status: value }
-                  : { status: 'ON REQUEST'
-                    , date: from_mdy(value.match(/\d{2}\/\d{2}\/\d{4}/)[0]) })}) %}
+       , value: processRP(value)}) %}
 
 otherEntry ->
   %tag %sep value:+

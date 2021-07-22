@@ -1,13 +1,16 @@
 Feature: Mendeley
 
 Scenario Outline: RIS Types -> Mendeley Types
-  Given I convert this to Mendeley
+  When I convert this content to Mendeley
     """
     TY  - <RIS>
     TI  - Lorem ipsum
     ER  - 
     """
-  Then I will find a reference where "type" is set to "<Mendeley>"
+  Then I get this result
+    """
+    [{"type": "<Mendeley>", "title": "Lorem ipsum"}]
+    """
 
   Examples:
     | RIS     | Mendeley               |
@@ -69,7 +72,7 @@ Scenario Outline: RIS Types -> Mendeley Types
     | VIDEO   | generic                |
 
 Scenario: Generic records
-  Given I convert this to Mendeley
+  When I convert this content to Mendeley
     """
     TY  - GEN
     A1  - Author1, John1
@@ -105,9 +108,9 @@ Scenario: Generic records
     VL  - volume
     ER  - 
     """
-  Then I will get this object
+  Then I get this result
     """
-    {
+    [{
       "type": "generic",
       "abstract": "abstract",
       "accessed": "1969-07-20",
@@ -151,11 +154,11 @@ Scenario: Generic records
       "series": "series",
       "title": "title",
       "volume": "volume"
-    }
+    }]
     """
 
 Scenario: Journal records
-  Given I convert this to Mendeley
+  When I convert this content to Mendeley
     """
     TY  - JOUR
     A1  - Author1, John1
@@ -191,9 +194,9 @@ Scenario: Journal records
     VL  - volume
     ER  - 
     """
-  Then I will get this object
+  Then I get this result
     """
-    {
+    [{
       "type": "journal",
       "abstract": "abstract",
       "accessed": "1969-07-20",
@@ -237,11 +240,11 @@ Scenario: Journal records
       "series": "series",
       "title": "title",
       "volume": "volume"
-    }
+    }]
     """
 
 Scenario: Journal (full) records
-  Given I convert this to Mendeley
+  When I convert this content to Mendeley
     """
     TY  - JFULL
     A1  - Author1, John1
@@ -277,9 +280,9 @@ Scenario: Journal (full) records
     VL  - volume
     ER  - 
     """
-  Then I will get this object
+  Then I get this result
     """
-    {
+    [{
       "type": "journal",
       "abstract": "abstract",
       "accessed": "1969-07-20",
@@ -323,11 +326,11 @@ Scenario: Journal (full) records
       "series": "series",
       "title": "title",
       "volume": "volume"
-    }
+    }]
     """
 
 Scenario: Patent records
-  Given I convert this to Mendeley
+  When I convert this content to Mendeley
     """
     TY  - PAT
     A1  - Author1, John1
@@ -365,9 +368,9 @@ Scenario: Patent records
     VL  - volume
     ER  - 
     """
-  Then I will get this object
+  Then I get this result
     """
-    {
+    [{
       "type": "patent",
       "abstract": "abstract",
       "accessed": "1969-07-20",
@@ -413,11 +416,11 @@ Scenario: Patent records
       "series": "series",
       "title": "title",
       "volume": "volume"
-    }
+    }]
     """
 
 Scenario: Report records
-  Given I convert this to Mendeley
+  When I convert this content to Mendeley
     """
     TY  - RPRT
     A1  - Author1, John1
@@ -453,9 +456,9 @@ Scenario: Report records
     VL  - volume
     ER  - 
     """
-  Then I will get this object
+  Then I get this result
     """
-    {
+    [{
       "type": "report",
       "abstract": "abstract",
       "accessed": "1969-07-20",
@@ -499,7 +502,7 @@ Scenario: Report records
       "series": "series",
       "title": "title",
       "series_number": "volume"
-    }
+    }]
     """
 
 
@@ -508,14 +511,17 @@ Scenario: Report records
 # and expensive to do.
 @browser
 Scenario Outline: Validate Mendeley documents
-  Given I convert this to Mendeley
+  When I convert this content to Mendeley
     """
     TY  - GEN
     TI  - Title is mandatory
     <key>  - <value>
     ER  - 
     """
-  Then I will get a list of 0 references
+  Then I get this result
+    """
+    []
+    """
 
   Examples:
     | key | value                        |
@@ -528,7 +534,7 @@ Scenario Outline: Validate Mendeley documents
 
 @browser
 Scenario: Mendeley references can be exported to RIS
-  Given I convert this from Mendeley
+  When I convert this content from Mendeley
     """
     [ { "type": "journal"
       , "title": "lorem ipsum"
@@ -553,7 +559,7 @@ Scenario: Mendeley references can be exported to RIS
       }
     ]
     """
-  Then I will get this RIS file
+  Then I get this result
     """
     TY  - JOUR
     TI  - lorem ipsum
@@ -576,15 +582,14 @@ Scenario: Mendeley references can be exported to RIS
 
 @browser
 Scenario: Invalid Mendeley references are ignored
-  Given I convert this from Mendeley
+  When I convert this content from Mendeley
     """
     [ {"type": "journal", "title": "lorem ipsum", "year": "not a number"}
     , {"type": "journal", "title": "additional fields not allowed", "answer": 42}
     , {"type": "foobarx", "title": "not a valid title"}
-    , {"type": "journal", "title": "this works"}
-    ]
+    , {"type": "journal", "title": "this works"}]
     """
-  Then I will get this RIS file
+  Then I get this result
     """
     TY  - JOUR
     TI  - this works
