@@ -7,25 +7,10 @@ sample: src/grammar.js resources/dev.ris
 	cat resources/dev.ris | yarn -s nearley-test -q src/grammar.js | tee out.txt
 
 parse: src/grammar.js
-	node -p -e 'const fs = require("fs"); const parse = require("./src/index"); console.log(JSON.stringify(parse(fs.readFileSync("./resources/dev.ris","utf-8")), null, 2));'
+	node -p -e 'const fs = require("fs"); const parse = require("./src/index").parser; console.log(JSON.stringify(parse(fs.readFileSync("./resources/dev.ris","utf-8")), null, 2));'
 
 src/grammar.js: src/grammar.ne src/lexer.js
 	yarn -s nearleyc $< > $@
-
-resources/all.ris: resources/all.jq resources/all.json
-	jq -M -S -r -f $^ > $@
-
-resources/fields-map.csv: resources/fields-map.jq resources/fields-map.json
-	jq -M -S -r -f $^ > $@
-
-resources/fields.csv: resources/fields.jq resources/fields.json
-	jq -M -r -f $^ > $@
-
-resources/full.ris: resources/full.jq  resources/fields-map.json
-	jq -M -r -f $^ > $@
-
-resources/types.csv: resources/types.jq resources/type-map.json
-	jq -M -r -f $^ > $@
 
 /tmp/ris.test: dist $(shell find test -type f)
 	yarn cucumber-js --require 'test/*.js' --world-parameters '{"browser": false}' test/features

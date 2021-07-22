@@ -155,16 +155,16 @@ module.exports.to = risText => parser(risText).reduce((arr, ris) => {
 
     if (k.endsWith('[]')) {
       let sym = k.slice(0, -2); // e.g. 'authors[]' -> 'authors'
-      obj[sym] = (obj[sym] || []).concat(Array.isArray(rval) ? rval.map(fn) : fn(rval));
+      obj[sym] = (obj[sym] || []).concat(rval.map(fn));
     } else if (k.includes('.')) {
       let [root, child] = k.split('.'); // e.g. 'identifiers.doi' -> ['identifiers', 'doi']
       obj[root] = obj[root] || {};
-      obj[root][child] = fn(rval);
+      obj[root][child] = fn(rval[0]);
     } else if (k.endsWith('+')) {
       let sym = k.slice(0, -1); // e.g. 'notes+' -> 'notes'
-      obj[sym] = sym in obj ? `${obj[sym]}\n${fn(rval)}` : fn(rval);
+      obj[sym] = sym in obj ? `${obj[sym]}\n${fn(rval[0])}` : fn(rval[0]);
     } else {
-      obj[k] = fn(rval);
+      obj[k] = fn(rval[0]);
     }
 
     return obj;

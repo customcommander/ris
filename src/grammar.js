@@ -33,7 +33,17 @@ const processName = (name) => {
 }
 
 const processAccessDate = value =>
-  zip(['year', 'month', 'day', 'info'], value.split('/'));
+  (value.includes('/')
+    ? zip(['year', 'month', 'day', 'info'], value.split('/'))
+    : value);
+
+const processRP = value => {
+  const match = value.match(/^(IN FILE|NOT IN FILE|ON REQUEST)(?:\s+\((\d{2})\/(\d{2})\/(\d{4})\))?$/);
+  if (!match) return value;
+  const [, status, month, day, year] = match;
+  if (status != 'ON REQUEST') return {status};
+  return {status, date: {year, month, day}};
+};
 
 var grammar = {
     Lexer: lexer,
@@ -54,7 +64,7 @@ var grammar = {
     {"name": "start", "symbols": [(lexer.has("type") ? {type: "type"} : type), (lexer.has("sep") ? {type: "sep"} : sep), (lexer.has("value") ? {type: "value"} : value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value: key},,{value}]) => ({key, value})},
     {"name": "end$ebnf$1", "symbols": []},
     {"name": "end$ebnf$1", "symbols": ["end$ebnf$1", (lexer.has("value") ? {type: "value"} : value)], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "end", "symbols": [(lexer.has("end") ? {type: "end"} : end), (lexer.has("sep") ? {type: "sep"} : sep), "end$ebnf$1", "_"], "postprocess": () => null},
+    {"name": "end", "symbols": [(lexer.has("end") ? {type: "end"} : end), "end$ebnf$1", "_"], "postprocess": () => null},
     {"name": "entry", "symbols": ["personEntry"], "postprocess": id},
     {"name": "entry", "symbols": ["urlEntry"], "postprocess": id},
     {"name": "entry", "symbols": ["dateaccessEntry"], "postprocess": id},
@@ -72,10 +82,7 @@ var grammar = {
          , value: processAccessDate(value)}) },
     {"name": "reprintEntry", "symbols": [(lexer.has("reprint") ? {type: "reprint"} : reprint), (lexer.has("sep") ? {type: "sep"} : sep), "value"], "postprocess":  ([{value: key},/*sep (ignored)*/, value]) =>
         ({ key
-         , value: ((value === 'IN FILE' || value === 'NOT IN FILE')
-                    ? { status: value }
-                    : { status: 'ON REQUEST'
-                      , date: from_mdy(value.match(/\d{2}\/\d{2}\/\d{4}/)[0]) })}) },
+         , value: processRP(value)}) },
     {"name": "otherEntry$ebnf$1", "symbols": ["value"]},
     {"name": "otherEntry$ebnf$1", "symbols": ["otherEntry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "otherEntry", "symbols": [(lexer.has("tag") ? {type: "tag"} : tag), (lexer.has("sep") ? {type: "sep"} : sep), "otherEntry$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join(' ')})},
