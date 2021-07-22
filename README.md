@@ -1,3 +1,7 @@
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/customcommander/ris/continuous%20integration)
+![npm (scoped)](https://img.shields.io/npm/v/@customcommander/ris)
+![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@customcommander/ris)
+
 # RIS
 
 Read/write bibliographic records in [RIS format][].
