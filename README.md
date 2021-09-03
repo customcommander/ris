@@ -169,7 +169,7 @@ Dependending on their types some entries will be mapped to different fields in M
 | STAT     | TY        | type (as *statute*)                |
 | THES     | TY        | type (as *thesis*)                 |
 | UNPB     | TY        | type (as *working_paper*)          |
-| *others* | TY        | generic                            |
+| *others* | TY        | type (as *generic*)                |
 | *any*    | UR        | websites                           |
 | *any*    | VL        | volume                             |
 | RPRT     | VL        | series_number                      |
