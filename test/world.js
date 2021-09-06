@@ -12,6 +12,11 @@ module.exports = class {
     return this.page.evaluate(str_ => RIS.parser(str_), str);
   }
 
+  async write(arr) {
+    if (!this.browser) return this.RIS.write(arr);
+    return this.page.evaluate(arr_ => RIS.write(arr_), arr);
+  }
+
   async toMendeley(risContent) {
     if (!this.browser) return this.RIS.toMendeley(risContent);
     return this.page.evaluate(risContent_ => RIS.toMendeley(risContent_), risContent);
