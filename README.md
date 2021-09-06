@@ -17,9 +17,9 @@ npm i @customcommander/ris
 ### Node.js
 
 ```javascript
-const RIS = require('@customcommander/ris');
+const {parser} = require('@customcommander/ris');
 
-RIS.parser(`
+parser(`
 TY  - JOUR
 TI  - Foo
 ER  - 
@@ -75,6 +75,99 @@ Some tags like `DA` or `RP` have special formatting rules. The parser supports t
 | RP  | IN FILE                 | {"status": "IN FILE"}                                                         |
 | RP  | NOT IN FILE             | {"status": "NOT IN FILE"}                                                     |
 | RP  | ON REQUEST (06/26/2020) | {"status": "ON REQUEST","date": {"year": "2020", "month": "06", "day": "26"}} |
+
+### Writing RIS formatted content
+
+The library exposes a `write` function that takes an input of the same type than the output of the `parser` function.
+
+```javascript
+write([ { "TY": ["JOUR"]
+        , "TI": ["Hello World!"]}
+
+      , { "TY": ["JOUR"]
+        , "TI": ["Apollo 11"]
+        , "DA": [{ "year": "1969"
+                 , "month": "07"
+                 , "day": "20"
+                 , "info": "Moon"}]}]);
+// => TY  - JOUR
+// => TI  - Hello World!
+// => ER  - 
+// =>
+// => TY  - JOUR
+// => TI  - Apollo 11
+// => DA  - 1969/07/20/Moon
+// => ER  - 
+// =>
+```
+
+If the input isn't an array an empty string is returned. Each element is validated first and skipped if not valid so it is possible to get an empty string even with a non-empty array.
+
+Each element **must** be a key/value pairs object:
+
+- Each key **must** be a two-letter capital word. The second letter *may* be a number.
+- Each value **must** be an array of at least one non-empty string.
+
+Some keys have additional rules.
+
+#### TY
+
+This is the only **required** key. Must be set to an array of exactly one non-empty string e.g.,
+
+```javascript
+{ "TY": [ "JOUR" ] }
+```
+
+#### DA
+
+Must be set to an array of exactly one element which can be either a non-empty string or an object e.g.,
+
+```javascript
+{ "TY": [ "JOUR" ]
+, "DA": [ "1969/07/20/Moon" ] }
+
+// or
+
+{ "TY": [ "JOUR" ]
+, "DA": [ { "year":  "<non-empty string>" /* Required. */
+          , "month": "<non-empty string>" /* Optional. */
+          , "day":   "<non-empty string>" /* Optional. */
+          , "info":  "<non-empty string>" /* Optional. */}]}
+```
+
+#### AU, A1, A2, A3, A4 & TA
+
+In addition to non-empty strings, arrays for these keys can also have objects e.g.,
+
+```javascript
+{ "TY": [ "JOUR" ]
+, "AU": [ "Doe, John"
+        , { "last_name":  "<non-empty string>" /* Required. */
+          , "first_name": "<non-empty string>" /* Optional. */
+          , "initials":   "<non-empty string>" /* Optional. */
+          , "suffix":     "<non-empty string>" /* Optional. */}]}
+```
+
+#### RP
+
+Must be set to an array of exactly one element which can be either a non-empty string or an object e.g.,
+
+```javascript
+{ "TY": [ "JOUR" ]
+, "RP": ["<non-empy string>"] }
+
+// or
+
+{ "TY": [ "JOUR" ]
+, "RP": [{ "status": "<non-empty string>" /* Required. */
+         , "year":   "<non-empty string>" /* Optional. */
+         , "month":  "<non-empty string>" /* Optional. */
+         , "day":    "<non-empty string>" /* Optional. */}] }
+```
+
+#### ER
+
+This is the only **reserved** tag. Any value will be **ignored**.
 
 ## Mendeley
 

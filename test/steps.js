@@ -17,6 +17,11 @@ defineStep('I get the result as shown in {word}.json', function (file) {
   assert.deepStrictEqual(this.res, content);
 });
 
+defineStep('I convert this content', async function (json) {
+  const input = JSON.parse(json);
+  this.res = await this.write(input);
+});
+
 defineStep('I convert this content to Mendeley', async function (risContent) {
   this.res = await this.toMendeley(risContent);
 });
