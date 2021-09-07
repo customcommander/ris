@@ -7,6 +7,7 @@ const Ajv = require('ajv');
 const ajvFormats = require('ajv-formats');
 const schema = require('./mendeley.schema.json');
 const parser = require('./parser');
+const write = require('./write');
 
 const name = ({last_name, first_name}) => ({last_name, first_name});
 const ymd = ({year, month, day}) => `${year}-${month}-${day}`;
@@ -184,20 +185,25 @@ module.exports.to = risText => parser(risText).reduce((arr, ris) => {
  *****************************************************************************/
 
 
+const ris_entry = fn => k => (ris, v) => {
+  const v2 = fn(v);
+  if (v2 != null) {
+    if (!ris[k]) ris[k] = [];
+    ris[k].push(v2)
+  };
+}
 
-const ris_copy = (field, value) => `${field}  - ${value}\n`;
-const ris_eor = () => 'ER  - \n';
-const ris_ignore = () => '';
+const ris_copy = ris_entry(v => v);
+
+const ris_ignore = ris => ris;
 
 const ris_name =
-  (field, {last_name, first_name}) =>
+  ris_entry(({last_name, first_name}) =>
     (first_name
-      ? ris_copy(field, `${last_name}, ${first_name}`)
-      : ris_copy(field, last_name));
+      ? `${last_name}, ${first_name}`
+      : last_name));
 
-const ris_dateaccess =
-  (field, value) =>
-    ris_copy(field, value.replace(/-/g, '/'));
+const ris_dateaccess = ris_entry(v => v.replace(/-/g, '/'));
 
 const typeMendeleyToRIS =
   { "bill":                   "BILL"
@@ -221,11 +227,7 @@ const typeMendeleyToRIS =
   , "thesis":                 "THES"
   , "working_paper":          "UNPB" };
 
-const ris_type =
-  (field, value) =>
-    ( value in typeMendeleyToRIS
-        ? ris_copy(field, typeMendeleyToRIS[value])
-        : ris_copy(field, "GEN"));
+const ris_type = ris_entry(v => typeMendeleyToRIS[v] || "GEN");
 
 
 /*
@@ -241,97 +243,87 @@ are certain fields that need to be converted.
 For example names in Mendeley are objects e.g. {last_name: 'Doe', first_name: 'John'}
 which need to be converted to a string in RIS e.g. 'Doe, John'.
 
-There isn't an obvious RIS equivalent for some of the Mendeley fields.
-Those are assigned a fake `??` RIS entry type and are simply ignored.
+There isn't an obvious RIS equivalent for some
+of the Mendeley fields and those are simply ignored.
 We want to keep them in this map so that we know which fields in Mendeley
 won't be exported into RIS. (Also maybe one day some of these fields can be
 assigned to actual RIS fields.) */
 
-const mapFrom =
-  { "abstract":                  ["AB", ris_copy       ]
-  , "accessed":                  ["DA", ris_dateaccess ]
-  , "authors":                   ["AU", ris_name       ]
-  , "chapter":                   ["SE", ris_copy       ]
-  , "citation_key":              ["??", ris_ignore     ]
-  , "city":                      ["CY", ris_copy       ]
-  , "code":                      ["??", ris_ignore     ]
-  , "country":                   ["??", ris_ignore     ]
-  , "department":                ["??", ris_ignore     ]
-  , "edition":                   ["ET", ris_copy       ]
-  , "editors":                   ["A2", ris_name       ]
-  , "genre":                     ["??", ris_ignore     ]
-  , "identifiers.arxiv":         ["??", ris_ignore     ]
-  , "identifiers.doi":           ["DO", ris_copy       ]
-  , "identifiers.isbn":          ["SN", ris_copy       ]
-  , "identifiers.issn":          ["SN", ris_copy       ]
-  , "identifiers.pii":           ["??", ris_ignore     ]
-  , "identifiers.pmid":          ["AN", ris_copy       ]
-  , "identifiers.pui":           ["??", ris_ignore     ]
-  , "identifiers.scopus":        ["??", ris_ignore     ]
-  , "identifiers.sgr":           ["??", ris_ignore     ]
-  , "institution":               ["AU", ris_copy       ]
-  , "issue":                     ["IS", ris_copy       ]
-  , "keywords":                  ["KW", ris_copy       ]
-  , "language":                  ["LA", ris_copy       ]
-  , "medium":                    ["M3", ris_copy       ]
-  , "notes":                     ["RN", ris_copy       ]
-  , "pages":                     ["SP", ris_copy       ]
-  , "patent_application_number": ["M1", ris_copy       ]
-  , "patent_legal_status":       ["C6", ris_copy       ]
-  , "patent_owner":              ["??", ris_ignore     ]
-  , "publisher":                 ["PB", ris_copy       ]
-  , "reprint_edition":           ["??", ris_ignore     ]
-  , "revision":                  ["??", ris_ignore     ]
-  , "series":                    ["T3", ris_copy       ]
-  , "series_editor":             ["AU", ris_copy       ]
-  , "series_number":             ["VL", ris_copy       ]
-  , "short_title":               ["ST", ris_copy       ]
-  , "source":                    ["T2", ris_copy       ]
-  , "source_type":               ["??", ris_ignore     ]
-  , "tags":                      ["LB", ris_copy       ]
-  , "title":                     ["TI", ris_copy       ]
-  , "translators":               ["TA", ris_name       ]
-  , "type":                      ["TY", ris_type       ]
-  , "user_context":              ["??", ris_ignore     ]
-  , "volume":                    ["VL", ris_copy       ]
-  , "websites":                  ["UR", ris_copy       ]
-  , "year":                      ["PY", ris_copy       ]};
+const map_from =
+  { "abstract":                  ris_copy("AB")
+  , "accessed":                  ris_dateaccess("DA")
+  , "authors":                   ris_name("AU")
+  , "chapter":                   ris_copy("SE")
+  , "citation_key":              ris_ignore
+  , "city":                      ris_copy("CY")
+  , "code":                      ris_ignore
+  , "country":                   ris_ignore
+  , "department":                ris_ignore
+  , "edition":                   ris_copy("ET")
+  , "editors":                   ris_name("A2")
+  , "genre":                     ris_ignore
+  , "identifiers.arxiv":         ris_ignore
+  , "identifiers.doi":           ris_copy("DO")
+  , "identifiers.isbn":          ris_copy("SN")
+  , "identifiers.issn":          ris_copy("SN")
+  , "identifiers.pii":           ris_ignore
+  , "identifiers.pmid":          ris_copy("AN")
+  , "identifiers.pui":           ris_ignore
+  , "identifiers.scopus":        ris_ignore
+  , "identifiers.sgr":           ris_ignore
+  , "institution":               ris_copy("AU")
+  , "issue":                     ris_copy("IS")
+  , "keywords":                  ris_copy("KW")
+  , "language":                  ris_copy("LA")
+  , "medium":                    ris_copy("M3")
+  , "notes":                     ris_copy("RN")
+  , "pages":                     ris_copy("SP")
+  , "patent_application_number": ris_copy("M1")
+  , "patent_legal_status":       ris_copy("C6")
+  , "patent_owner":              ris_ignore
+  , "publisher":                 ris_copy("PB")
+  , "reprint_edition":           ris_ignore
+  , "revision":                  ris_ignore
+  , "series":                    ris_copy("T3")
+  , "series_editor":             ris_copy("AU")
+  , "series_number":             ris_copy("VL")
+  , "short_title":               ris_copy("ST")
+  , "source":                    ris_copy("T2")
+  , "source_type":               ris_ignore
+  , "tags":                      ris_copy("LB")
+  , "title":                     ris_copy("TI")
+  , "translators":               ris_name("TA")
+  , "type":                      ris_type("TY")
+  , "user_context":              ris_ignore
+  , "volume":                    ris_copy("VL")
+  , "websites":                  ris_copy("UR")
+  , "year":                      ris_copy("PY")};
 
 /*
 Transform a Mendeley reference into a RIS record.
 See mendeley.schema.json
 */
-const ris_record = ref => {
-  const rec = Object.entries(ref).reduce((ris, [mk, mv/*Mendeley key & value*/]) => {
-    let rk; //RIS key
-    let rv; //RIS value
-    if (mk == "identifiers") {
-      let {arxiv, doi, isbn, issn, pii, pmid, pui, scopus, sgr} = mv;
-      [rk, rv] = mapFrom['identifiers.arxiv' ]; ris += arxiv  ? rv(rk, arxiv)  : '';
-      [rk, rv] = mapFrom['identifiers.doi'   ]; ris += doi    ? rv(rk, doi)    : '';
-      [rk, rv] = mapFrom['identifiers.isbn'  ]; ris += isbn   ? rv(rk, isbn)   : '';
-      [rk, rv] = mapFrom['identifiers.issn'  ]; ris += issn   ? rv(rk, issn)   : '';
-      [rk, rv] = mapFrom['identifiers.pii'   ]; ris += pii    ? rv(rk, pii)    : '';
-      [rk, rv] = mapFrom['identifiers.pmid'  ]; ris += pmid   ? rv(rk, pmid)   : '';
-      [rk, rv] = mapFrom['identifiers.pui'   ]; ris += pui    ? rv(rk, pui)    : '';
-      [rk, rv] = mapFrom['identifiers.scopus']; ris += scopus ? rv(rk, scopus) : '';
-      [rk, rv] = mapFrom['identifiers.sgr'   ]; ris += sgr    ? rv(rk, sgr)    : '';
-    } else if (Array.isArray(mv)) {
-      [rk, rv] = mapFrom[mk];
-      ris += mv.map(x => rv(rk, x)).join('');
-    } else {
-      [rk, rv] = mapFrom[mk];
-      ris += rv(rk, mv);
-    }
-    return ris;
-  }, '');
-  if (!rec) return '';
-  return rec + ris_eor();
-};
+const ris_record = ref => Object.entries(ref).reduce((ris, [mk, mv]) => {
+  if (mk == "identifiers") {
+    let {arxiv, doi, isbn, issn, pii, pmid, pui, scopus, sgr} = mv;
+    map_from['identifiers.arxiv' ](ris, arxiv);
+    map_from['identifiers.doi'   ](ris, doi);
+    map_from['identifiers.isbn'  ](ris, isbn);
+    map_from['identifiers.issn'  ](ris, issn);
+    map_from['identifiers.pii'   ](ris, pii);
+    map_from['identifiers.pmid'  ](ris, pmid);
+    map_from['identifiers.pui'   ](ris, pui);
+    map_from['identifiers.scopus'](ris, scopus);
+    map_from['identifiers.sgr'   ](ris, sgr);
+  } else if (Array.isArray(mv)) {
+    mv.forEach(v => map_from[mk](ris, v));
+  } else {
+    map_from[mk](ris, mv);
+  }
+  return ris;
+}, {});
 
-module.exports.from =
-  references =>
-    references.reduce((ris, ref) =>
-      ( validate(ref)
-          ? ris + ris_record(ref)
-          : ris), '');
+module.exports.from = references => {
+  if (!Array.isArray(references)) return '';
+  return write(references.flatMap(ref => validate(ref) === true ? [ris_record(ref)] : []));
+}

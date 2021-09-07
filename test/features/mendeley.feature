@@ -563,19 +563,19 @@ Scenario: Mendeley references can be exported to RIS
     """
     TY  - JOUR
     TI  - lorem ipsum
+    A2  - Foo, Bar
+    AN  - pmid123
     AU  - Doe
     AU  - Doe, Jane
-    A2  - Foo, Bar
+    AU  - University123
     DA  - 2021/05/09
-    UR  - https://example.com/1
-    UR  - https://example.com/2
-    UR  - https://example.com/3
+    DO  - doi123
     KW  - abc
     KW  - def
     KW  - ghi
-    AU  - University123
-    DO  - doi123
-    AN  - pmid123
+    UR  - https://example.com/1
+    UR  - https://example.com/2
+    UR  - https://example.com/3
     ER  - 
 
     """
