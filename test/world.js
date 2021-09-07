@@ -7,9 +7,9 @@ module.exports = class {
     this.RIS = sut;
   }
 
-  async parse(str) {
-    if (!this.browser) return this.RIS.parser(str);
-    return this.page.evaluate(str_ => RIS.parser(str_), str);
+  async read(str) {
+    if (!this.browser) return this.RIS.read(str);
+    return this.page.evaluate(str_ => RIS.read(str_), str);
   }
 
   async write(arr) {
