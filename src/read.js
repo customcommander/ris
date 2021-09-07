@@ -20,7 +20,7 @@ const process_ast =
             )
       );
 
-const parse = text => {
+module.exports = text => {
   const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
   parser.feed(text);
   if (parser.results.length != 1) {
@@ -33,5 +33,3 @@ const parse = text => {
   }
   return process_ast(parser.results[0]);
 };
-
-module.exports = parse;

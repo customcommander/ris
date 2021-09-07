@@ -6,7 +6,7 @@
 const Ajv = require('ajv');
 const ajvFormats = require('ajv-formats');
 const schema = require('./mendeley.schema.json');
-const parser = require('./parser');
+const read = require('./read');
 const write = require('./write');
 
 const name = ({last_name, first_name}) => ({last_name, first_name});
@@ -141,7 +141,7 @@ const map = {
   'VL':       ['volume'                                    ]
 };
 
-module.exports.to = risText => parser(risText).reduce((arr, ris) => {
+module.exports.to = risText => read(risText).reduce((arr, ris) => {
   const mdly = Object.entries(ris).reduce((obj, [rkey, rval]) => {
 
     const [k, v] = (  map[`${rkey}.${ris.TY}`]

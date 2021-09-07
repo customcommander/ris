@@ -17,9 +17,9 @@ npm i @customcommander/ris
 ### Node.js
 
 ```javascript
-const {parser} = require('@customcommander/ris');
+const {read} = require('@customcommander/ris');
 
-parser(`
+read(`
 TY  - JOUR
 TI  - Foo
 ER  - 
@@ -41,7 +41,7 @@ ER  -
 <script src="./node_modules/@customcommander/ris/dist/browser.min.js"></script>
 
 <script>
-RIS.parser(`
+RIS.read(`
 TY  - JOUR
 TI  - Foo
 ER  - 
@@ -60,7 +60,7 @@ ER  -
 
 ## How Does It Work?
 
-The parser returns an array of objects (one per reference). Each key in an object is named after the corresponding RIS tag and holds an array containing all the entries for that tag. (Some tags can appear multiple times.)
+The `read` function returns an array of objects (one per reference). Each key in an object is named after the corresponding RIS tag and holds an array containing all the entries for that tag. (Some tags can appear multiple times.)
 
 ### Additional Processing
 
@@ -78,7 +78,7 @@ Some tags like `DA` or `RP` have special formatting rules. The parser supports t
 
 ### Writing RIS formatted content
 
-The library exposes a `write` function that takes an input of the same type than the output of the `parser` function.
+The library exposes a `write` function that takes an input of the same type than the output of the `read` function.
 
 ```javascript
 write([ { "TY": ["JOUR"]

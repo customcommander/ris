@@ -4,12 +4,12 @@ const assert = require('assert').strict;
 const { defineStep } = require('@cucumber/cucumber');
 
 defineStep('I parse this content', async function (ris) {
-  this.res = await this.parse(ris);
+  this.res = await this.read(ris);
 });
 
 defineStep('I parse the content of {word}.ris', async function (file) {
   const content = fs.readFileSync(path.join(__dirname, 'samples', `${file}.ris`), 'utf-8');
-  this.res = await this.parse(content);
+  this.res = await this.read(content);
 });
 
 defineStep('I get the result as shown in {word}.json', function (file) {
