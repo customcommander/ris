@@ -80,3 +80,8 @@ module.exports = inp => {
     return write((out ? out + '\n' : out), r);
   }, '');
 };
+
+module.exports.entry = (k, fn) => (o, v) => {
+  if (o[k] == null) o[k] = [];
+  o[k].push(fn(v));
+}
