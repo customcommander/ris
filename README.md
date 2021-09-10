@@ -8,8 +8,6 @@ Read/write bibliographic records in [RIS format][].
 
 ## Getting Started
 
-Whether you intend to use it on Node.js or in a browser you must grab a copy of `@customcommander/ris` e.g.,
-
 ```
 npm i @customcommander/ris
 ```
@@ -58,13 +56,13 @@ ER  -
 </script>
 ```
 
-## How Does It Work?
+## Reading RIS
 
-The `read` function returns an array of objects (one per reference). Each key in an object is named after the corresponding RIS tag and holds an array containing all the entries for that tag. (Some tags can appear multiple times.)
+The `read` function returns an array of objects (one per reference). Each key in an object is named after the corresponding RIS tag and holds the values for each entry for that tag. (Some tags can appear multiple times.)
 
 ### Additional Processing
 
-Some tags like `DA` or `RP` have special formatting rules. The parser supports them but won't enforce them meaning that any content that doesn't comply is returned as is (i.e. as a string).
+Some tags like `DA` or `RP` have special formatting rules. The parser supports them but won't enforce them meaning that any content that doesn't comply is returned as is.
 
 | Tag | Content (example)       | After processing                                                              |
 |:----|:------------------------|:------------------------------------------------------------------------------|
@@ -76,7 +74,7 @@ Some tags like `DA` or `RP` have special formatting rules. The parser supports t
 | RP  | NOT IN FILE             | {"status": "NOT IN FILE"}                                                     |
 | RP  | ON REQUEST (06/26/2020) | {"status": "ON REQUEST","date": {"year": "2020", "month": "06", "day": "26"}} |
 
-### Writing RIS formatted content
+### Writing RIS
 
 The library exposes a `write` function that takes an input of the same type than the output of the `read` function.
 
@@ -170,6 +168,8 @@ Must be set to an array of exactly one element which can be either a non-empty s
 This is the only **reserved** tag. Any value will be **ignored**.
 
 ## Mendeley
+
+### Generate Mendeley References From RIS
 
 Bibliographic records in [RIS format] can be converted to Mendeley references:
 
@@ -267,7 +267,7 @@ Dependending on their types some entries will be mapped to different fields in M
 | *any*    | VL        | volume                             |
 | RPRT     | VL        | series_number                      |
 
-### From Mendeley to RIS
+### Generate RIS From Mendeley References
 
 It is also possible to generate RIS records from Mendeley references: (using the above table)
 
