@@ -3,7 +3,7 @@ Feature: Can generate RIS content
 @browser
 Rule: Input is validated
 
-  Example: Return null when input is not an array
+  Example: Skip input if not an array
     When I convert this content
       """
       42
@@ -30,7 +30,7 @@ Rule: Input is validated
       , {"TY": "not an array"}
       , {"TY": []}
       , {"TY": ["foo", "bar"]}
-      , {"TY": ["   ", "   "]}]
+      , {"TY": ["   "]}]
       """
     Then I get this result
       """
@@ -73,7 +73,7 @@ Rule: Output is formatted
 
       """
 
-  Example: User-define ER entries are ignored
+  Example: User-defined ER entries are ignored
     When I convert this content
       """
       [{"TY": ["JOUR"], "ER": ["foo"]}]
