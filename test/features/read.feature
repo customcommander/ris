@@ -1,4 +1,4 @@
-Feature: RIS Parser
+Feature: Reading RIS
 
 Rule: References may or may not be grouped together
 
