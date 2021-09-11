@@ -1,6 +1,6 @@
-Feature: Can generate RIS content
-
 @browser
+Feature: Writing RIS entries
+
 Rule: Input is validated
 
   Example: Skip input if not an array
@@ -133,125 +133,6 @@ Rule: Output is formatted
       Z2  - DDD
       Z2  - EEE
       Z2  - FFF
-      ER  - 
-
-      """
-
-  Example: AU, A1, A2, A3, A4 & TA
-    When I convert this content
-      """
-      [ {"TY": ["JOUR"], "AU": ["John", { "last_name": "Doe"
-                                        , "first_name": "John"
-                                        , "initials": "J.J."
-                                        , "suffix": "Sr"}]}
-
-      , {"TY": ["JOUR"], "A1": ["John", { "last_name": "Doe"
-                                        , "initials": "J.J."
-                                        , "suffix": "Sr"}]}
-
-      , {"TY": ["JOUR"], "A2": ["John", { "last_name": "Doe"
-                                        , "first_name": "John"
-                                        , "suffix": "Sr"}]}
-
-      , {"TY": ["JOUR"], "A3": ["John", { "last_name": "Doe"
-                                        , "first_name": "John"}]}
-
-      , {"TY": ["JOUR"], "A4": ["John", { "last_name": "Doe"
-                                        , "suffix": "Sr"}]}
-
-      , {"TY": ["JOUR"], "TA": ["John", {"last_name": "Doe"}]}]
-      """
-    Then I get this result
-      """
-      TY  - JOUR
-      AU  - John
-      AU  - Doe, John J.J., Sr
-      ER  - 
-      
-      TY  - JOUR
-      A1  - John
-      A1  - Doe, J.J., Sr
-      ER  - 
-
-      TY  - JOUR
-      A2  - John
-      A2  - Doe, John, Sr
-      ER  - 
-
-      TY  - JOUR
-      A3  - John
-      A3  - Doe, John
-      ER  - 
-
-      TY  - JOUR
-      A4  - John
-      A4  - Doe, Sr
-      ER  - 
-
-      TY  - JOUR
-      TA  - John
-      TA  - Doe
-      ER  - 
-
-      """
-
-  Example: DA
-    When I convert this content
-      """
-      [ {"TY": ["JOUR"], "DA": ["1969"]}
-      , {"TY": ["JOUR"], "DA": [{"year": "1969", "month": "07", "day": "20", "info": "Moon"}]}
-      , {"TY": ["JOUR"], "DA": [{"year": "1969", "month": "07",              "info": "Moon"}]}
-      , {"TY": ["JOUR"], "DA": [{"year": "1969",                             "info": "Moon"}]}
-      , {"TY": ["JOUR"], "DA": [{"year": "1969"                                            }]}]
-      """
-    Then I get this result
-      """
-      TY  - JOUR
-      DA  - 1969
-      ER  - 
-      
-      TY  - JOUR
-      DA  - 1969/07/20/Moon
-      ER  - 
-
-      TY  - JOUR
-      DA  - 1969/07//Moon
-      ER  - 
-
-      TY  - JOUR
-      DA  - 1969///Moon
-      ER  - 
-
-      TY  - JOUR
-      DA  - 1969///
-      ER  - 
-
-      """
-
-  Example: RP
-    When I convert this content
-      """
-      [ {"TY": ["JOUR"], "RP": ["IN FILE"]}
-      , {"TY": ["JOUR"], "RP": [{"status": "IN FILE"}]}
-      , {"TY": ["JOUR"], "RP": [{"status": "NOT IN FILE"}]}
-      , {"TY": ["JOUR"], "RP": [{"status": "ON REQUEST", "year": "1969", "month": "07", "day": "20"}]}]
-      """
-    Then I get this result
-      """
-      TY  - JOUR
-      RP  - IN FILE
-      ER  - 
-      
-      TY  - JOUR
-      RP  - IN FILE
-      ER  - 
-
-      TY  - JOUR
-      RP  - NOT IN FILE
-      ER  - 
-
-      TY  - JOUR
-      RP  - ON REQUEST (07/20/1969)
       ER  - 
 
       """
