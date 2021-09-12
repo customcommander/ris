@@ -63,3 +63,46 @@ Rule: Accept any tags as long as they are correctly formatted
       """
       [{"TY": ["WHATEVER"], "XX": ["whatever1"], "ZZ": ["whatever2"]}]
       """
+
+Rule: Return null when content does not follow the RIS format
+
+  Example: No ER tag
+    When I parse this content
+      """
+      TY  - JOUR
+      TI  - Some title
+      """
+    Then I get this result
+      """
+      null
+      """
+
+  Example: Incorrect RIS tags
+    When I parse this content
+      """
+      TY  - JOUR
+      11  - RIS tags cannot start with a number
+      aa  - RIS tags must be uppercase
+      foobar  - RIS tags must not exceed two characters
+      ER  - 
+      """
+    Then I get this result
+      """
+      null
+      """
+
+  Example: Incorrect format (tag not followed by two spaces)
+    When I parse this content
+      """
+      TY - JOUR
+      TI - Some title
+      ER - 
+      """
+
+  Example: Incorrect format (no space after separator)
+    When I parse this content
+      """
+      TY  -JOUR
+      TI  -Some title
+      ER  -
+      """
