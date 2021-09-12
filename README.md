@@ -174,7 +174,7 @@ This is the only **reserved** tag. Any value will be **ignored**.
 Bibliographic records in [RIS format] can be converted to Mendeley references:
 
 ```javascript
-RIS.toMendeley(`
+toMendeley(`
 TY  - JOUR
 TI  - Mission to the Moon
 AU  - Armstrong, Neil
@@ -187,25 +187,9 @@ ER  -
 //=>  , title: 'Mission to the Moon' }]
 ```
 
-**Warning:** not all RIS fields can be mapped to Mendeley fields. The following tables show which RIS fields are supported by the [Mendeley Reference Manager].
+#### RIS Conversion Table
 
-**Warning:** each Mendeley reference is validated before it is returned. If one field in the reference is invalid the _entire_ reference is discarded. e.g.,
-
-In Mendeley a reference *MUST* have a title (`TI` entry in RIS) so converting this RIS record will return an empty list:
-
-```javascript
-RIS.toMendeley(`
-TY  - JOUR
-AU  - Armstrong, Neil
-DA  - 1969/07/20
-ER  - 
-`);
-//=> []
-```
-
-### RIS Conversation Table
-
-Dependending on their types some entries will be mapped to different fields in Mendeley and whilst others may not be mapped at all.
+The following table shows which RIS fields are supported by the [Mendeley Reference Manager].
 
 | RIS Type | RIS Entry | Mendeley                           |
 |:---------|:----------|:-----------------------------------|
@@ -267,16 +251,20 @@ Dependending on their types some entries will be mapped to different fields in M
 | *any*    | VL        | volume                             |
 | RPRT     | VL        | series_number                      |
 
+#### Errors
+
+Each Mendeley reference is validated before it is returned so `toMendeley` can return an empty array.
+
 ### Generate RIS From Mendeley References
 
 It is also possible to generate RIS records from Mendeley references: (using the above table)
 
 ```javascript
-RIS.fromMendeley([{ type: 'journal'
-                  , title: 'Moon 69'
-                  , year: 1969
-                  , authors: [{last_name: 'Armstrong', first_name: 'Neil'}]
-                  , identifiers: {doi: 'doi/123'}}]);
+fromMendeley([{ type: 'journal'
+              , title: 'Moon 69'
+              , year: 1969
+              , authors: [{last_name: 'Armstrong', first_name: 'Neil'}]
+              , identifiers: {doi: 'doi/123'}}]);
 
 //=> TY  - JOUR
 //=> TI  - Moon 69
