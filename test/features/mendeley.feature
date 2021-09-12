@@ -530,69 +530,106 @@ Scenario Outline: Validate Mendeley documents
     | DA  | 2021/02/29                   |
     | ET  | no longer than 20 characters |
 
-# From Mendeley to RIS
-
-@browser
-Scenario: Mendeley references can be exported to RIS
-  When I convert this content from Mendeley
+Scenario: return null if content cannot be parsed
+  When I convert this content to Mendeley
     """
-    [ { "type": "journal"
-      , "title": "lorem ipsum"
-      , "authors": [ {"last_name": "Doe"}
-                   , {"last_name": "Doe", "first_name": "Jane"}
-                   ]
-      , "editors": [ {"last_name": "Foo", "first_name": "Bar"}]
-      , "accessed": "2021-05-09"
-      , "websites": [ "https://example.com/1"
-                    , "https://example.com/2"
-                    , "https://example.com/3"
-                    ]
-      , "keywords": [ "abc"
-                    , "def"
-                    , "ghi"
-                    ]
-      , "institution": "University123"
-      , "identifiers": { "doi": "doi123"
-                       , "pmid": "pmid123"
-                       , "arxiv": "arxiv123"
-                       }
-      }
-    ]
+    This is not something that the parser
+    will be able to understand.
     """
   Then I get this result
     """
-    TY  - JOUR
-    TI  - lorem ipsum
-    A2  - Foo, Bar
-    AN  - pmid123
-    AU  - Doe
-    AU  - Doe, Jane
-    AU  - University123
-    DA  - 2021/05/09
-    DO  - doi123
-    KW  - abc
-    KW  - def
-    KW  - ghi
-    UR  - https://example.com/1
-    UR  - https://example.com/2
-    UR  - https://example.com/3
-    ER  - 
-
+    null
     """
 
-@browser
-Scenario: Invalid Mendeley references are ignored
-  When I convert this content from Mendeley
-    """
-    [ {"type": "journal", "title": "lorem ipsum", "year": "not a number"}
-    , {"type": "journal", "title": "additional fields not allowed", "answer": 42}
-    , {"type": "foobarx", "title": "not a valid title"}
-    , {"type": "journal", "title": "this works"}]
-    """
-  Then I get this result
-    """
-    TY  - JOUR
-    TI  - this works
-    ER  - 
+Rule: fromMendeley validates its input
 
-    """
+  Example: Return null when input is not an array
+    When I convert this content from Mendeley
+      """
+      42
+      """
+    Then I get this result
+      """
+      null
+      """
+
+  Example: Return null when all elements are invalid
+    When I convert this content from Mendeley
+      """
+      [42, 42, 42]
+      """
+    Then I get this result
+      """
+      null
+      """
+
+  Example: Ignore elements that are invalid
+    When I convert this content from Mendeley
+      """
+      [42, {"type": "journal", "title": "some title"}]
+      """
+    Then I get this result
+      """
+      TY  - JOUR
+      TI  - some title
+      ER  - 
+
+      """
+
+Rule: fromMendeley returns a string
+
+  Example: Empty string when input is an empty array
+    When I convert this content from Mendeley
+      """
+      []
+      """
+    Then I get this result
+      """
+      """
+
+  Example: Mendeley references can be exported to RIS
+    When I convert this content from Mendeley
+      """
+      [ { "type": "journal"
+        , "title": "lorem ipsum"
+        , "authors": [ {"last_name": "Doe"}
+                    , {"last_name": "Doe", "first_name": "Jane"}
+                    ]
+        , "editors": [ {"last_name": "Foo", "first_name": "Bar"}]
+        , "accessed": "2021-05-09"
+        , "websites": [ "https://example.com/1"
+                      , "https://example.com/2"
+                      , "https://example.com/3"
+                      ]
+        , "keywords": [ "abc"
+                      , "def"
+                      , "ghi"
+                      ]
+        , "institution": "University123"
+        , "identifiers": { "doi": "doi123"
+                        , "pmid": "pmid123"
+                        , "arxiv": "arxiv123"
+                        }
+        }
+      ]
+      """
+    Then I get this result
+      """
+      TY  - JOUR
+      TI  - lorem ipsum
+      A2  - Foo, Bar
+      AN  - pmid123
+      AU  - Doe
+      AU  - Doe, Jane
+      AU  - University123
+      DA  - 2021/05/09
+      DO  - doi123
+      KW  - abc
+      KW  - def
+      KW  - ghi
+      UR  - https://example.com/1
+      UR  - https://example.com/2
+      UR  - https://example.com/3
+      ER  - 
+
+      """

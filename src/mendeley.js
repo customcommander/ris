@@ -110,15 +110,19 @@ const map_to =
   , 'VL.RPRT':  mdly_set('series_number'            , copy                              )
   , 'VL':       mdly_set('volume'                   , copy                              )};
 
-module.exports.to = risText => read(risText).reduce((arr, ris) => {
-  const mdly = Object.entries(ris).reduce((obj, [rkey, rval]) => {
-    const fn = map_to[`${rkey}.${ris.TY[0]}`] || map_to[rkey] || noop;
-    fn(obj, rval);
-    return obj;
-  }, {});
-  if (validate(mdly)) arr.push(mdly);
-  return arr;
-}, []);
+module.exports.to = risText => {
+  const risv = read(risText);
+  if (!risv) return null;
+  return risv.reduce((arr, ris) => {
+    const mdly = Object.entries(ris).reduce((obj, [rkey, rval]) => {
+      const fn = map_to[`${rkey}.${ris.TY[0]}`] || map_to[rkey] || noop;
+      fn(obj, rval);
+      return obj;
+    }, {});
+    if (validate(mdly)) arr.push(mdly);
+    return arr;
+  }, []);
+};
 
 /*****************************************************************************
  * FROM MENDELEY TO RIS                                                      *
@@ -226,6 +230,9 @@ const ris_record = ref => Object.entries(ref).reduce((ris, [mk, mv]) => {
 }, {});
 
 module.exports.from = references => {
-  if (!Array.isArray(references)) return '';
-  return write(references.flatMap(ref => validate(ref) === true ? [ris_record(ref)] : []));
+  if (!Array.isArray(references)) return null;
+  const refs = references.filter(ref => validate(ref));
+  // if initial input was not empty and no elements are valid
+  if (references.length > 0 && refs.length == 0) return null;
+  return write(refs.map(ref => ris_record(ref)));
 }

@@ -259,6 +259,8 @@ The following table shows which RIS fields are supported by the [Mendeley Refere
 
 Each Mendeley reference is validated before it is returned so `toMendeley` can return an empty array.
 
+If the RIS content cannot be parsed `toMendeley` returns `null`.
+
 ### Generate RIS From Mendeley References
 
 It is also possible to generate RIS records from Mendeley references: (using the above table)
@@ -279,7 +281,9 @@ fromMendeley([{ type: 'journal'
 //=>
 ```
 
-*Note: Mendeley references are validated against [this schema](https://github.com/customcommander/ris/blob/master/src/mendeley.schema.json) before they converted into RIS records so it is possible to end up with less or no records at all if the Mendeley references are not valid.*
+#### Errors
+
+The `fromMendeley` returns null if the input is not an array or if **all** elements are not valid Mendeley references. Otherwise invalid elements are ignored.
 
 ## Development
 
