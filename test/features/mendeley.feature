@@ -576,6 +576,21 @@ Rule: fromMendeley validates its input
 
       """
 
+Rule: fromMendeley only consider fields that can be converted to RIS tags
+
+  Example: Additional properties in a Mendeley reference are ignored
+    When I convert this content from Mendeley
+      """
+      [{"type": "journal", "title": "some title", "id": "61ab4234-1843-4101-9a16-d07398c2d750"}]
+      """
+    Then I get this result
+      """
+      TY  - JOUR
+      TI  - some title
+      ER  - 
+
+      """
+
 Rule: fromMendeley returns a string
 
   Example: Empty string when input is an empty array
