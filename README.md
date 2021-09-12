@@ -60,6 +60,10 @@ ER  -
 
 The `read` function returns an array of objects (one per reference). Each key in an object is named after the corresponding RIS tag and holds the values for each entry for that tag. (Some tags can appear multiple times.)
 
+The function returns `null` if it cannot parse the content.
+Please check that the content is correctly formatted as per the RIS specification.
+If you think this is a bug please [raise an issue](https://github.com/customcommander/ris/issues/new).
+
 ### Additional Processing
 
 Some tags like `DA` or `RP` have special formatting rules. The parser supports them but won't enforce them meaning that any content that doesn't comply is returned as is.
