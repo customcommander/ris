@@ -74,7 +74,7 @@ Some tags like `DA` or `RP` have special formatting rules. The parser supports t
 | RP  | NOT IN FILE             | {"status": "NOT IN FILE"}                                                     |
 | RP  | ON REQUEST (06/26/2020) | {"status": "ON REQUEST","date": {"year": "2020", "month": "06", "day": "26"}} |
 
-### Writing RIS
+## Writing RIS
 
 The library exposes a `write` function that takes an input of the same type than the output of the `read` function.
 
@@ -108,7 +108,7 @@ Each element **must** be a key/value pairs object:
 
 Some keys have additional rules.
 
-#### TY
+### TY
 
 This is the only **required** key. Must be set to an array of exactly one non-empty string e.g.,
 
@@ -116,7 +116,7 @@ This is the only **required** key. Must be set to an array of exactly one non-em
 { "TY": [ "JOUR" ] }
 ```
 
-#### DA
+### DA
 
 Must be set to an array of exactly one element which can be either a non-empty string or an object e.g.,
 
@@ -133,7 +133,7 @@ Must be set to an array of exactly one element which can be either a non-empty s
           , "info":  "<non-empty string>" /* Optional. */}]}
 ```
 
-#### AU, A1, A2, A3, A4 & TA
+### AU, A1, A2, A3, A4 & TA
 
 In addition to non-empty strings, arrays for these keys can also have objects e.g.,
 
@@ -146,7 +146,7 @@ In addition to non-empty strings, arrays for these keys can also have objects e.
           , "suffix":     "<non-empty string>" /* Optional. */}]}
 ```
 
-#### RP
+### RP
 
 Must be set to an array of exactly one element which can be either a non-empty string or an object e.g.,
 
@@ -163,7 +163,7 @@ Must be set to an array of exactly one element which can be either a non-empty s
          , "day":    "<non-empty string>" /* Optional. */}] }
 ```
 
-#### ER
+### ER
 
 This is the only **reserved** tag. Any value will be **ignored**.
 
