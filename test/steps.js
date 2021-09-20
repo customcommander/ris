@@ -22,12 +22,21 @@ defineStep('I convert this content', async function (json) {
   this.res = await this.write(input);
 });
 
-defineStep('I convert this content to Mendeley', async function (risContent) {
-  this.res = await this.toMendeley(risContent);
+defineStep('I convert this content to {word}', async function (vendor, risContent) {
+  if (vendor === 'Mendeley') {
+    this.res = await this.toMendeley(risContent);
+  } else if (vendor === 'CSL-JSON') {
+    this.res = await this.toCSLJSON(risContent);
+  }
 });
 
-defineStep('I convert this content from Mendeley', async function (json) {
-  this.res = await this.fromMendeley(JSON.parse(json));
+defineStep('I convert this content from {word}', async function (vendor, json) {
+  const references = JSON.parse(json);
+  if (vendor === 'Mendeley') {
+    this.res = await this.fromMendeley(references);
+  } else if (vendor === 'CSL-JSON') {
+    this.res = await this.fromCSLJSON(references);
+  }
 });
 
 defineStep('I get this result', function (str) {

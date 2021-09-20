@@ -26,6 +26,16 @@ module.exports = class {
     if (!this.browser) return this.RIS.fromMendeley(references);
     return this.page.evaluate(references_ => RIS.fromMendeley(references_), references);
   }
+
+  async toCSLJSON(risContent) {
+    if (!this.browser) return this.RIS.toCSLJSON(risContent);
+    return this.page.evaluate(risContent_ => RIS.toCSLJSON(risContent_), risContent);
+  }
+
+  async fromCSLJSON(references) {
+    if (!this.browser) return this.RIS.fromCSLJSON(references);
+    return this.page.evaluate(references_ => RIS.fromCSLJSON(references_), references);
+  }
 };
 
 module.exports.init = async function () {

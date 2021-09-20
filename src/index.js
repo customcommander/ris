@@ -6,6 +6,7 @@
 const read = require('./read');
 const write = require('./write');
 const {to: toMendeley, from: fromMendeley} = require('./mendeley');
+const {to: toCSLJSON, from: fromCSLJSON} = require('./csl-json');
 
 const parser = inp => {
   console.warning(`
@@ -23,4 +24,6 @@ module.exports = {
   write,
   toMendeley,
   fromMendeley,
+  toCSLJSON,
+  fromCSLJSON
 };
