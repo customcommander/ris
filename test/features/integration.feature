@@ -7,3 +7,4 @@ Scenario Outline:
   Examples:
     | sample |
     | 01     |
+    | 02     |

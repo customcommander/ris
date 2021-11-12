@@ -96,7 +96,7 @@ reprintEntry ->
 
 otherEntry ->
   %tag %sep value:+
-    {% ([{value: key},,value]) => ({key, value: value.join(' ')}) %}
+    {% ([{value: key},,value]) => ({key, value: value.join('\n')}) %}
 
 value ->
   %value %newline

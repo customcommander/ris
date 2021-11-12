@@ -85,7 +85,7 @@ var grammar = {
          , value: processRP(value)}) },
     {"name": "otherEntry$ebnf$1", "symbols": ["value"]},
     {"name": "otherEntry$ebnf$1", "symbols": ["otherEntry$ebnf$1", "value"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "otherEntry", "symbols": [(lexer.has("tag") ? {type: "tag"} : tag), (lexer.has("sep") ? {type: "sep"} : sep), "otherEntry$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join(' ')})},
+    {"name": "otherEntry", "symbols": [(lexer.has("tag") ? {type: "tag"} : tag), (lexer.has("sep") ? {type: "sep"} : sep), "otherEntry$ebnf$1"], "postprocess": ([{value: key},,value]) => ({key, value: value.join('\n')})},
     {"name": "value", "symbols": [(lexer.has("value") ? {type: "value"} : value), (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": ([{value}]) => value}
 ]
   , ParserStart: "ris"

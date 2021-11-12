@@ -6,7 +6,7 @@ const moo = require('moo');
 
 const lexer =
   moo.compile
-    ( { newline: {match: /\n/, lineBreaks: true}
+    ( { newline: {match: /\n+/, lineBreaks: true}
       , sep: "  - "
       , type: /TY(?=  - )/
       , person: /(?:AU|A1|A2|A3|A4|TA)(?=  - )/
