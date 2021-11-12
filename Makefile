@@ -7,7 +7,7 @@ sample: src/grammar.js resources/dev.ris
 	cat resources/dev.ris | yarn -s nearley-test -q src/grammar.js | tee out.txt
 
 parse: src/grammar.js
-	node -p -e 'const fs = require("fs"); const parse = require("./src/index").parser; console.log(JSON.stringify(parse(fs.readFileSync("./resources/dev.ris","utf-8")), null, 2));'
+	node -p -e 'const fs = require("fs"); const read = require("./src/index").read; console.log(JSON.stringify(read(fs.readFileSync("./resources/dev.ris","utf-8")), null, 2));'
 
 src/grammar.js: src/grammar.ne src/lexer.js
 	yarn -s nearleyc $< > $@
