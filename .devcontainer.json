@@ -1,6 +1,6 @@
 {
   "name": "ris-dev",
-  "image": "customcommander/webdev",
+  "image": "customcommander/webdev:3.1",
   "postCreateCommand": "yarn",
   "settings": {
     "terminal.integrated.shell.*": "/bin/bash"
