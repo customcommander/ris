@@ -37,10 +37,10 @@
   dependencies:
     becke-ch--regex--s0-0-v1--base--pl--lib "^1.4.0"
 
-"@cucumber/cucumber@^7.3.1":
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-7.3.1.tgz#1339abc92044f865043eceb2993da15cee0cd255"
-  integrity sha512-x1+/AvouZy205ZvfYbeEVat5aBAj4EeLt9TZfD7pO9j+tQ3W6uxSuDB1TKfxAXFU3WYrswor0CXoJBYOIZhzMw==
+"@cucumber/cucumber@^7.3.2":
+  version "7.3.2"
+  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-7.3.2.tgz#e7b752530cfaf77664d3d49042ea20d543f6e334"
+  integrity sha512-qqptM9w+UqXEYBAkrIGpIVPXDWv+zp0LrS89LiwHZwBp0cJg00su/iPMZ4j8TvCJiKfAwJXsAI1yjrd1POtU+w==
   dependencies:
     "@cucumber/create-meta" "^5.0.0"
     "@cucumber/cucumber-expressions" "^12.1.1"
@@ -52,8 +52,8 @@
     assertion-error-formatter "^3.0.0"
     bluebird "^3.7.2"
     capital-case "^1.0.4"
-    cli-table3 "^0.6.0"
-    colors "^1.4.0"
+    cli-table3 "0.6.1"
+    colors "1.4.0"
     commander "^7.0.0"
     create-require "^1.1.1"
     duration "^0.2.2"
@@ -1126,6 +1126,15 @@ cli-columns@^3.1.2:
     string-width "^2.0.0"
     strip-ansi "^3.0.1"
 
+cli-table3@0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/cli-table3/-/cli-table3-0.6.1.tgz#36ce9b7af4847f288d3cdd081fbd09bf7bd237b8"
+  integrity sha512-w0q/enDHhPLq44ovMGdQeeDLvwxwavsJX7oQGYt/LrBlYsyaxyDnp6z3QzFut/6kLLKnlcUVJLrpB7KBfgG/RA==
+  dependencies:
+    string-width "^4.2.0"
+  optionalDependencies:
+    colors "1.4.0"
+
 cli-table3@^0.5.0, cli-table3@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/cli-table3/-/cli-table3-0.5.1.tgz#0252372d94dfc40dbd8df06005f48f31f656f202"
@@ -1133,16 +1142,6 @@ cli-table3@^0.5.0, cli-table3@^0.5.1:
   dependencies:
     object-assign "^4.1.0"
     string-width "^2.1.1"
-  optionalDependencies:
-    colors "^1.1.2"
-
-cli-table3@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/cli-table3/-/cli-table3-0.6.0.tgz#b7b1bc65ca8e7b5cef9124e13dc2b21e2ce4faee"
-  integrity sha512-gnB85c3MGC7Nm9I/FkiasNBOKjOiO1RNuXXarQms37q4QMpWdlbBgD/VnOStA2faG1dpXMv31RFApjX1/QdgWQ==
-  dependencies:
-    object-assign "^4.1.0"
-    string-width "^4.2.0"
   optionalDependencies:
     colors "^1.1.2"
 
@@ -1227,7 +1226,7 @@ colors@1.0.3:
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
   integrity sha1-BDP0TYCWgP3rYO0mDxsMJi6CpAs=
 
-colors@^1.1.2, colors@^1.4.0:
+colors@1.4.0, colors@^1.1.2:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
   integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
