@@ -12,14 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup
-        run: docker run -d -i --rm --name risbox -v $GITHUB_WORKSPACE:/workspaces/dev customcommander/webdev
-
       - name: Build
-        run: docker exec risbox make static_site
-
-      - name: Cleanup
-        run: docker kill risbox
+        run: >
+          mkdir -p static_site/uat &&
+          cp uat/index.html static_site/uat/ &&
+          docker run --rm -v $GITHUB_WORKSPACE/doc/manual:/workspaces/manual -w /workspaces/manual squidfunk/mkdocs-material:8.0.3 mkdocs build &&
+          mv doc/manual/site static_site/manual
 
       - name: Publish
         uses: crazy-max/ghaction-github-pages@v2

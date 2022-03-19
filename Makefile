@@ -27,9 +27,4 @@ dist/%: src/%
 	mkdir -p $(@D)
 	cp $< $@
 
-static_site: static_site/uat/index.html
-static_site/uat/index.html: uat/index.html
-	mkdir -p $(@D)
-	cp -f $< $@
-
-clean:; rm -rfv dist static_site
+clean:; rm -rfv dist

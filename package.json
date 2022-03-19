@@ -32,12 +32,11 @@
     "semantic-release": "^19.0.2"
   },
   "scripts": {
-    "start": "./scripts/start.sh",
+    "start": "rm -rf dist && docker-compose up",
     "stop": "docker-compose down",
     "test": "docker-compose exec dev make",
     "sample": "docker-compose exec dev make sample",
-    "parse": "docker-compose exec dev make parse",
-    "site": "./scripts/site.sh"
+    "parse": "docker-compose exec dev make parse"
   },
   "publishConfig": {
     "access": "public"
