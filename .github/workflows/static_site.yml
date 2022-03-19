@@ -14,11 +14,10 @@ jobs:
 
       - name: Build
         run: >
-          mkdir -p $GITHUB_WORKSPACE/static_site/uat &&
-          ls $GITHUB_WORKSPACE &&
+          mkdir -p $GITHUB_WORKSPACE/static_site/{uat,manual} &&
           cp $GITHUB_WORKSPACE/uat/index.html $GITHUB_WORKSPACE/static_site/uat/ &&
           docker run --rm -v $GITHUB_WORKSPACE/doc/manual:/workspaces/manual -w /workspaces/manual squidfunk/mkdocs-material:8.0.3 build &&
-          mv $GITHUB_WORKSPACE/doc/manual/site $GITHUB_WORKSPACE/static_site/manual
+          cp -rf $GITHUB_WORKSPACE/doc/manual/site $GITHUB_WORKSPACE/static_site/manual
 
       - name: Publish
         uses: crazy-max/ghaction-github-pages@v2
