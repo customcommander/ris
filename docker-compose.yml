@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+
+  dev:
+    image: customcommander/webdev:3.1
+    volumes:
+      - .:/workspaces/dev
+    stdin_open: true
+    tty: true
+
+  docs:
+    image: squidfunk/mkdocs-material:8.0.3
+    working_dir: /workspaces/manual
+    volumes:
+      - ./doc/manual:/workspaces/manual
+    ports:
+      - 4567:8000

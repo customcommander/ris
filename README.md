@@ -287,16 +287,16 @@ The `fromMendeley` returns null if the input is not an array or if **all** eleme
 
 ## Development
 
-The following command will:
+```
+npm run sample
+```
+
+This command will:
 
 1.  Compile the grammar.
 2.  Test the grammar against the [dev.ris](./resources/dev.ris) file.
 3.  Output the result to the standard output.
 4.  Write the output to `out.txt`. (This file is ignored by Git.)
-
-```
-make sample
-```
 
 ## Further Resources
 

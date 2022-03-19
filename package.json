@@ -32,9 +32,12 @@
     "semantic-release": "^19.0.2"
   },
   "scripts": {
-    "test": "make",
-    "sample": "make sample",
-    "parse": "make parse"
+    "start": "./scripts/start.sh",
+    "stop": "docker-compose down",
+    "test": "docker-compose exec dev make",
+    "sample": "docker-compose exec dev make sample",
+    "parse": "docker-compose exec dev make parse",
+    "site": "./scripts/site.sh"
   },
   "publishConfig": {
     "access": "public"

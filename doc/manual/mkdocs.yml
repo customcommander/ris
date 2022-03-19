@@ -1,0 +1,29 @@
+site_name: RIS
+site_url: https://customcommander.github.io/ris/manual
+repo_url: https://github.com/customcommander/ris
+edit_uri: ""
+docs_dir: pages
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - content.code.annotate
+markdown_extensions:
+  - def_list
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+nav:
+  - Home:
+    - About: 'index.md'
+  - Playground: https://customcommander.github.io/ris/uat
