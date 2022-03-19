@@ -16,7 +16,7 @@ jobs:
         run: >
           mkdir -p static_site/uat &&
           cp uat/index.html static_site/uat/ &&
-          docker run --rm -v $GITHUB_WORKSPACE/doc/manual:/workspaces/manual -w /workspaces/manual squidfunk/mkdocs-material:8.0.3 mkdocs build &&
+          docker run --rm -v $GITHUB_WORKSPACE/doc/manual:/workspaces/manual -w /workspaces/manual squidfunk/mkdocs-material:8.0.3 build &&
           mv doc/manual/site static_site/manual
 
       - name: Publish
