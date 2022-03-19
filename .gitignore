@@ -1,4 +1,5 @@
 dist/
 node_modules/
 out.txt
+static_site
 yarn-error.log
