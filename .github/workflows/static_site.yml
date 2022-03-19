@@ -12,10 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Generate Site
+        run: docker run --rm -v $GITHUB_WORKSPACE:/workspaces/dev customcommander/webdev make static_site
+
       - name: Publish
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
-          build_dir: uat
+          build_dir: static_site
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
