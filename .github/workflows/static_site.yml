@@ -1,4 +1,4 @@
-name: UAT
+name: Generate Site
 
 on:
   push:
@@ -12,8 +12,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Generate Site
-        run: docker run --rm -v $GITHUB_WORKSPACE:/workspaces/dev customcommander/webdev make static_site
+      - name: Setup
+        run: docker run -d -i --rm --name risbox -v $GITHUB_WORKSPACE:/workspaces/dev customcommander/webdev
+
+      - name: Build
+        run: docker exec risbox make static_site
+
+      - name: Cleanup
+        run: docker kill risbox
 
       - name: Publish
         uses: crazy-max/ghaction-github-pages@v2
