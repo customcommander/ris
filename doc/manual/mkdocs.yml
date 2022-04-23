@@ -1,4 +1,4 @@
-site_name: RIS
+site_name: '@customcommander/ris'
 site_url: https://customcommander.github.io/ris/manual
 repo_url: https://github.com/customcommander/ris
 edit_uri: ""
@@ -8,8 +8,8 @@ theme:
   icon:
     repo: fontawesome/brands/github
   features:
-    - navigation.tabs
-    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
     - content.code.annotate
 markdown_extensions:
   - def_list
@@ -20,10 +20,16 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true 
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
 nav:
-  - Home:
-    - About: 'index.md'
-  - Playground: https://customcommander.github.io/ris/uat
+  - Getting Started:
+    - About: index.md
+    - 'Read & Write': intro.md
+  - Transform:
+    - Mendeley: mendeley.md
+  - Further Resources:
+    - Online Playground: https://customcommander.github.io/ris/uat
