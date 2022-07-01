@@ -1,0 +1,920 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://customcommander.github.io/ris/manual/mendeley/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.3">
+    
+    
+      
+        <title>Mendeley - @customcommander/ris</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.62128196.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.9204c3b2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"..":".."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ris-to-mendeley" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="@customcommander/ris" class="md-header__button md-logo" aria-label="@customcommander/ris" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            @customcommander/ris
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Mendeley
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/customcommander/ris" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="@customcommander/ris" class="md-nav__button md-logo" aria-label="@customcommander/ris" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    @customcommander/ris
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/customcommander/ris" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" data-md-state="indeterminate" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        Read & Write
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Transform
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Transform" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Transform
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Mendeley
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Mendeley
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ris-to-mendeley" class="md-nav__link">
+    RIS to Mendeley
+  </a>
+  
+    <nav class="md-nav" aria-label="RIS to Mendeley">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conversion-table" class="md-nav__link">
+    Conversion Table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#errors" class="md-nav__link">
+    Errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mendeley-to-ris" class="md-nav__link">
+    Mendeley to RIS
+  </a>
+  
+    <nav class="md-nav" aria-label="Mendeley to RIS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#errors_1" class="md-nav__link">
+    Errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" data-md-state="indeterminate" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Further Resources
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Further Resources" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Further Resources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://customcommander.github.io/ris/uat" class="md-nav__link">
+        Online Playground
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ris-to-mendeley" class="md-nav__link">
+    RIS to Mendeley
+  </a>
+  
+    <nav class="md-nav" aria-label="RIS to Mendeley">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conversion-table" class="md-nav__link">
+    Conversion Table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#errors" class="md-nav__link">
+    Errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mendeley-to-ris" class="md-nav__link">
+    Mendeley to RIS
+  </a>
+  
+    <nav class="md-nav" aria-label="Mendeley to RIS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#errors_1" class="md-nav__link">
+    Errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>Mendeley</h1>
+
+<h2 id="ris-to-mendeley">RIS to Mendeley</h2>
+<p>Bibliographic records in RIS format can be converted to <a href="https://mendeley.com">Mendeley</a> references:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="p">{</span><span class="nx">toMendeley</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@customcommander/ris&#39;</span><span class="p">);</span>
+
+<span class="nx">toMendeley</span><span class="p">(</span><span class="sb">`</span>
+<span class="sb">TY  - JOUR</span>
+<span class="sb">TI  - Mission to the Moon</span>
+<span class="sb">AU  - Armstrong, Neil</span>
+<span class="sb">DA  - 1969/07/20</span>
+<span class="sb">ER  - </span>
+<span class="sb">`</span><span class="p">);</span>
+
+<span class="c1">//=&gt; [{ type: &#39;journal&#39;</span>
+<span class="c1">//=&gt;  , authors: [{last_name: &#39;Armstrong&#39;, first_name: &#39;Neil&#39;}]</span>
+<span class="c1">//=&gt;  , accessed: &#39;1969-07-20&#39;</span>
+<span class="c1">//=&gt;  , title: &#39;Mission to the Moon&#39; }]</span>
+</code></pre></div>
+<h3 id="conversion-table">Conversion Table</h3>
+<p>The following table shows which RIS fields are supported by the <a href="https://www.mendeley.com/reference-manager/">Mendeley Reference Manager</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">RIS Type</th>
+<th align="left">RIS Entry</th>
+<th align="left">Mendeley</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">A1</td>
+<td align="left">authors</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">A2</td>
+<td align="left">editors</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">A3</td>
+<td align="left">authors</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">A4</td>
+<td align="left">authors</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">AB</td>
+<td align="left">abstract</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">AN</td>
+<td align="left">identifiers.pmid</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">AU</td>
+<td align="left">authors</td>
+</tr>
+<tr>
+<td align="left">PAT</td>
+<td align="left">C6</td>
+<td align="left">patent_legal_status</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">CY</td>
+<td align="left">city</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">DA</td>
+<td align="left">accessed</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">DO</td>
+<td align="left">identifiers.doi</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">ET</td>
+<td align="left">edition</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">IS</td>
+<td align="left">issue</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">KW</td>
+<td align="left">keywords</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">L1</td>
+<td align="left">websites</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">L4</td>
+<td align="left">websites</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">LA</td>
+<td align="left">language</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">LB</td>
+<td align="left">tags</td>
+</tr>
+<tr>
+<td align="left">PAT</td>
+<td align="left">M1</td>
+<td align="left">patent_application_number</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">N1</td>
+<td align="left">notes</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">PB</td>
+<td align="left">publisher</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">PY</td>
+<td align="left">year</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">RN</td>
+<td align="left">notes</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">SE</td>
+<td align="left">chapter</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">SN</td>
+<td align="left">identifiers.isbn</td>
+</tr>
+<tr>
+<td align="left">JFULL</td>
+<td align="left">SN</td>
+<td align="left">identifiers.issn</td>
+</tr>
+<tr>
+<td align="left">JOUR</td>
+<td align="left">SN</td>
+<td align="left">identifiers.issn</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">SP</td>
+<td align="left">pages</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">ST</td>
+<td align="left">short_title</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">T2</td>
+<td align="left">source</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">T3</td>
+<td align="left">series</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">TA</td>
+<td align="left">authors</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">TI</td>
+<td align="left">title</td>
+</tr>
+<tr>
+<td align="left">BILL</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>bill</em>)</td>
+</tr>
+<tr>
+<td align="left">BOOK</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>book</em>)</td>
+</tr>
+<tr>
+<td align="left">CASE</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>case</em>)</td>
+</tr>
+<tr>
+<td align="left">CHAP</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>book_section</em>)</td>
+</tr>
+<tr>
+<td align="left">COMP</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>computer_program</em>)</td>
+</tr>
+<tr>
+<td align="left">CONF</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>conference_proceedings</em>)</td>
+</tr>
+<tr>
+<td align="left">ENCYC</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>encyclopedia_article</em>)</td>
+</tr>
+<tr>
+<td align="left">GEN</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>generic</em>)</td>
+</tr>
+<tr>
+<td align="left">HEAR</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>hearing</em>)</td>
+</tr>
+<tr>
+<td align="left">ICOMM</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>web_page</em>)</td>
+</tr>
+<tr>
+<td align="left">JFULL</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>journal</em>)</td>
+</tr>
+<tr>
+<td align="left">JOUR</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>journal</em>)</td>
+</tr>
+<tr>
+<td align="left">MGZN</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>magazine_article</em>)</td>
+</tr>
+<tr>
+<td align="left">MPCT</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>film</em>)</td>
+</tr>
+<tr>
+<td align="left">NEWS</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>newspaper_article</em>)</td>
+</tr>
+<tr>
+<td align="left">PAT</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>patent</em>)</td>
+</tr>
+<tr>
+<td align="left">RPRT</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>report</em>)</td>
+</tr>
+<tr>
+<td align="left">STAT</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>statute</em>)</td>
+</tr>
+<tr>
+<td align="left">THES</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>thesis</em>)</td>
+</tr>
+<tr>
+<td align="left">UNPB</td>
+<td align="left">TY</td>
+<td align="left">type (as <em>working_paper</em>)</td>
+</tr>
+<tr>
+<td align="left"><em>others</em></td>
+<td align="left">TY</td>
+<td align="left">type (as <em>generic</em>)</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">UR</td>
+<td align="left">websites</td>
+</tr>
+<tr>
+<td align="left"><em>any</em></td>
+<td align="left">VL</td>
+<td align="left">volume</td>
+</tr>
+<tr>
+<td align="left">RPRT</td>
+<td align="left">VL</td>
+<td align="left">series_number</td>
+</tr>
+</tbody>
+</table>
+<h3 id="errors">Errors</h3>
+<p>Each Mendeley reference is validated before it is returned so <code>toMendeley</code> can return an empty array.</p>
+<p>If the RIS content cannot be parsed <code>toMendeley</code> returns <code>null</code>.</p>
+<h2 id="mendeley-to-ris">Mendeley to RIS</h2>
+<p>It is also possible to generate RIS records from Mendeley references: (using the above table)</p>
+<div class="highlight"><pre><span></span><code><span class="nx">fromMendeley</span><span class="p">([{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;journal&#39;</span>
+              <span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Moon 69&#39;</span>
+              <span class="p">,</span> <span class="nx">year</span><span class="o">:</span> <span class="mf">1969</span>
+              <span class="p">,</span> <span class="nx">authors</span><span class="o">:</span> <span class="p">[{</span><span class="nx">last_name</span><span class="o">:</span> <span class="s1">&#39;Armstrong&#39;</span><span class="p">,</span> <span class="nx">first_name</span><span class="o">:</span> <span class="s1">&#39;Neil&#39;</span><span class="p">}]</span>
+              <span class="p">,</span> <span class="nx">identifiers</span><span class="o">:</span> <span class="p">{</span><span class="nx">doi</span><span class="o">:</span> <span class="s1">&#39;doi/123&#39;</span><span class="p">}}]);</span>
+
+<span class="c1">//=&gt; TY  - JOUR</span>
+<span class="c1">//=&gt; TI  - Moon 69</span>
+<span class="c1">//=&gt; PY  - 1969</span>
+<span class="c1">//=&gt; AU  - Armstrong, Neil</span>
+<span class="c1">//=&gt; DO  - doi/123</span>
+<span class="c1">//=&gt; ER  - </span>
+<span class="c1">//=&gt;</span>
+</code></pre></div>
+<h3 id="errors_1">Errors</h3>
+<p>The <code>fromMendeley</code> returns null if the input is not an array or if <strong>all</strong> elements are not valid Mendeley references. Otherwise invalid elements are ignored.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../intro/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Read &amp; Write" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Read & Write
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.expand", "content.code.annotate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.01824240.min.js"}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e0abf5b0.min.js"></script>
+      
+    
+  </body>
+</html>
